@@ -1,0 +1,232 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+UPDATE {databaseOwner}[{objectQualifier}ModuleDefinitions] SET FriendlyName = 'Bitboxx BBNews' WHERE FriendlyName = 'BBNews'
+
+IF EXISTS (SELECT 1 FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{objectQualifier}[FK_Category_Feed]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}BBNews_Feed]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_Feed] 
+DROP CONSTRAINT {objectQualifier}[FK_Category_Feed]
+go
+
+IF EXISTS (SELECT 1 FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{objectQualifier}[FK_Category_News]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}BBNews_News]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_News] 
+DROP CONSTRAINT {objectQualifier}[FK_Category_News]
+go
+
+IF EXISTS (SELECT 1 FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{objectQualifier}[FK_Category_Feed]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}BBNews_Feed]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_Feed] 
+DROP CONSTRAINT {objectQualifier}[FK_Category_Feed]
+go
+
+IF EXISTS (SELECT 1 FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{objectQualifier}[FK_Category_News]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}BBNews_News]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_News] 
+DROP CONSTRAINT {objectQualifier}[FK_Category_News]
+go
+
+
+IF EXISTS (SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}TEMP_BBNews_Category]') AND type = 'U')
+   DROP TABLE {databaseOwner}[{objectQualifier}TEMP_BBNews_Category]
+go
+
+IF EXISTS (SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}TEMP_BBNews_Feed]') AND type = 'U')
+   DROP TABLE {databaseOwner}[{objectQualifier}TEMP_BBNews_Feed]
+go
+
+IF EXISTS (SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}TEMP_BBNews_News]') AND type = 'U')
+   DROP TABLE {databaseOwner}[{objectQualifier}TEMP_BBNews_News]
+go
+
+
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{objectQualifier}BBNews_CategoryFeeds]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+   BEGIN
+	  CREATE TABLE {databaseOwner}[{objectQualifier}BBNews_CategoryFeeds] ( 
+		 CategoryID INT NULL,
+		 FeedID INT NULL
+	  )
+   END
+GO
+
+
+CREATE TABLE  {databaseOwner}[{objectQualifier}TEMP_BBNews_Category]
+(   
+   CategoryID INT NOT NULL IDENTITY (1,1),
+   PortalID INT NULL,
+   CategoryName NVARCHAR(80) NOT NULL DEFAULT '' ,
+   CategoryDescription NVARCHAR(255) NOT NULL DEFAULT '' 
+)
+
+go
+
+SET IDENTITY_INSERT {databaseOwner}[{objectQualifier}TEMP_BBNews_Category] ON
+
+INSERT INTO {databaseOwner}[{objectQualifier}TEMP_BBNews_Category] (CategoryID,PortalID,CategoryName)
+SELECT CategoryID,PortalID,CategoryName
+FROM {databaseOwner}[{objectQualifier}BBNews_Category]
+go
+
+IF @@error=0
+BEGIN
+	IF EXISTS (SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}BBNews_Category]') AND type = 'U') AND EXISTS (SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}TEMP_BBNews_Category]') AND type = 'U')
+		DROP TABLE {databaseOwner}[{objectQualifier}BBNews_Category]
+
+	SET IDENTITY_INSERT {databaseOwner}[{objectQualifier}TEMP_BBNews_Category] OFF
+
+	EXECUTE sp_rename '{databaseOwner}[{objectQualifier}TEMP_BBNews_Category]', '{objectQualifier}BBNews_Category', 'OBJECT'
+
+	ALTER TABLE  {databaseOwner}[{objectQualifier}BBNews_Category]
+	ADD CONSTRAINT {objectQualifier}PK_BBNews_Category PRIMARY KEY NONCLUSTERED  (CategoryID ASC)
+	WITH ( IGNORE_DUP_KEY = OFF)
+END
+ELSE
+BEGIN
+	IF EXISTS (SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}TEMP_BBNews_Category]') AND type = 'U')
+	   DROP TABLE {databaseOwner}[{objectQualifier}TEMP_BBNews_Category]
+
+END
+go
+
+INSERT INTO {databaseOwner}[{objectQualifier}BBNews_Feed] (CategoryId)
+SELECT DISTINCT CategoryId FROM {databaseOwner}[{objectQualifier}BBNews_News] WHERE CategoryID NOT IN (SELECT CategoryID FROM {databaseOwner}[{objectQualifier}BBNEws_Feed])
+
+CREATE TABLE  {databaseOwner}[{objectQualifier}TEMP_BBNews_Feed]
+(   FeedID INT NOT NULL IDENTITY (1,1),
+   PortalId INT NOT NULL DEFAULT (0) ,
+   FeedName NVARCHAR(80) NOT NULL DEFAULT '' ,
+   FeedType INT NOT NULL DEFAULT (1) ,
+   FeedUrl VARCHAR(200) NOT NULL DEFAULT '' ,
+   LastRetrieve DATETIME NULL,
+   LastTry DATETIME NULL,
+   RetrieveInterval INT NOT NULL DEFAULT (120) ,
+   TryInterval INT NOT NULL DEFAULT (20) ,
+   Enabled BIT NOT NULL DEFAULT (1) ,
+   ReorgInterval INT NOT NULL DEFAULT (0) ,
+   Username NVARCHAR(40) NOT NULL DEFAULT '' ,
+   Password NVARCHAR(40) NOT NULL DEFAULT '' 
+)
+
+go
+
+SET IDENTITY_INSERT {databaseOwner}[{objectQualifier}TEMP_BBNews_Feed] ON
+
+INSERT INTO {databaseOwner}[{objectQualifier}TEMP_BBNews_Feed] (FeedID,PortalId,FeedUrl,Feedname,FeedType,LastRetrieve,LastTry,RetrieveInterval,TryInterval,Enabled)
+SELECT FeedID,PortalId,FeedUrl,LEFT(FeedUrl,80),2,LastRetrieve,LastTry,RetrieveInterval,TryInterval,Enabled
+FROM {databaseOwner}[{objectQualifier}BBNews_Feed]
+INNER JOIN {databaseOwner}[{objectQualifier}BBNews_Category] 
+ON {databaseOwner}[{objectQualifier}BBNews_Feed].CategoryID = {databaseOwner}[{objectQualifier}BBNews_Category].CategoryId
+go
+
+
+INSERT INTO {databaseOwner}[{objectQualifier}BBNews_CategoryFeeds] (CategoryId, FeedId)
+SELECT CategoryId,FeedId
+FROM {databaseOwner}[{objectQualifier}BBNews_Feed]
+go
+
+IF @@error=0
+BEGIN
+	IF EXISTS (SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}BBNews_Feed]') AND type = 'U') AND 
+		EXISTS (SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}TEMP_BBNews_Feed]') AND type = 'U')
+		DROP TABLE {databaseOwner}[{objectQualifier}BBNews_Feed]
+
+	SET IDENTITY_INSERT {databaseOwner}[{objectQualifier}TEMP_BBNews_Feed] OFF
+
+	EXECUTE sp_rename '{databaseOwner}[{objectQualifier}TEMP_BBNews_Feed]', '{objectQualifier}BBNews_Feed', 'OBJECT'
+
+	ALTER TABLE  {databaseOwner}[{objectQualifier}BBNews_Feed]
+	ADD CONSTRAINT {objectQualifier}PK_BBNews_Feed PRIMARY KEY NONCLUSTERED  (FeedID ASC)
+	WITH ( IGNORE_DUP_KEY = OFF)
+
+END
+ELSE
+BEGIN
+	IF EXISTS (SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}TEMP_BBNews_Feed]') AND type = 'U')
+		DROP TABLE {databaseOwner}[{objectQualifier}TEMP_BBNews_Feed]
+END
+go
+
+
+CREATE TABLE  {databaseOwner}[{objectQualifier}TEMP_BBNews_News]
+(   NewsID INT NOT NULL IDENTITY (1,1),
+   FeedID INT NOT NULL DEFAULT (0) ,
+   Title NVARCHAR(250) NOT NULL DEFAULT '' ,
+   Summary NVARCHAR(MAX) NOT NULL DEFAULT '' ,
+   Author NVARCHAR(100) NOT NULL DEFAULT '' ,
+   News NVARCHAR(MAX) NOT NULL,
+   Link VARCHAR(500) NOT NULL DEFAULT '' ,
+   Image NVARCHAR(500) NOT NULL DEFAULT '' ,
+   GUID NVARCHAR(500) NOT NULL DEFAULT '' ,
+   Pubdate DATETIME NOT NULL DEFAULT '' ,
+   Hide BIT NOT NULL,
+   Internal BIT NOT NULL
+)
+
+go
+
+SET IDENTITY_INSERT {databaseOwner}[{objectQualifier}TEMP_BBNews_News] ON
+
+INSERT INTO {databaseOwner}[{objectQualifier}TEMP_BBNews_News] (NewsID,FeedId,Title,Author,Summary,News,Link,Image,GUID,Pubdate,Hide,Internal)
+SELECT NewsID,(SELECT Top 1 FeedId FROM {databaseOwner}[{objectQualifier}BBNews_CategoryFeeds] WHERE {databaseOwner}[{objectQualifier}BBNews_CategoryFeeds].CategoryID = {databaseOwner}[{objectQualifier}BBNews_News].CategoryID) as FeedId,
+Title,Author,Description,News,Link,Image,GUID,Pubdate,Hide,convert(bit,0)
+FROM {databaseOwner}[{objectQualifier}BBNews_News]
+go
+
+IF @@error=0
+BEGIN
+	IF EXISTS (SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}BBNews_News]') AND type = 'U') AND 
+	   EXISTS (SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}TEMP_BBNews_News]') AND type = 'U')
+	   DROP TABLE {databaseOwner}[{objectQualifier}BBNews_News]
+
+	SET IDENTITY_INSERT {databaseOwner}[{objectQualifier}TEMP_BBNews_News] OFF
+
+	EXECUTE sp_rename '{databaseOwner}[{objectQualifier}TEMP_BBNews_News]', '{objectQualifier}BBNews_News', 'OBJECT'
+
+	ALTER TABLE  {databaseOwner}[{objectQualifier}BBNews_News]
+	ADD CONSTRAINT {objectQualifier}PK_BBNews_News PRIMARY KEY NONCLUSTERED  (NewsID ASC)
+	WITH ( IGNORE_DUP_KEY = OFF)
+
+
+END
+ELSE
+BEGIN
+	IF EXISTS (SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}TEMP_BBNews_News]') AND type = 'U')
+	   DROP TABLE {databaseOwner}[{objectQualifier}TEMP_BBNews_News]
+
+END
+go
+
+IF NOT EXISTS (SELECT 1 FROM sys.objects where name='{objectQualifier}FK_CategoryFeedsOfCategory' and type='F')
+ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_CategoryFeeds] WITH NOCHECK
+	  ADD CONSTRAINT {objectQualifier}FK_CategoryFeedsOfCategory FOREIGN KEY
+		  ( CategoryID )
+		  REFERENCES {databaseOwner}[{objectQualifier}BBNews_Category]
+		  ( CategoryID )
+	  ON DELETE CASCADE
+go
+
+IF NOT EXISTS (SELECT 1 FROM sys.objects where name='{objectQualifier}FK_NewsOfFeed' and type='F')
+ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_News] WITH NOCHECK
+	  ADD CONSTRAINT {objectQualifier}FK_NewsOfFeed FOREIGN KEY
+		  ( FeedID )
+		  REFERENCES {databaseOwner}[{objectQualifier}BBNews_Feed]
+		  ( FeedID )
+	  ON DELETE CASCADE
+go
+
+IF NOT EXISTS (SELECT 1 FROM sys.objects where name='{objectQualifier}FK_FeedsOfCategoryFeeds' and type='F')
+ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_CategoryFeeds] WITH NOCHECK
+	  ADD CONSTRAINT {objectQualifier}FK_FeedsOfCategoryFeeds FOREIGN KEY
+		  ( FeedID )
+		  REFERENCES {databaseOwner}[{objectQualifier}BBNews_Feed]
+		  ( FeedID )
+go
+
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/

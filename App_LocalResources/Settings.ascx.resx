@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="ControlTitle_settings.Text" xml:space="preserve">
+    <value>BBNews Settings</value>
+  </data>
+	<data name="ModuleHelp.Text" xml:space="preserve">
+    <value>About BBNews Settings</value>
+  </data>
+	<data name="lblCategory.Help" xml:space="preserve">
+    <value>If you choose a category, only news from this category are shown.</value>
+  </data>
+	<data name="lblCategory.Text" xml:space="preserve">
+    <value>Category </value>
+  </data>
+	<data name="lblEndDate.Help" xml:space="preserve">
+    <value>Show only News older then (Date)</value>
+  </data>
+	<data name="lblEndDate.Text" xml:space="preserve">
+    <value>End date</value>
+  </data>
+	<data name="lblNewsInRow.Help" xml:space="preserve">
+    <value>Enter the amount of News you want to see in one row</value>
+  </data>
+	<data name="lblNewsInRow.Text" xml:space="preserve">
+    <value>News per Row </value>
+  </data>
+	<data name="lblStartDate.Help" xml:space="preserve">
+    <value>Show only News newer then (Date)</value>
+  </data>
+	<data name="lblStartDate.Text" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+	<data name="lblTopN.Help" xml:space="preserve">
+    <value>Show only the N newest News in display. Leave empty or set zero for no limiting. You need this to supress possible paging</value>
+  </data>
+	<data name="lblTopN.Text" xml:space="preserve">
+    <value>News count</value>
+  </data>
+	<data name="lblDescriptionLimit.Help" xml:space="preserve">
+    <value>Enter the maximum number of characters for description or leave blank for undelimited</value>
+  </data>
+	<data name="lblDescriptionLimit.Text" xml:space="preserve">
+    <value>Max Desc. Length</value>
+  </data>
+	<data name="lblNewsLimit.Help" xml:space="preserve">
+    <value>Enter the maximum number of characters for full news or leave blank for undelimited</value>
+  </data>
+	<data name="lblNewsLimit.Text" xml:space="preserve">
+    <value>Max News Length</value>
+  </data>
+	<data name="lblPubDateFormat.Help" xml:space="preserve">
+    <value>Select format to display the pubdate</value>
+  </data>
+	<data name="lblPubDateFormat.Text" xml:space="preserve">
+    <value>Date Format</value>
+  </data>
+	<data name="lblTitleLimit.Help" xml:space="preserve">
+    <value>Enter the maximum number of characters for title or leave blank for undelimited</value>
+  </data>
+	<data name="lblTitleLimit.Text" xml:space="preserve">
+    <value>Max Title Length</value>
+  </data>
+	<data name="lblView.Help" xml:space="preserve">
+    <value>Select the style of your news display - as marquee text or as tabular templated display. Select "Detail" only if on "Page for own News"</value>
+  </data>
+	<data name="lblView.Text" xml:space="preserve">
+    <value>View</value>
+  </data>
+	<data name="rblView0.Text" xml:space="preserve">
+    <value>Table</value>
+  </data>
+	<data name="rblView1.Text" xml:space="preserve">
+    <value>Marquee</value>
+  </data>
+	<data name="lblAsynch.Text" xml:space="preserve">
+    <value>Fetch Feed Async.</value>
+  </data>
+	<data name="lblAsynch.Help" xml:space="preserve">
+    <value>Check if you want that the feeds are fetched asynchronous (non-blocking)</value>
+  </data>
+	<data name="rblView2.Text" xml:space="preserve">
+    <value>Detail</value>
+  </data>
+	<data name="lblNewsPage.Help" xml:space="preserve">
+    <value>Select a page with a BBNews-Modul in Detail-View to show own news</value>
+  </data>
+	<data name="lblNewsPage.Text" xml:space="preserve">
+    <value>Page for own News</value>
+  </data>
+	<data name="lblShowTitle.Help" xml:space="preserve">
+    <value>Check if you want the news Title to be shown as module title</value>
+  </data>
+	<data name="lblShowTitle.Text" xml:space="preserve">
+    <value>Show Title</value>
+  </data>
+	<data name="cboMarqueeDirection0.Text" xml:space="preserve">
+    <value>Left</value>
+  </data>
+	<data name="cboMarqueeDirection1.Text" xml:space="preserve">
+    <value>Right</value>
+  </data>
+	<data name="cboMarqueeDirection2.Text" xml:space="preserve">
+    <value>Up</value>
+  </data>
+	<data name="cboMarqueeDirection3.Text" xml:space="preserve">
+    <value>Down</value>
+  </data>
+	<data name="lblMarqueeAlternate.Help" xml:space="preserve">
+    <value>Check if you want to have the text scrolled between left/right or top/bottom</value>
+  </data>
+	<data name="lblMarqueeAlternate.Text" xml:space="preserve">
+    <value>Marquee Alternate</value>
+  </data>
+	<data name="lblMarqueeDirection.Help" xml:space="preserve">
+    <value>Scroll direction for the marquee-text. "Direction = Left" scrolls from right to left</value>
+  </data>
+	<data name="lblMarqueeDirection.Text" xml:space="preserve">
+    <value>Marquee-Direction</value>
+  </data>
+	<data name="lblMarqueeScrollAmount.Help" xml:space="preserve">
+    <value>Amount of pixels between 2 scroll states (Default:6)</value>
+  </data>
+	<data name="lblMarqueeScrollAmount.Text" xml:space="preserve">
+    <value>Marquee Scroll Amount</value>
+  </data>
+	<data name="lblMarqueeScrollDelay.Help" xml:space="preserve">
+    <value>Time in milliseconds between 2 scroll states (Default:85)</value>
+  </data>
+	<data name="lblMarqueeScrollDelay.Text" xml:space="preserve">
+    <value>Marquee Scroll Delay</value>
+  </data>
+	<data name="lblRowsPerPage.Help" xml:space="preserve">
+    <value>Enter the amount of rows with news per page</value>
+  </data>
+	<data name="lblRowsPerPage.Text" xml:space="preserve">
+    <value>Rows per Page</value>
+  </data>
+	<data name="Default.Template" xml:space="preserve">
+		<value>&lt;div style="padding:5px;" &gt;
+&lt;h3&gt;[BBNEWS:TITLELINK|120]&lt;/h3&gt;
+&lt;p style="font-style: italic;"&gt;[BBNEWS:PUBDATE|yyyy/MM/dd hh:mm] by [BBNEWS:SOURCE]&lt;/p&gt;
+&lt;p&gt;
+   &lt;div style="float:left"&gt;[BBNEWS:IMAGELINK]&lt;/div&gt;&lt;p&gt;[BBNEWS:SUMMARY|500]&lt;/p&gt;
+&lt;div style="float:right;font-size:x-small;"&gt;[BBNEWS:LINK]&lt;div&gt;
+&lt;div style="clear:both"&gt;&amp;nbsp;&lt;/div&gt;
+&lt;/div&gt;</value>
+	</data>
+	<data name="rblRss0.Text" xml:space="preserve">
+		<value>don't show</value>
+	</data>
+	<data name="rblRss1.Text" xml:space="preserve">
+		<value>left of title</value>
+	</data>
+	<data name="rblRss2.Text" xml:space="preserve">
+		<value>right of title</value>
+	</data>
+	<data name="lblShowRss.Text" xml:space="preserve">
+		<value>Show RSS Icon</value>
+	</data>
+	<data name="lblShowRss.Help" xml:space="preserve">
+		<value>Select if/how you want to display a RSS icon in the module title</value>
+	</data>
+	<data name="lblSelectTemplate.Text" xml:space="preserve">
+		<value>Select template</value>
+	</data>
+	<data name="lblSelectTemplate.Help" xml:space="preserve">
+		<value>Select a display template from the list or create a new one</value>
+	</data>
+</root>

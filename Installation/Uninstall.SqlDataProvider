@@ -1,0 +1,31 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+/** Drop FAQs Table **/
+
+ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_Feed] DROP CONSTRAINT FK_Category_Feed
+go
+
+ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_News] DROP CONSTRAINT FK_Category_News
+go
+
+DROP TABLE {databaseOwner}[{objectQualifier}BBNews_Category]
+go
+
+DROP TABLE {databaseOwner}[{objectQualifier}BBNews_Feed]
+go
+
+DROP TABLE {databaseOwner}[{objectQualifier}BBNews_News]
+go
+
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/

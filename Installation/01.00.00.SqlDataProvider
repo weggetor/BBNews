@@ -1,0 +1,76 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+/** Create Table **/
+
+
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{objectQualifier}BBNews_Category]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+   BEGIN
+      CREATE TABLE {databaseOwner}[{objectQualifier}BBNews_Category] ( 
+         CategoryID INT NOT NULL IDENTITY (1,1),
+         PortalID INT NULL,
+         CategoryName NVARCHAR(80) NOT NULL,
+         ReorgInterval INT NOT NULL DEFAULT (0) 
+      )
+
+      ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_Category] 
+	  ADD CONSTRAINT {objectQualifier}PK_BBNews_Category PRIMARY KEY NONCLUSTERED  (CategoryID ASC)
+   END
+GO
+
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{objectQualifier}BBNews_Feed]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+   BEGIN
+      CREATE TABLE {databaseOwner}[{objectQualifier}BBNews_Feed] ( 
+         FeedID INT NOT NULL IDENTITY (1,1),
+         CategoryID INT NOT NULL DEFAULT (0) ,
+         FeedUrl VARCHAR(200) NOT NULL DEFAULT '' ,
+         LastRetrieve DATETIME NULL,
+         LastTry DATETIME NULL,
+         RetrieveInterval INT NOT NULL DEFAULT (120) ,
+         TryInterval INT NOT NULL DEFAULT (20) 
+      )
+
+      ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_Feed] 
+	  ADD CONSTRAINT {objectQualifier}PK_BBNews_Feed PRIMARY KEY NONCLUSTERED  (FeedID ASC)
+   END
+GO
+
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{objectQualifier}BBNews_News]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+   BEGIN
+      CREATE TABLE {databaseOwner}[{objectQualifier}BBNews_News] ( 
+         NewsID INT NOT NULL IDENTITY (1,1),
+         CategoryID INT NOT NULL,
+         Title NVARCHAR(250) NOT NULL DEFAULT '' ,
+         Description NVARCHAR(MAX) NOT NULL DEFAULT '' ,
+         News NVARCHAR(MAX) NOT NULL,
+         Link VARCHAR(500) NOT NULL DEFAULT '' ,
+         GUID NVARCHAR(500) NOT NULL DEFAULT '' ,
+         Pubdate DATETIME NOT NULL DEFAULT '' ,
+         Hide BIT NOT NULL
+      )
+
+      ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_News] 
+	  ADD CONSTRAINT {objectQualifier}PK_BBNews_News PRIMARY KEY NONCLUSTERED  (NewsID ASC)
+   END
+GO
+IF NOT EXISTS (SELECT 1 FROM sys.objects where name='FK_Category_Feed' and type='F')
+   ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_Feed] WITH NOCHECK 
+   ADD CONSTRAINT {objectQualifier}FK_Category_Feed FOREIGN KEY ( CategoryID ) 
+   REFERENCES {databaseOwner}[{objectQualifier}BBNews_Category] ( CategoryID ) ON DELETE SET DEFAULT
+GO
+IF NOT EXISTS (SELECT 1 FROM sys.objects where name='FK_Category_News' and type='F')
+   ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_News] WITH NOCHECK 
+   ADD CONSTRAINT {objectQualifier}FK_Category_News FOREIGN KEY ( CategoryID ) 
+   REFERENCES {databaseOwner}[{objectQualifier}BBNews_Category] ( CategoryID ) ON DELETE CASCADE
+GO
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/
