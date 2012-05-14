@@ -23,6 +23,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using Bitboxx.DNNModules.BBNews.Components;
 using DotNetNuke.Entities.Modules;
@@ -63,6 +64,8 @@ namespace Bitboxx.DNNModules.BBNews
 				cmdCancel.Visible = _editMode;
 			}
 		}
+
+		public Control MainControl { get; set; } 
 		#endregion
 
 		
@@ -113,6 +116,8 @@ namespace Bitboxx.DNNModules.BBNews
 			Controller.SaveCategory(cat);
 			BindData();
 			EditMode = false;
+			EditCategoryFeeds ctrl = (EditCategoryFeeds)((Edit) MainControl).SubModules["EditCategoryFeeds"];
+			ctrl.FillDdlCategories();
 		}
 
 		protected void cmdCancel_Click(object sender, EventArgs e)

@@ -23,6 +23,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using Bitboxx.DNNModules.BBNews.Components;
 using DotNetNuke.Entities.Modules;
@@ -63,6 +64,7 @@ namespace Bitboxx.DNNModules.BBNews
 				cmdCancel.Visible = _editMode;
 			}
 		}
+		public Control MainControl { get; set; } 
 		#endregion
 
 		

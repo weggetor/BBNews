@@ -22,6 +22,7 @@
 
 
 using System;
+using System.Collections;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Framework;
 using DotNetNuke.Services.Exceptions;
@@ -32,40 +33,53 @@ namespace Bitboxx.DNNModules.BBNews
 	[DNNtc.ModuleControlProperties("Edit", "Bitboxx.BBNews Admin", DNNtc.ControlType.Edit, "", true, true)]
 	public partial class Edit : PortalModuleBase
 	{
+		public Hashtable SubModules;
+		
 		protected override void OnInit(EventArgs e)
 		{
 			base.OnInit(e);
 			jQuery.RequestDnnPluginsRegistration();
+			SubModules = new Hashtable();
 		}
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			try
 			{
-				PortalModuleBase ctrlCategories = LoadControl("EditCategories.ascx") as PortalModuleBase;
+				EditCategories ctrlCategories = LoadControl("EditCategories.ascx") as EditCategories;
 				ctrlCategories.ModuleConfiguration = this.ModuleConfiguration;
 				ctrlCategories.LocalResourceFile = Localization.GetResourceFile(ctrlCategories, ctrlCategories.GetType().BaseType.Name + ".ascx");
+				ctrlCategories.MainControl = this;
 				plCategories.Controls.Add(ctrlCategories);
+				SubModules.Add("EditCategories",ctrlCategories);
 
-				PortalModuleBase ctrlFeeds = LoadControl("EditFeeds.ascx") as PortalModuleBase;
+				EditFeeds ctrlFeeds = LoadControl("EditFeeds.ascx") as EditFeeds;
 				ctrlFeeds.ModuleConfiguration = this.ModuleConfiguration;
 				ctrlFeeds.LocalResourceFile = Localization.GetResourceFile(ctrlFeeds, ctrlFeeds.GetType().BaseType.Name + ".ascx");
+				ctrlFeeds.MainControl = this;
 				plFeeds.Controls.Add(ctrlFeeds);
+				SubModules.Add("EditFeeds", ctrlFeeds);
 
-				PortalModuleBase ctrlCategoryfeeds = LoadControl("EditCategoryFeeds.ascx") as PortalModuleBase;
+				EditCategoryFeeds ctrlCategoryfeeds = LoadControl("EditCategoryFeeds.ascx") as EditCategoryFeeds;
 				ctrlCategoryfeeds.ModuleConfiguration = this.ModuleConfiguration;
 				ctrlCategoryfeeds.LocalResourceFile = Localization.GetResourceFile(ctrlCategoryfeeds, ctrlCategoryfeeds.GetType().BaseType.Name + ".ascx");
+				ctrlCategoryfeeds.MainControl = this;
 				plCategoryFeeds.Controls.Add(ctrlCategoryfeeds);
+				SubModules.Add("EditCategoryFeeds", ctrlCategoryfeeds);
 
-				PortalModuleBase ctrlNews = LoadControl("EditNews.ascx") as PortalModuleBase;
+				EditNews ctrlNews = LoadControl("EditNews.ascx") as EditNews;
 				ctrlNews.ModuleConfiguration = this.ModuleConfiguration;
 				ctrlNews.LocalResourceFile = Localization.GetResourceFile(ctrlNews, ctrlNews.GetType().BaseType.Name + ".ascx");
+				ctrlNews.MainControl = this;
 				plNews.Controls.Add(ctrlNews);
+				SubModules.Add("EditNews", ctrlNews);
 
-				PortalModuleBase ctrlScheduler = LoadControl("EditScheduler.ascx") as PortalModuleBase;
+				EditScheduler ctrlScheduler = LoadControl("EditScheduler.ascx") as EditScheduler;
 				ctrlScheduler.ModuleConfiguration = this.ModuleConfiguration;
 				ctrlScheduler.LocalResourceFile = Localization.GetResourceFile(ctrlNews, ctrlScheduler.GetType().BaseType.Name + ".ascx");
+				ctrlScheduler.MainControl = this;
 				plScheduler.Controls.Add(ctrlScheduler);
+				SubModules.Add("EditScheduler", ctrlScheduler);
 			}
 			catch (Exception ex)
 			{
