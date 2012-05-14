@@ -27,6 +27,7 @@
 
 using System;
 using System.Collections;
+using System.Web.UI;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Localization;
@@ -56,7 +57,7 @@ namespace Bitboxx.DNNModules.BBNews
 				return _controller;
 			}
 		}
-
+		public Control MainControl { get; set; } 
 		#endregion
 
 		

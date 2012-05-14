@@ -229,6 +229,7 @@
     <None Include="Installation\01.00.00.SqlDataProvider" />
     <None Include="Installation\Uninstall.SqlDataProvider" />
     <None Include="Module.css" />
+    <None Include="Templates\News\tokens.htp" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Controls\TabSelectControl.ascx" />
@@ -246,6 +247,18 @@
     <Content Include="Settings.ascx" />
     <Content Include="Templates\News\default.htm" />
     <Content Include="Templates\News\default.jpg" />
+    <Content Include="Templates\News\Details.htm" />
+    <Content Include="Templates\News\Details.jpg" />
+    <Content Include="Templates\News\NewsA.htm" />
+    <Content Include="Templates\News\NewsA.jpg" />
+    <Content Include="Templates\News\NewsB.htm" />
+    <Content Include="Templates\News\NewsB.jpg" />
+    <Content Include="Templates\News\NewsShort.htm" />
+    <Content Include="Templates\News\NewsShort.jpg" />
+    <Content Include="Templates\News\Ticker.htm" />
+    <Content Include="Templates\News\Ticker.jpg" />
+    <Content Include="Templates\News\Twitter.htm" />
+    <Content Include="Templates\News\Twitter.jpg" />
     <Content Include="View.ascx" />
   </ItemGroup>
   <ItemGroup>

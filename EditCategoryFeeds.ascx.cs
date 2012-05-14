@@ -23,6 +23,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using Bitboxx.DNNModules.BBNews.Components;
 using DotNetNuke.Entities.Icons;
@@ -50,7 +51,7 @@ namespace Bitboxx.DNNModules.BBNews
 				return _controller;
 			}
 		}
-
+		public Control MainControl { get; set; } 
 		#endregion
 
 		protected void Page_Load(object sender, EventArgs e)
@@ -64,14 +65,7 @@ namespace Bitboxx.DNNModules.BBNews
 			ctlFeeds.RemoveButtonClick += ctlFeeds_RemoveButtonClick;
 			ctlFeeds.RemoveAllButtonClick += ctlFeeds_RemoveAllButtonClick;
 
-			List<CategoryInfo> allCats = Controller.GetCategories(PortalId);
-			ddlCategories.Items.Clear();
-			ddlCategories.Items.Add(new ListItem(Localization.GetString("Select.Text",this.LocalResourceFile),"0"));
-			ddlCategories.AppendDataBoundItems = true;
-			ddlCategories.DataSource = allCats;
-			ddlCategories.DataBind();
-			ddlCategories.SelectedValue = "0";
-			BindData();
+			FillDdlCategories();
 		}
 
 		void ctlFeeds_RemoveAllButtonClick(object sender, EventArgs e)
@@ -124,6 +118,18 @@ namespace Bitboxx.DNNModules.BBNews
 
 		protected void ddlCategories_SelectedIndexChanged(object sender, EventArgs e)
 		{
+			BindData();
+		}
+
+		public void FillDdlCategories()
+		{
+			List<CategoryInfo> allCats = Controller.GetCategories(PortalId);
+			ddlCategories.Items.Clear();
+			ddlCategories.Items.Add(new ListItem(Localization.GetString("Select.Text", this.LocalResourceFile), "0"));
+			ddlCategories.AppendDataBoundItems = true;
+			ddlCategories.DataSource = allCats;
+			ddlCategories.DataBind();
+			ddlCategories.SelectedValue = "0";
 			BindData();
 		}
 
