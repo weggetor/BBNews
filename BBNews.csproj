@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <!--Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" /-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{45AE5FFE-8AB5-4319-B311-9A04C5A7F607}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Bitboxx.DNNModules.BBNews</RootNamespace>
+    <AssemblyName>Bitboxx.DNNModules.BBNews</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>Bitboxx.DNNModules.BBNews.xml</DocumentationFile>
+    <WarningLevel>1</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DotNetNuke">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\DotNetNuke.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <!-- Warum sind die da drin ?
+    <Reference Include="DotNetNuke.Web">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\DotNetNuke.Web.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="WebFormsMvp">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\WebFormsMvp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    -->
+    <Reference Include="DotNetNuke.Web">
+      <HintPath>..\..\bin\DotNetNuke.Web.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationBlocks.Data, Version=2.0.0.0, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\Microsoft.ApplicationBlocks.Data.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Extensions.Design, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Telerik.Web.UI, Version=2011.2.915.35, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\Telerik.Web.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="DotNetNuke" />
+    <Import Include="DotNetNuke.Common" />
+    <Import Include="DotNetNuke.Common.Utilities" />
+    <Import Include="DotNetNuke.Data" />
+    <Import Include="DotNetNuke.Entities" />
+    <Import Include="DotNetNuke.Entities.Tabs" />
+    <Import Include="DotNetNuke.Framework" />
+    <Import Include="DotNetNuke.Modules" />
+    <Import Include="DotNetNuke.Security" />
+    <Import Include="DotNetNuke.Services" />
+    <Import Include="DotNetNuke.Services.Exceptions" />
+    <Import Include="DotNetNuke.Services.Localization" />
+    <Import Include="DotNetNuke.UI" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Collections.Specialized" />
+    <Import Include="System.Configuration" />
+    <Import Include="System.Text" />
+    <Import Include="System.Text.RegularExpressions" />
+    <Import Include="System.Web" />
+    <Import Include="System.Web.Caching" />
+    <Import Include="System.Web.SessionState" />
+    <Import Include="System.Web.Security" />
+    <Import Include="System.Web.Profile" />
+    <Import Include="System.Web.UI" />
+    <Import Include="System.Web.UI.WebControls" />
+    <Import Include="System.Web.UI.WebControls.WebParts" />
+    <Import Include="System.Web.UI.HtmlControls" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Components\BBNewsScheduler.cs" />
+    <Compile Include="Components\BBNewsTokenReplace.cs" />
+    <Compile Include="Components\CategoryInfo.cs" />
+    <Compile Include="Components\DataProvider.cs" />
+    <Compile Include="Components\FeedInfo.cs" />
+    <Compile Include="Components\IEBrowser.cs" />
+    <Compile Include="Components\NewsInfo.cs" />
+    <Compile Include="Components\SqlDataProvider.cs" />
+    <Compile Include="Components\BBNewsController.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\Twitter.cs" />
+    <Compile Include="Controls\TabSelectControl.ascx.cs">
+      <DependentUpon>TabSelectControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\TabSelectControl.ascx.designer.cs">
+      <DependentUpon>TabSelectControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TemplateControl.ascx.cs">
+      <DependentUpon>TemplateControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\TemplateControl.ascx.designer.cs">
+      <DependentUpon>TemplateControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EditScheduler.ascx.cs">
+      <DependentUpon>EditScheduler.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditScheduler.ascx.designer.cs">
+      <DependentUpon>EditScheduler.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Edit.ascx.cs">
+      <DependentUpon>Edit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Edit.ascx.designer.cs">
+      <DependentUpon>Edit.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EditCategories.ascx.cs">
+      <DependentUpon>EditCategories.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditCategories.ascx.designer.cs">
+      <DependentUpon>EditCategories.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EditCategoryFeeds.ascx.cs">
+      <DependentUpon>EditCategoryFeeds.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditCategoryFeeds.ascx.designer.cs">
+      <DependentUpon>EditCategoryFeeds.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EditFeeds.ascx.cs">
+      <DependentUpon>EditFeeds.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditFeeds.ascx.designer.cs">
+      <DependentUpon>EditFeeds.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EditNews.ascx.cs">
+      <DependentUpon>EditNews.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditNews.ascx.designer.cs">
+      <DependentUpon>EditNews.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Installation\Attributes.cs" />
+    <Compile Include="Settings.ascx.cs">
+      <DependentUpon>Settings.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Settings.ascx.designer.cs">
+      <DependentUpon>Settings.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="View.ascx.cs">
+      <DependentUpon>View.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View.ascx.designer.cs">
+      <DependentUpon>View.ascx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App_LocalResources\Settings.ascx.resx">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App_LocalResources\View.ascx.resx">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Installation\01.00.05.SqlDataProvider" />
+    <None Include="Installation\01.00.07.SqlDataProvider" />
+    <None Include="Installation\01.01.00.SqlDataProvider" />
+    <None Include="Installation\Project.targets">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Installation\01.00.00.SqlDataProvider" />
+    <None Include="Installation\Uninstall.SqlDataProvider" />
+    <None Include="Module.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Controls\TabSelectControl.ascx" />
+    <Content Include="Controls\TemplateControl.ascx" />
+    <Content Include="EditScheduler.ascx" />
+    <Content Include="Edit.ascx" />
+    <Content Include="EditCategories.ascx" />
+    <Content Include="EditCategoryFeeds.ascx" />
+    <Content Include="EditFeeds.ascx" />
+    <Content Include="EditNews.ascx" />
+    <Content Include="Installation\CleanUp\CleanUp.01.00.00.txt" />
+    <Content Include="Installation\Config\Config.txt" />
+    <Content Include="Installation\License.txt" />
+    <Content Include="Installation\ReleaseNotes\Release.01.01.00.txt" />
+    <Content Include="Settings.ascx" />
+    <Content Include="Templates\News\default.htm" />
+    <Content Include="Templates\News\default.jpg" />
+    <Content Include="View.ascx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\Edit.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\EditCategoryFeeds.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\EditCategories.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\EditFeeds.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\EditNews.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\EditScheduler.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Controls\App_LocalResources\TemplateControl.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <Import Project="$(MSBuildProjectDirectory)\Installation\Project.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

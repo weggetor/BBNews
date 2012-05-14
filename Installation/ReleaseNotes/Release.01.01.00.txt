@@ -1,0 +1,6 @@
+﻿<h1>Release Notes</h1>
+<p>bitboxx bbnews  01.01.00 will work for any DNN version <strong>6.1.0</strong> and up.
+<p>
+	V 01.01.00 First Public Release.
+</p>
+	

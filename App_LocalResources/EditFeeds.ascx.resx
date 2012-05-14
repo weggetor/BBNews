@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="cmdCancel.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+	<data name="cmdNew.Text" xml:space="preserve">
+    <value>New</value>
+  </data>
+	<data name="cmdSave.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+	<data name="Intro.Text" xml:space="preserve">
+    <value>Feeds are the source for your news. You can have different types of feeds. The feed type None means that you manually write the news. Furthermore, you can still choose between a RSS / Atom feed, the Twitter timeline and the search for a keyword in Twitter.</value>
+  </data>
+	<data name="lblFeedName.Text" xml:space="preserve">
+    <value>Feed Name</value>
+  </data>
+	<data name="Active.Header" xml:space="preserve">
+    <value>Active</value>
+  </data>
+	<data name="FeedName.Header" xml:space="preserve">
+    <value>Name</value>
+  </data>
+	<data name="FeedUrl.Header" xml:space="preserve">
+    <value>Url</value>
+  </data>
+	<data name="lblFeedUrlRss.Text" xml:space="preserve">
+    <value>Feed Url</value>
+  </data>
+	<data name="LastRetrieve.Header" xml:space="preserve">
+    <value>Last Retrieve</value>
+  </data>
+	<data name="lblEnabled.Text" xml:space="preserve">
+    <value>Active</value>
+  </data>
+	<data name="lblLastRetrieve.Text" xml:space="preserve">
+    <value>Last Retrieve</value>
+  </data>
+	<data name="lblLastTry.Text" xml:space="preserve">
+    <value>Last Try</value>
+  </data>
+	<data name="lblReorgInterval.Text" xml:space="preserve">
+    <value>Reorg Interval</value>
+  </data>
+	<data name="lblRetrieveInterval.Text" xml:space="preserve">
+    <value>Retrieve Interval</value>
+  </data>
+	<data name="lblTryInterval.Text" xml:space="preserve">
+    <value>Try Interval</value>
+  </data>
+	<data name="valFeedName.Error" xml:space="preserve">
+    <value>Please enter a name for the feed</value>
+  </data>
+	<data name="valFeedUrl.Error" xml:space="preserve">
+    <value>Please enter a feed URL</value>
+  </data>
+	<data name="valFeedUrlValid.Error" xml:space="preserve">
+    <value>Please enter a valid complete feed URL (see help)</value>
+  </data>
+	<data name="valReorgIntervalValid.Error" xml:space="preserve">
+    <value>Please enter a number between 0 and 365</value>
+  </data>
+	<data name="valRetrieveIntervalValid.Error" xml:space="preserve">
+    <value>Please enter a number between 0 and 86400</value>
+  </data>
+	<data name="valTryIntervalValid.Error" xml:space="preserve">
+    <value>Please enter a number between 0 and 86400</value>
+  </data>
+	<data name="FeedType.Header" xml:space="preserve">
+    <value>Feed Type</value>
+  </data>
+	<data name="FeedTypeNone.Text" xml:space="preserve">
+    <value>None</value>
+  </data>
+	<data name="FeedTypeRss.Text" xml:space="preserve">
+    <value>RSS / Atom Feed</value>
+  </data>
+	<data name="FeedTypeTwitterSearch.Text" xml:space="preserve">
+    <value>Twitter Search</value>
+  </data>
+	<data name="FeedTypeTwitterTimeline.Text" xml:space="preserve">
+    <value>Twitter User Timeline</value>
+  </data>
+	<data name="lblFeedType.Text" xml:space="preserve">
+    <value>Feed Type</value>
+  </data>
+	<data name="lblPassword.Text" xml:space="preserve">
+    <value>Password</value>
+  </data>
+	<data name="lblUserName.Text" xml:space="preserve">
+    <value>Username</value>
+  </data>
+	<data name="valPassword.Error" xml:space="preserve">
+    <value>Password is required</value>
+  </data>
+	<data name="valUserName.Error" xml:space="preserve">
+    <value>UserName is required</value>
+  </data>
+	<data name="lblFeedUrlTwitterSearch.Text" xml:space="preserve">
+    <value>Twitter Searchword</value>
+  </data>
+	<data name="lblFeedUrlTwitterTimeline.Text" xml:space="preserve">
+    <value>Twitter Account</value>
+  </data>
+	<data name="lblActive.Help" xml:space="preserve">
+    <value>Select if the feed should be active (news are collected)</value>
+  </data>
+	<data name="lblFeedName.Help" xml:space="preserve">
+    <value>Please enter an decriptional name for your feed</value>
+  </data>
+	<data name="lblFeedType.Help" xml:space="preserve">
+    <value>Please select the type of your feed. If you want to create your own news select "none". If you want to collect news from an RSS/Atom feed or from twitter, select the corresponding entrys</value>
+  </data>
+	<data name="lblFeedUrl.Help" xml:space="preserve">
+    <value>Please enter the feed Url (RSS/Atom-Feed) or the search term (twitter search). If "None"  leave this empty.</value>
+  </data>
+	<data name="lblReorgInterval.Help" xml:space="preserve">
+    <value>Enter the number of days passing before automatic delete. If zero, news are never deleted</value>
+  </data>
+	<data name="lblRetrieveInterval.Help" xml:space="preserve">
+    <value>Select the Interval you wish to collect information from the feed (in seconds). Zero collects feed on every hit</value>
+  </data>
+	<data name="lblTryInterval.Help" xml:space="preserve">
+    <value>Select the Interval when the application tries again to collect the feed after an unsuccesful try (in seconds) . Zero collects feed on every hit</value>
+  </data>
+	<data name="DeleteFeed.Error" xml:space="preserve">
+		<value>The feed could not be deleted because it is still used. For example check whether it is associated with a category yet.</value>
+	</data>
+</root>

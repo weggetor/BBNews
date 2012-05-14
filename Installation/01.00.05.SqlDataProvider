@@ -1,0 +1,23 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+/** Create Table **/
+
+ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_Feed] ADD Enabled BIT NOT NULL DEFAULT (1) 
+go
+ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_Feed] ADD StripHtml BIT NOT NULL DEFAULT (0) 
+go
+ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_News] ADD Author nVarchar(50) NOT NULL DEFAULT '' 
+go
+
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/
