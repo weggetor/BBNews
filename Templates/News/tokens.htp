@@ -1,0 +1,31 @@
+Use standard syntax for token replace:
+
+<pre>[Object :Property]
+[Object :Property|Format]
+[Object :Property|Format|IfEmpyReplacement]
+</pre>
+
+ Some tokens have special format parameters: 
+<ul>
+  <li>[BBNews:NewsId] = ID of the news</li>
+  <li>[BBNews:Title] = Title of News. (Format = max length, e.g. [BBNews:Title|80] shows the first 80 letters)</li>
+  <li>[BBNews:TitleLink] = Title as link to Source. (Format = max length) </li>
+  <li>[BBNews:Link] = Link to original news</li>
+  <li>[BBNews:Summary] = Summary text of news (Format = max length)</li>
+  <li>[BBNews:SummayNoHtml] = Summary text without all HTML (Images etc.) (Format = max length)</li>
+  <li>[BBNews:AuthorName] = Name of author</li>
+  <li>[BBNews:AuthorUrl] = Url of author homepage</li>
+  <li>[BBNews:AuthorEmail] = Emailaddress of author</li>
+  <li>[BBNews:AuthorNick] = Alias/Username of author</li>
+  <li>[BBNews:News] = Complete Newstext (only for internal news)</li>
+  <li>[BBNews:Image] = Html to display image</li>
+  <li>[BBNews:ImageLink] = Address of image</li>
+  <li>[BBNews:PubDate] = Publishing date</li>
+  <li>[BBNews:Source] = Domain of news</li>
+  <li>[BBNews:FavIcon] = Html to display FavIcon</li>
+  <li>[BBNews:FeedName] = Name of corresponding feed</li>
+  <li>[BBNews:FeedUrl] = Url of corresponding feed</li>
+  <li>... and all DNN standard tokens (see:
+  <a href="http://www.dotnetnuke.com/Resources/Wiki/Page/Tokens.aspx">
+  http://www.dotnetnuke.com/.../Tokens.aspx</a> )</li>
+ </ul>
