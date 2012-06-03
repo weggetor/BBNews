@@ -21,7 +21,7 @@ IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwne
       )
 
       ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_Category] 
-	  ADD CONSTRAINT {objectQualifier}PK_BBNews_Category PRIMARY KEY NONCLUSTERED  (CategoryID ASC)
+	  ADD CONSTRAINT {objectQualifier}PK_BBNews_Category PRIMARY KEY CLUSTERED  (CategoryID ASC)
    END
 GO
 
@@ -38,7 +38,7 @@ IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwne
       )
 
       ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_Feed] 
-	  ADD CONSTRAINT {objectQualifier}PK_BBNews_Feed PRIMARY KEY NONCLUSTERED  (FeedID ASC)
+	  ADD CONSTRAINT {objectQualifier}PK_BBNews_Feed PRIMARY KEY CLUSTERED  (FeedID ASC)
    END
 GO
 
@@ -57,7 +57,7 @@ IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwne
       )
 
       ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_News] 
-	  ADD CONSTRAINT {objectQualifier}PK_BBNews_News PRIMARY KEY NONCLUSTERED  (NewsID ASC)
+	  ADD CONSTRAINT {objectQualifier}PK_BBNews_News PRIMARY KEY CLUSTERED  (NewsID ASC)
    END
 GO
 IF NOT EXISTS (SELECT 1 FROM sys.objects where name='FK_Category_Feed' and type='F')
