@@ -103,7 +103,10 @@ namespace Bitboxx.DNNModules.BBNews.Controls
 		
 		private string TemplatePath
 		{
-			get { return MapPath(AppRelativeTemplateSourceDirectory + @"..\Templates\" + Key + "\\"); }
+			get
+			{
+				return MapPath("~" + TemplateSourceDirectory + @"\..\Templates\" + Key + "\\");
+			}
 		}
 
 		
@@ -204,10 +207,10 @@ namespace Bitboxx.DNNModules.BBNews.Controls
 			List<string> lst = new List<string>();
 			foreach (string file in files)
 			{
-				string normFile = file.Substring(0, file.IndexOf('.'));
-				FileInfo fi = new FileInfo(normFile);
-				if (!lst.Contains(fi.Name) && fi.Name != "default")
-					lst.Add(fi.Name);
+				FileInfo fi = new FileInfo(file);
+				string normFile = fi.Name.Substring(0, fi.Name.IndexOf('.'));
+				if (!lst.Contains(normFile) && normFile != "default")
+					lst.Add(normFile);
 			}
 
 			if (lst.Count > 0)

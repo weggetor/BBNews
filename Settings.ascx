@@ -13,11 +13,13 @@
 			<asp:ListItem resourcekey="rblView2" Value="2" />
 		</asp:RadioButtonList>
 	</div>
-	<asp:Panel ID="pnlMulti" runat="server">
+	<asp:Panel ID="pnlCategory" runat="server">
 		<div class="dnnFormItem">
 			<dnn:label id="lblCategory" runat="server" controlname="cboCategory" suffix=":" />
 			<asp:DropDownList ID="cboCategory" runat="server" CssClass="dnnFormInput"/>
 		</div>
+	</asp:Panel>
+	<asp:Panel ID="pnlMulti" runat="server">
 		<div class="dnnFormItem">
 			<dnn:label id="lblTopN" runat="server" controlname="txtTopN" suffix=":" />
 			<asp:textbox id="txtTopN" runat="server" Columns="3" CssClass="dnnFormInput dnnNumberInput" />

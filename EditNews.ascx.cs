@@ -36,7 +36,7 @@ namespace Bitboxx.DNNModules.BBNews
 		#region Private Members
 
 		private BBNewsController _controller;
-		private bool _editMode = false;
+		private bool _inEditMode = false;
 
 		#endregion
 
@@ -51,17 +51,17 @@ namespace Bitboxx.DNNModules.BBNews
 				return _controller;
 			}
 		}
-		public bool EditMode
+		public bool InEditMode
 		{
-			get { return _editMode; }
+			get { return _inEditMode; }
 			set
 			{
-				_editMode = value;
-				pnlEdit.Visible = _editMode;
-				pnlSearch.Visible = !_editMode;
-				cmdNew.Visible = !_editMode;
-				cmdSave.Visible = _editMode;
-				cmdCancel.Visible = _editMode;
+				_inEditMode = value;
+				pnlEdit.Visible = _inEditMode;
+				pnlSearch.Visible = !_inEditMode;
+				cmdNew.Visible = !_inEditMode;
+				cmdSave.Visible = _inEditMode;
+				cmdCancel.Visible = _inEditMode;
 			}
 		}
 		public Control MainControl { get; set; } 
@@ -143,13 +143,13 @@ namespace Bitboxx.DNNModules.BBNews
 					txtLink.Text = news.Link;
 					hidNewsId.Value = news.NewsId.ToString();
 					hidGuid.Value = news.GUID;
-				    EditMode = true;
+				    InEditMode = true;
 				    break;
 
 				case "Delete":
 				    newsId = Convert.ToInt32(e.CommandArgument);
 				    Controller.DeleteNews(newsId);
-				    EditMode = false;
+				    InEditMode = false;
 					BindData();
 				    break;
 			}
@@ -191,7 +191,7 @@ namespace Bitboxx.DNNModules.BBNews
 			txtLink.Text = "";
 			hidNewsId.Value = "-1";
 			hidGuid.Value = Guid.NewGuid().ToString();
-			EditMode = true;
+			InEditMode = true;
 			BindData();
 		}
 
@@ -205,25 +205,35 @@ namespace Bitboxx.DNNModules.BBNews
 			news.Summary = txtSummary.Text;
 			news.News = txtNews.Text;
 			news.Hide = chkHide.Checked;
-			news.Pubdate = (tpPubDate.SelectedDate == null ? DateTime.MinValue : (DateTime)tpPubDate.SelectedDate);
+			if (dpPubDate.SelectedDate == null || tpPubDate.SelectedDate == null)
+				news.Pubdate = DateTime.MinValue;
+			else
+			{
+				news.Pubdate = new DateTime(dpPubDate.SelectedDate.Value.Year,
+					dpPubDate.SelectedDate.Value.Month,
+					dpPubDate.SelectedDate.Value.Day,
+					tpPubDate.SelectedDate.Value.Hour,
+					tpPubDate.SelectedDate.Value.Minute,
+					tpPubDate.SelectedDate.Value.Second);
+			}
 			news.Link = txtLink.Text;
 			news.Image = txtImage.Text;
 			news.Internal = chkInternal.Checked;
 			news.Author = txtAuthorName.Text + "|" + txtAuthorUrl.Text + "|" + txtAuthorEmail.Text + "|" + txtAuthorNick.Text;
 
 			Controller.SaveNewsById(news);
-			EditMode = false;
+			InEditMode = false;
 			BindData();
 		}
 
 		protected void cmdCancel_Click(object sender, EventArgs e)
 		{
-			EditMode = false;
+			InEditMode = false;
 			BindData();
 		}
 		protected void cmdSearch_Click(object sender, EventArgs e)
 		{
-			EditMode = false;
+			InEditMode = false;
 			grdNews.CurrentPageIndex = 0;
 			BindData();
 		}
