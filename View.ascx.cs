@@ -56,14 +56,6 @@ namespace Bitboxx.DNNModules.BBNews
 		private NewsInfo News = null;
 		private NewsInfo _theNews = null;
 
-		private Label lblHeadline;
-		private Label lblPubDate;
-		private Label lblSource;
-		private Label lblAuthor;
-		private Literal ltrDescription;
-		private Literal ltrNews;
-		private HyperLink lnkLink;
-
 		#endregion
 
 		#region Properties
@@ -152,11 +144,20 @@ namespace Bitboxx.DNNModules.BBNews
 		{
 			get
 			{
-				if (_theNews == null && !String.IsNullOrEmpty(Request["newsid"]))
+				if (_theNews == null) 
 				{
-					int newsId = -1;
-					Int32.TryParse(Request["newsid"], out newsId);
-					_theNews = Controller.GetNews(newsId);
+					if (!String.IsNullOrEmpty(Request["newsid"]))
+					{
+						int newsId = -1;
+						Int32.TryParse(Request["newsid"], out newsId);
+						_theNews = Controller.GetNews(newsId);
+					}
+					else
+					{
+						var theNews = Controller.GetNews(PortalId, CategoryId, 1, StartDate, EndDate, -1, -1, false, "");
+						if (theNews.Count > 0)
+							_theNews = theNews[0];
+					}
 				}
 				return _theNews;
 			}
@@ -256,12 +257,12 @@ namespace Bitboxx.DNNModules.BBNews
 					{
 						switch (ViewIndex)
 						{
-							case 0:
+							case 0: // Table
 								lstNews.DataSource = AllNews;
 								lstNews.DataBind();
 								Pager.Visible = (AllNews.Count > rowsPerPage*newsInRow);
 								break;
-							case 1:
+							case 1: // Marquee
 								StringBuilder sb = new StringBuilder();
 								sb.Append("<marquee");
 
@@ -292,6 +293,12 @@ namespace Bitboxx.DNNModules.BBNews
 								{
 									NewsInfo news = AllNews[i];
 
+									if (news.Internal && Settings["NewsPage"] != null)
+									{
+										int newsTabId = Convert.ToInt32((string)Settings["NewsPage"]);
+										news.Link = Globals.NavigateURL(newsTabId, "", "newsid=" + news.NewsId.ToString());
+									}
+
 									PortalSecurity ps = new PortalSecurity();
 									string newstext = ProcessTokens(news, Template);
 									string newstextSec = ps.InputFilter(newstext, PortalSecurity.FilterFlag.NoScripting);
@@ -309,7 +316,7 @@ namespace Bitboxx.DNNModules.BBNews
 								ltrMarquee.Text = sb.ToString();
 								Pager.Visible = false;
 								break;
-							case 2:
+							case 2: // Details
 								if (TheNews != null)
 								{
 									if (TheNews.Internal && Settings["NewsPage"] != null)

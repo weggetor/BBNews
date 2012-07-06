@@ -217,6 +217,7 @@ namespace Bitboxx.DNNModules.BBNews
 
 		protected void rblView_SelectedIndexChanged(object sender, EventArgs e)
 		{
+			pnlCategory.Visible = true;
 			pnlMulti.Visible = (rblView.SelectedIndex != 2);
 			pnlNewsRows.Visible = (rblView.SelectedIndex == 0);
 			pnlSelectPage.Visible = (rblView.SelectedIndex != 2);

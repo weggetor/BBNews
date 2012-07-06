@@ -36,7 +36,7 @@ namespace Bitboxx.DNNModules.BBNews
 		#region Private Members
 
 		private BBNewsController _controller;
-		private bool _editMode = false;
+		private bool _inEditMode = false;
 
 		#endregion
 
@@ -51,17 +51,17 @@ namespace Bitboxx.DNNModules.BBNews
 				return _controller;
 			}
 		}
-		public bool EditMode
+		public bool InEditMode
 		{
-			get { return _editMode; }
+			get { return _inEditMode; }
 			set
 			{
-				_editMode = value;
-				pnlEdit.Visible = _editMode;
-				pnlSearch.Visible = !_editMode;
-				cmdNew.Visible = !_editMode;
-				cmdSave.Visible = _editMode;
-				cmdCancel.Visible = _editMode;
+				_inEditMode = value;
+				pnlEdit.Visible = _inEditMode;
+				pnlSearch.Visible = !_inEditMode;
+				cmdNew.Visible = !_inEditMode;
+				cmdSave.Visible = _inEditMode;
+				cmdCancel.Visible = _inEditMode;
 			}
 		}
 
@@ -86,12 +86,12 @@ namespace Bitboxx.DNNModules.BBNews
 					txtCategoryName.Text = cat.CategoryName;
 					txtCategoryDescription.Text = cat.CategoryDescription;
 					hidCategoryId.Value = cat.CategoryId.ToString();
-					EditMode = true;
+					InEditMode = true;
 					BindData();
 					break;
 				case "Delete":
 					Controller.DeleteCategory(categoryId);
-					EditMode = false;
+					InEditMode = false;
 					BindData();
 					break;
 			}
@@ -102,7 +102,7 @@ namespace Bitboxx.DNNModules.BBNews
 			txtCategoryName.Text = "";
 			txtCategoryDescription.Text = "";
 			hidCategoryId.Value = "-1";
-			EditMode = true;
+			InEditMode = true;
 			BindData();
 		}
 
@@ -115,14 +115,14 @@ namespace Bitboxx.DNNModules.BBNews
 			cat.PortalId = PortalId;
 			Controller.SaveCategory(cat);
 			BindData();
-			EditMode = false;
+			InEditMode = false;
 			EditCategoryFeeds ctrl = (EditCategoryFeeds)((Edit) MainControl).SubModules["EditCategoryFeeds"];
 			ctrl.FillDdlCategories();
 		}
 
 		protected void cmdCancel_Click(object sender, EventArgs e)
 		{
-			EditMode = false;
+			InEditMode = false;
 			BindData();
 		}
 

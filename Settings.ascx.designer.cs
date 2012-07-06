@@ -31,13 +31,13 @@ namespace Bitboxx.DNNModules.BBNews {
         protected global::System.Web.UI.WebControls.RadioButtonList rblView;
         
         /// <summary>
-        /// pnlMulti control.
+        /// pnlCategory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlMulti;
+        protected global::System.Web.UI.WebControls.Panel pnlCategory;
         
         /// <summary>
         /// lblCategory control.
@@ -56,6 +56,15 @@ namespace Bitboxx.DNNModules.BBNews {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList cboCategory;
+        
+        /// <summary>
+        /// pnlMulti control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlMulti;
         
         /// <summary>
         /// lblTopN control.

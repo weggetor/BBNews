@@ -36,7 +36,7 @@ namespace Bitboxx.DNNModules.BBNews
 		#region Private Members
 
 		private BBNewsController _controller;
-		private bool _editMode = false;
+		private bool _inEditMode = false;
 
 		#endregion
 
@@ -51,17 +51,17 @@ namespace Bitboxx.DNNModules.BBNews
 				return _controller;
 			}
 		}
-		public bool EditMode
+		public bool InEditMode
 		{
-			get { return _editMode; }
+			get { return _inEditMode; }
 			set
 			{
-				_editMode = value;
-				pnlEdit.Visible = _editMode;
-				pnlSearch.Visible = !_editMode;
-				cmdNew.Visible = !_editMode;
-				cmdSave.Visible = _editMode;
-				cmdCancel.Visible = _editMode;
+				_inEditMode = value;
+				pnlEdit.Visible = _inEditMode;
+				pnlSearch.Visible = !_inEditMode;
+				cmdNew.Visible = !_inEditMode;
+				cmdSave.Visible = _inEditMode;
+				cmdCancel.Visible = _inEditMode;
 			}
 		}
 		public Control MainControl { get; set; } 
@@ -96,7 +96,7 @@ namespace Bitboxx.DNNModules.BBNews
 					txtUserName.Text = feed.UserName;
 					txtPassword.Text = feed.Password;
 					hidFeedId.Value = feed.FeedId.ToString();
-					EditMode = true;
+					InEditMode = true;
 					BindData();
 					cboFeedType_SelectedIndexChanged(this, new EventArgs());
 					break;
@@ -105,13 +105,13 @@ namespace Bitboxx.DNNModules.BBNews
 					{
 						Controller.DeleteFeed(feedId);
 					}
-					catch (Exception ex)
+					catch (Exception)
 					{
 						string message = Localization.GetString("DeleteFeed.Error", this.LocalResourceFile);
 						DotNetNuke.UI.Skins.Skin.AddModuleMessage(this, message, ModuleMessage.ModuleMessageType.YellowWarning);
 					}
 					
-					EditMode = false;
+					InEditMode = false;
 					BindData();
 					break;
 			}
@@ -131,7 +131,7 @@ namespace Bitboxx.DNNModules.BBNews
 			hidFeedId.Value = "-1";
 			txtUserName.Text = "";
 			txtPassword.Text = "";
-			EditMode = true;
+			InEditMode = true;
 			BindData();
 		}
 
@@ -162,12 +162,12 @@ namespace Bitboxx.DNNModules.BBNews
 			
 			Controller.SaveFeed(feed);
 			BindData();
-			EditMode = false;
+			InEditMode = false;
 		}
 
 		protected void cmdCancel_Click(object sender, EventArgs e)
 		{
-			EditMode = false;
+			InEditMode = false;
 			BindData();
 		}
 

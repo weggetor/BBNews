@@ -1,0 +1,18 @@
+﻿<h2>Release Notes bitboxx bbnews  01.01.01</h2>
+<p>bbnews  01.01.01 will work for any DNN version <strong>6.1.0</strong> and up.
+<h3>BUG FIXES</h3>
+<ul>
+    <li>Changes to News.Publishingdate are not saved back to database</li>
+	<li>When using marquee as view mode, internal links to own news are not filled with the proper URL</li>
+	<li>If the physical installation path of the portal contains a dot ("."), the selection of templates did not show the template files</li>
+	<li>Updated Uninstall script. Now checking for existance of entities/constraints before deleting them</li>
+</ul>
+<h3>ENHANCEMENTS</h3>
+<ul>
+    <li>Azure compatibility of SQL Scripts</li>
+</ul>
+<h3>CHANGES</h3>
+<ul>
+    <li>News in details view mode now can also have a category. If no newsid parameter is given in URL, the newest news of this category is shown</li>
+</ul>
+	
