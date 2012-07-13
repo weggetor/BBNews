@@ -10,14 +10,14 @@
 
 UPDATE {databaseOwner}[{objectQualifier}ModuleDefinitions] SET FriendlyName = 'Bitboxx BBNews' WHERE FriendlyName = 'BBNews'
 
-IF EXISTS (SELECT 1 FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{objectQualifier}[FK_Category_Feed]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}BBNews_Feed]'))
+IF EXISTS (SELECT 1 FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[{objectQualifier}FK_Category_Feed]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}BBNews_Feed]'))
 ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_Feed] 
-DROP CONSTRAINT {objectQualifier}[FK_Category_Feed]
+DROP CONSTRAINT [{objectQualifier}FK_Category_Feed]
 go
 
-IF EXISTS (SELECT 1 FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{objectQualifier}[FK_Category_News]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}BBNews_News]'))
+IF EXISTS (SELECT 1 FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[{objectQualifier}FK_Category_News]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}BBNews_News]'))
 ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_News] 
-DROP CONSTRAINT {objectQualifier}[FK_Category_News]
+DROP CONSTRAINT [{objectQualifier}FK_Category_News]
 go
 
 
