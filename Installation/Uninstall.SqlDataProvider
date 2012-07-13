@@ -11,7 +11,7 @@
 /** Drop FAQs Table **/
 
 IF EXISTS (select * from sys.foreign_keys where object_id = object_id(N'{objectQualifier}FK_CategoryFeedsOfCategory') and parent_object_id = object_id(N'{databaseOwner}[{objectQualifier}BBNews_CategoryFeeds]'))
-ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_CategoryFeeds] DROP CONSTRAINT FK_CategoryFeedsOfCategory
+ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_CategoryFeeds] DROP CONSTRAINT {objectQualifier}FK_CategoryFeedsOfCategory
 go
 
 if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}BBNews_Category]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
@@ -19,11 +19,11 @@ DROP TABLE {databaseOwner}[{objectQualifier}BBNews_Category]
 go
 
 IF EXISTS (select * from sys.foreign_keys where object_id = object_id(N'{objectQualifier}FK_NewsOfFeed') and parent_object_id = object_id(N'{databaseOwner}[{objectQualifier}BBNews_News]'))
-ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_News] DROP CONSTRAINT FK_NewsOfFeed
+ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_News] DROP CONSTRAINT {objectQualifier}FK_NewsOfFeed
 go
 
 IF EXISTS (select * from sys.foreign_keys where object_id = object_id(N'{objectQualifier}FK_FeedsOfCategoryFeeds') and parent_object_id = object_id(N'{databaseOwner}[{objectQualifier}BBNews_CategoryFeeds]'))
-ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_CategoryFeeds] DROP CONSTRAINT FK_FeedsOfCategoryFeeds
+ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_CategoryFeeds] DROP CONSTRAINT {objectQualifier}FK_FeedsOfCategoryFeeds
 go
 
 if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}BBNews_Feed]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
