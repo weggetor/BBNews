@@ -154,9 +154,10 @@ namespace Bitboxx.DNNModules.BBNews
 			string ProxyPort = DotNetNuke.Entities.Host.Host.ProxyPort.ToString();
 			string ProxyUserName = DotNetNuke.Entities.Host.Host.ProxyUsername;
 			string ProxyPassword = DotNetNuke.Entities.Host.Host.ProxyPassword;
-			WebRequest wrq;
+			HttpWebRequest wrq;
 			WebResponse wrp;
 			Stream rssStream;
+			XmlReaderSettings settings;
 			XmlReader rssReader;
 			SyndicationFeed feed;
 
@@ -169,18 +170,23 @@ namespace Bitboxx.DNNModules.BBNews
 					case 1: // Twitter Search
 						string url = String.Format("http://search.twitter.com/search.atom?q={0}", feedInfo.FeedUrl);
 
-						wrq = WebRequest.Create(url);
+						wrq = (HttpWebRequest)WebRequest.Create(url);
 						if (ProxyServer != string.Empty)
 							wrq.Proxy = new WebProxy(ProxyServer + (ProxyPort != "-1" ? ":" + ProxyPort : ""));
 
 						if (ProxyUserName != string.Empty)
 							wrq.Proxy.Credentials = new NetworkCredential(ProxyUserName, ProxyPassword);
 
+						// Set UserAgent to avoid prohibited (403) answer
+						wrq.UserAgent = "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:15.0) Gecko/20100101 Firefox/15.0.1";
+
 						wrp = wrq.GetResponse();
 						rssStream = wrp.GetResponseStream();
 
+						settings = new XmlReaderSettings();
 
-						rssReader = XmlReader.Create(rssStream);
+						rssReader = XmlReader.Create(rssStream,settings);
+
 						feed = SyndicationFeed.Load(rssReader);
 
 						foreach (var feedItem in feed.Items)
@@ -230,18 +236,23 @@ namespace Bitboxx.DNNModules.BBNews
 						break;
 
 					case 2: // RSS
-						wrq = WebRequest.Create(feedInfo.FeedUrl);
+						wrq = (HttpWebRequest)WebRequest.Create(feedInfo.FeedUrl);
 						if (ProxyServer != string.Empty)
 							wrq.Proxy = new WebProxy(ProxyServer + (ProxyPort != "-1" ? ":" + ProxyPort : ""));
 
 						if (ProxyUserName != string.Empty)
 							wrq.Proxy.Credentials = new NetworkCredential(ProxyUserName, ProxyPassword);
 
+
+						// Set UserAgent to avoid prohibited (403) answer
+						wrq.UserAgent = "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:15.0) Gecko/20100101 Firefox/15.0.1";
+
 						wrp = wrq.GetResponse();
 						rssStream = wrp.GetResponseStream();
 
+						settings = new XmlReaderSettings();
 
-						rssReader = XmlReader.Create(rssStream);
+						rssReader = XmlReader.Create(rssStream,settings);
 						feed = SyndicationFeed.Load(rssReader);
 
 						foreach (var feedItem in feed.Items)
@@ -284,16 +295,7 @@ namespace Bitboxx.DNNModules.BBNews
 						this.SaveFeed(feedInfo);
 						break;
 
-					case 3: // Twitter Usertimeline
-						//Twitter twitter = new Twitter("weggetor", "waikiki");
-						//List<NewsInfo> lst = twitter.GetUserTimeLine(feedInfo.FeedUrl.Substring(10));
-						//foreach (NewsInfo news in lst)
-						//{
-						//    news.CategoryID = feedInfo.CategoryID;
-						//    this.SaveFeedNews(news);
-						//    feedInfo.LastRetrieve = DateTime.Now;
-						//    this.SaveFeed(feedInfo);
-						//}
+					case 3: 
 						break;
 				}
 			}
