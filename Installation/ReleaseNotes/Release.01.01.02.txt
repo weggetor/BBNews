@@ -1,0 +1,8 @@
+﻿<h2>Release Notes bitboxx bbnews  01.01.02</h2>
+<p>bbnews  01.01.02 will work for any DNN version <strong>6.1.0</strong> and up.
+<h3>BUG FIXES</h3>
+<ul>
+    <li>Relative links delivered from RSS feeds causing news diplay to crash when using a template containing source-token</li>
+	<li>Some RSS feeds answer with Status 403 (access denied). Mimic a firefox browser solves the problem.</li>
+</ul>
+	
