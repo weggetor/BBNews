@@ -237,6 +237,9 @@ namespace Bitboxx.DNNModules.BBNews
 
 					case 2: // RSS
 						wrq = (HttpWebRequest)WebRequest.Create(feedInfo.FeedUrl);
+
+						Uri baseUrl = new Uri(feedInfo.FeedUrl); 
+
 						if (ProxyServer != string.Empty)
 							wrq.Proxy = new WebProxy(ProxyServer + (ProxyPort != "-1" ? ":" + ProxyPort : ""));
 
@@ -265,6 +268,8 @@ namespace Bitboxx.DNNModules.BBNews
 							//if (feedInfo.StripHtml)
 							//    news.Summary = StripHTML(news.Summary);
 							news.Link = (feedItem.Links.Count > 0 ? feedItem.Links[0].Uri.OriginalString : "");
+							if (!news.Link.ToLower().StartsWith("http"))
+								news.Link = baseUrl.Scheme + "://" + baseUrl.Host + news.Link;
 							news.Author = "";
 							if (feedItem.Authors.Count > 0)
 							{

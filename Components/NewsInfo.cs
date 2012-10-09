@@ -148,8 +148,15 @@ namespace Bitboxx.DNNModules.BBNews.Components
 				case "source":
 					if (!String.IsNullOrEmpty(Link))
 					{
-						Uri url = new Uri(Link);
-						return PropertyAccess.FormatString(url.Host,format);
+						try
+						{
+							Uri url = new Uri(Link);
+							return PropertyAccess.FormatString(url.Host, format);
+						}
+						catch (Exception)
+						{
+							return "";
+						}
 					}
 					return "";
 				case "favicon":
