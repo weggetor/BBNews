@@ -243,6 +243,7 @@
     <Content Include="Installation\CleanUp\CleanUp.01.00.00.txt" />
     <Content Include="Installation\Config\Config.txt" />
     <Content Include="Installation\License.txt" />
+    <Content Include="Installation\ReleaseNotes\Release.01.01.02.txt" />
     <Content Include="Installation\ReleaseNotes\Release.01.01.01.txt" />
     <Content Include="Installation\ReleaseNotes\Release.01.01.00.txt" />
     <Content Include="Settings.ascx" />
