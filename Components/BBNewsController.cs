@@ -27,6 +27,7 @@ using System.Data.SqlTypes;
 using System.IO;
 using System.Net;
 using System.ServiceModel.Syndication;
+using System.Text;
 using System.Xml;
 
 using Bitboxx.DNNModules.BBNews.Components;
@@ -236,27 +237,65 @@ namespace Bitboxx.DNNModules.BBNews
 						break;
 
 					case 2: // RSS
-						wrq = (HttpWebRequest)WebRequest.Create(feedInfo.FeedUrl);
+						Uri baseUrl = new Uri(feedInfo.FeedUrl);
+						try
+						{
+							wrq = (HttpWebRequest)WebRequest.Create(feedInfo.FeedUrl);
 
-						Uri baseUrl = new Uri(feedInfo.FeedUrl); 
+							if (ProxyServer != string.Empty)
+								wrq.Proxy = new WebProxy(ProxyServer + (ProxyPort != "-1" ? ":" + ProxyPort : ""));
 
-						if (ProxyServer != string.Empty)
-							wrq.Proxy = new WebProxy(ProxyServer + (ProxyPort != "-1" ? ":" + ProxyPort : ""));
-
-						if (ProxyUserName != string.Empty)
-							wrq.Proxy.Credentials = new NetworkCredential(ProxyUserName, ProxyPassword);
+							if (ProxyUserName != string.Empty)
+								wrq.Proxy.Credentials = new NetworkCredential(ProxyUserName, ProxyPassword);
 
 
-						// Set UserAgent to avoid prohibited (403) answer
-						wrq.UserAgent = "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:15.0) Gecko/20100101 Firefox/15.0.1";
+							// Set UserAgent to avoid prohibited (403) answer
+							wrq.UserAgent = "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:15.0) Gecko/20100101 Firefox/15.0.1";
 
-						wrp = wrq.GetResponse();
-						rssStream = wrp.GetResponseStream();
+							wrp = wrq.GetResponse();
+							rssStream = wrp.GetResponseStream();
 
-						settings = new XmlReaderSettings();
+							settings = new XmlReaderSettings();
 
-						rssReader = XmlReader.Create(rssStream,settings);
-						feed = SyndicationFeed.Load(rssReader);
+							rssReader = XmlReader.Create(rssStream, settings);
+							feed = SyndicationFeed.Load(rssReader);
+						}
+						catch (IOException)
+						{
+							// zweiter Versuch
+							string xml = string.Empty;
+							WebClient c = new WebClient();
+							Stream s = c.OpenRead(feedInfo.FeedUrl);
+							try
+							{
+								int n, bloc = 65535;
+								byte[] bytes = new byte[bloc];
+								do
+								{
+									try
+									{
+										n = s.Read(bytes, 0, bloc);
+									}
+									catch (IOException iox)
+									{
+										break;
+									}
+
+									// The end of the file is reached.
+									if (n == 0)
+										break; 
+									xml += Encoding.UTF8.GetString(bytes, 0, n);
+								} while (true);
+							}
+							finally
+							{
+								s.Close();
+							}
+
+							rssReader = System.Xml.XmlReader.Create(new StringReader(xml));
+							feed = SyndicationFeed.Load(rssReader);
+						}
+						
 
 						foreach (var feedItem in feed.Items)
 						{
