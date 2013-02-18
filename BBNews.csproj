@@ -246,6 +246,7 @@
     <Content Include="Installation\ReleaseNotes\Release.01.01.02.txt" />
     <Content Include="Installation\ReleaseNotes\Release.01.01.01.txt" />
     <Content Include="Installation\ReleaseNotes\Release.01.01.00.txt" />
+    <Content Include="Installation\ReleaseNotes\Release.01.01.03.txt" />
     <Content Include="Settings.ascx" />
     <Content Include="Templates\News\default.htm" />
     <Content Include="Templates\News\default.jpg" />

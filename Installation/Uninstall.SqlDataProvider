@@ -8,8 +8,7 @@
 /*****                                                  *****/
 /************************************************************/
 
-/** Drop FAQs Table **/
-
+/** Drop BBNews tables **/
 IF EXISTS (select * from sys.foreign_keys where object_id = object_id(N'{objectQualifier}FK_CategoryFeedsOfCategory') and parent_object_id = object_id(N'{databaseOwner}[{objectQualifier}BBNews_CategoryFeeds]'))
 ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_CategoryFeeds] DROP CONSTRAINT {objectQualifier}FK_CategoryFeedsOfCategory
 go

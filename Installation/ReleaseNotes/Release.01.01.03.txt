@@ -1,0 +1,9 @@
+﻿<h2>Release Notes bitboxx bbnews  01.01.03</h2>
+<p>bbnews  01.01.03 will work for any DNN version <strong>6.1.0</strong> and up.
+<h3>BUG FIXES</h3>
+<ul>
+    <li>Fixed an error with Settings if a portal is located in a subdirectory (e.g. http://localhost/dnntest )</li>
+	<li>Some files for selecting templates were missing in version 1.1.2. These are now included, so selecting and editing templates should be fine now</li>
+	<li>Fixed an error which occured while retrieving some RSS feeds (e.g. blogs-feed on dotnetnuke.com).
+</ul>
+	
