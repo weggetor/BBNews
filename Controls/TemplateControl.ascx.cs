@@ -105,7 +105,11 @@ namespace Bitboxx.DNNModules.BBNews.Controls
 		{
 			get
 			{
-				return MapPath("~" + TemplateSourceDirectory + @"\..\Templates\" + Key + "\\");
+				string controlPath = MapPath(AppRelativeVirtualPath);
+				FileInfo fi = new FileInfo(controlPath);
+				string templatePath = fi.DirectoryName + @"\..\Templates\" + Key +"\\";
+				fi = new FileInfo(templatePath);
+				return fi.DirectoryName + "\\";
 			}
 		}
 
