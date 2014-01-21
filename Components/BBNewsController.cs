@@ -256,6 +256,7 @@ namespace Bitboxx.DNNModules.BBNews
 							rssStream = wrp.GetResponseStream();
 
 							settings = new XmlReaderSettings();
+							settings.ProhibitDtd = false;
 
 							rssReader = XmlReader.Create(rssStream, settings);
 							feed = SyndicationFeed.Load(rssReader);
@@ -276,7 +277,7 @@ namespace Bitboxx.DNNModules.BBNews
 									{
 										n = s.Read(bytes, 0, bloc);
 									}
-									catch (IOException iox)
+									catch (IOException)
 									{
 										break;
 									}

@@ -213,12 +213,12 @@ namespace Bitboxx.DNNModules.BBNews
 
 				string topClause = (TopN > 0 ? "TOP " + TopN.ToString() : "");
 				string selCmd =
-					"WITH NewsRN AS ( SELECT ROW_NUMBER() OVER (ORDER BY PubDate DESC, NewsId DESC) AS RowNum, NewsId FROM " +
+					"WITH NewsRN AS ( SELECT ROW_NUMBER() OVER (ORDER BY News.PubDate DESC, News.NewsId DESC) AS RowNum, News.NewsId FROM " +
 					GetFullyQualifiedName("News") + " News WHERE " + where +")"+
 					"SELECT " + topClause + " News.*, NewsRN.RowNum FROM " + GetFullyQualifiedName("News") + " News" +
 					" INNER JOIN NewsRN ON NewsRN.NewsId = News.NewsId" +
 					" WHERE " + String.Format(" RowNum BETWEEN {0} AND {1}", (pageNum - 1) * pageSize + 1, pageNum * pageSize) +
-					" ORDER BY Pubdate DESC, NewsId DESC";
+					" ORDER BY News.Pubdate DESC, News.NewsId DESC";
 
 				return (IDataReader) SqlHelper.ExecuteReader(ConnectionString, CommandType.Text, selCmd, sqlParams.ToArray());
 			}
@@ -260,7 +260,7 @@ namespace Bitboxx.DNNModules.BBNews
 							 "%' OR News.News LIKE '%" + search + "%' )";
 				}
 
-				selCmd += " WHERE " + where + " ORDER BY Pubdate DESC, NewsId DESC";
+				selCmd += " WHERE " + where + " ORDER BY Pubdate DESC, News.NewsId DESC";
 				return (IDataReader)SqlHelper.ExecuteReader(ConnectionString, CommandType.Text, selCmd, sqlParams.ToArray());
 			}
 		}

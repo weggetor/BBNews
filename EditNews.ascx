@@ -110,26 +110,28 @@
 			</div>
 			<div class="dnnFormItem">
 				<dnn:Label id="lblPubDate" runat="server"  controlname="dpPubDate" suffix=":" />
-				<dnn:DnnDatePicker runat="server" ID="dpPubDate" CssClass="dnnFormInput" />
-				<dnn:DnnTimePicker runat="server" ID="tpPubDate" CssClass="dnnFormItem"  DateInput="dpPubDate"/>
+				<div>
+					<dnn:DnnDatePicker runat="server" ID="dpPubDate" CssClass="dnnFormInput" />
+					<dnn:DnnTimePicker runat="server" ID="tpPubDate" CssClass="dnnFormItem"  DateInput="dpPubDate"/>
+				</div>
 			</div>
 			<div class="dnnFormItem">
 				<dnn:Label ID="lblAuthor" runat="server" controlname="txtAuthor" suffix=":" />
 				<fieldset>
 					<div class="dnnFormItem">
-						<dnn:Label runat="server" id="lblAuthorName"  controlname="txtAuthorName" suffix=":" />
+						<asp:Label runat="server" id="lblAuthorName"  resourcekey="lblAuthorName.Text" CssClass="dnnLeft" Width="80px"/>
 						<asp:TextBox runat="server" id="txtAuthorName" CssClass="dnnFormInput" Columns="40" />
 					</div>
 					<div class="dnnFormItem">
-						<dnn:Label runat="server" id="lblAuthorUrl"  controlname="txtAuthorUrl" suffix=":" />
+						<asp:Label runat="server" id="lblAuthorUrl"  resourcekey="lblAuthorUrl.Text" CssClass="dnnLeft" Width="80px"/>
 						<asp:TextBox runat="server" id="txtAuthorUrl" CssClass="dnnFormInput" Columns="40" />
 					</div>
 					<div class="dnnFormItem">
-						<dnn:Label runat="server" id="lblAuthorEmail"  controlname="txtAuthorEmail" suffix=":" />
+						<asp:Label runat="server" id="lblAuthorEmail"  resourcekey="lblAuthorEmail.Text" CssClass="dnnLeft" Width="80px"/>
 						<asp:TextBox runat="server" id="txtAuthorEmail" CssClass="dnnFormInput" Columns="40" />
 					</div>
 					<div class="dnnFormItem">
-						<dnn:Label runat="server" id="lblAuthorNick"  controlname="txtAuthorNick" suffix=":" />
+						<asp:Label runat="server" id="lblAuthorNick"  resourcekey="lblAuthorNick.Text" CssClass="dnnLeft" Width="80px"/>
 						<asp:TextBox runat="server" id="txtAuthorNick" CssClass="dnnFormInput" Columns="40" />
 					</div>
 				</fieldset>
@@ -144,13 +146,13 @@
 			</div>
 			<div class="dnnFormItem">
 				<dnn:Label ID="lblSummary" runat="server"  controlname="txtSummary" suffix=":" />
-				<div class="dnnRight">
+				<div class="dnnLeft" style="width:200px;">
 					<dnn:texteditor ID="txtSummary" runat="server" TextRenderMode="Raw" HtmlEncode="False" defaultmode="Rich"  choosemode="False" chooserender="False" Width="550" Height="350"/>
 				</div>
 			</div>
 			<div class="dnnFormItem">
 				<dnn:Label ID="lblNews" runat="server"  controlname="txtNews" suffix=":" />
-				<div class="dnnRight">
+				<div class="dnnLeft" style="width:200px;">
 					<dnn:texteditor ID="txtNews" runat="server" TextRenderMode="Raw" HtmlEncode="False" defaultmode="Rich"  choosemode="False" chooserender="False" Width="550" Height="350"/>
 				</div>
 			</div>

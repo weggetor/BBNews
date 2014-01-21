@@ -27,6 +27,7 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
+using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Services.Tokens;
 
@@ -146,11 +147,12 @@ namespace Bitboxx.DNNModules.BBNews.Components
 				case "pubdate":
 					return Pubdate.ToString(String.IsNullOrEmpty(format) ? "d" : format, formatProvider);
 				case "source":
+					Uri url;
 					if (!String.IsNullOrEmpty(Link))
 					{
 						try
 						{
-							Uri url = new Uri(Link);
+							url = new Uri(Link);
 							return PropertyAccess.FormatString(url.Host, format);
 						}
 						catch (Exception)
@@ -158,17 +160,26 @@ namespace Bitboxx.DNNModules.BBNews.Components
 							return "";
 						}
 					}
-					return "";
+					else
+					{
+						url = new Uri("http://" + PortalSettings.Current.PortalAlias.HTTPAlias);
+						return PropertyAccess.FormatString(url.Host, format);
+					}
 				case "favicon":
+					Uri urlFav;
 					if (feed.FeedUrl != String.Empty)
 					{
-						Uri urlfav = new Uri(feed.FeedUrl);
-						return "<img src=\"http://" + urlfav.Host + 
-						       "/favicon.ico\"" +
-						       (String.IsNullOrEmpty(format) ? "" : " width=\"" + format + "\"") +
-						       " style=\"vertical-align: middle;\" />";
+						urlFav = new Uri(feed.FeedUrl);
 					}
-					return "";
+					else
+					{
+						urlFav = new Uri("http://" + PortalSettings.Current.PortalAlias.HTTPAlias);
+					}
+					return "<img src=\"http://" + urlFav.Host +
+							   "/favicon.ico\"" +
+							   (String.IsNullOrEmpty(format) ? "" : " width=\"" + format + "\"") +
+							   " style=\"vertical-align: middle;\" />";
+
 				case "feedid":
 					return FeedId.ToString(String.IsNullOrEmpty(format) ? "g" : format, formatProvider);
 				case "feedname":

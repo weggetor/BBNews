@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Web.UI.WebControls;
 using Bitboxx.DNNModules.BBNews.Components;
+using DotNetNuke.Common;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Exceptions;
 
@@ -226,6 +227,5 @@ namespace Bitboxx.DNNModules.BBNews
 		}
 
 	}
-
 }
 

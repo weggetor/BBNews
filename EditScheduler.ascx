@@ -17,23 +17,27 @@
         </div>
         <div class="dnnFormItem">
             <dnn:Label ID="plTimeLapse" runat="server" ControlName="txtTimeLapse" />
-            <asp:TextBox ID="txtTimeLapse" runat="server" MaxLength="10" />
-            <asp:DropDownList ID="ddlTimeLapseMeasurement" runat="server">
-                <asp:ListItem resourcekey="Seconds" Value="s" />
-                <asp:ListItem resourcekey="Minutes" Value="m" />
-                <asp:ListItem resourcekey="Hours" Value="h" />
-                <asp:ListItem resourcekey="Days" Value="d" />
-            </asp:DropDownList>
+            <div>
+				<asp:TextBox ID="txtTimeLapse" runat="server" MaxLength="10" style="width:50px"/>
+				<asp:DropDownList ID="ddlTimeLapseMeasurement" runat="server">
+					<asp:ListItem resourcekey="Seconds" Value="s" />
+					<asp:ListItem resourcekey="Minutes" Value="m" />
+					<asp:ListItem resourcekey="Hours" Value="h" />
+					<asp:ListItem resourcekey="Days" Value="d" />
+				</asp:DropDownList>
+			</div>
         </div>
         <div class="dnnFormItem">
             <dnn:Label ID="plRetryTimeLapse" runat="server" ControlName="txtRetryTimeLapse" />
-            <asp:TextBox ID="txtRetryTimeLapse" runat="server" MaxLength="10" />
-            <asp:DropDownList ID="ddlRetryTimeLapseMeasurement" runat="server">
-               <asp:ListItem resourcekey="Seconds" Value="s" />
-                <asp:ListItem resourcekey="Minutes" Value="m" />
-                <asp:ListItem resourcekey="Hours" Value="h" />
-                <asp:ListItem resourcekey="Days" Value="d" />
-            </asp:DropDownList>
+            <div>
+				<asp:TextBox ID="txtRetryTimeLapse" runat="server" MaxLength="10" style="width:50px"/>
+				<asp:DropDownList ID="ddlRetryTimeLapseMeasurement" runat="server">
+				   <asp:ListItem resourcekey="Seconds" Value="s" />
+					<asp:ListItem resourcekey="Minutes" Value="m" />
+					<asp:ListItem resourcekey="Hours" Value="h" />
+					<asp:ListItem resourcekey="Days" Value="d" />
+				</asp:DropDownList>
+			</div>
         </div>
         <div class="dnnFormItem">
             <dnn:Label ID="plRetainHistoryNum" runat="server" ControlName="ddlRetainHistoryNum" />

@@ -1,0 +1,13 @@
+﻿<h2>Release Notes bitboxx bbnews  01.01.04</h2>
+<p>bbnews  01.01.04 will work for any DNN version <strong>6.1.0</strong> and up.
+<h3>BUG FIXES</h3>
+<ul>
+    <li>Fixed some errors in the UI (DNN Form Pattern)</li>
+	<li>Fixed a bug not showing the correct favicon</li>
+	<li>Fixed an error which occured while retrieving some RSS feeds (e.g. blogs-feed on dotnetnuke.com).<li>
+	<li>Fixed an error with ambiguous NewsId when opening "Manage BBNews".<li>
+</ul>
+<h3>ENHANCEMENTS</h3>
+<ul>
+    <li>Added a class ("bbNewsCell") to the news area for better styling</li>
+</ul>
