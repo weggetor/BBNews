@@ -14,7 +14,7 @@
 				<tr id="Tr1" runat="server"><td id="itemPlaceholder" /></tr>
 			</GroupTemplate>
 			<ItemTemplate>
-				<td id="newsCell" runat="server" style="vertical-align:top">
+				<td id="newsCell" runat="server" class="bbNewsCell">
 					 <asp:PlaceHolder ID="newsPlaceHolder" runat="server" />
 				</td>
 			</ItemTemplate>

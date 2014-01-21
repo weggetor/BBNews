@@ -280,7 +280,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblAuthorName;
+        protected global::System.Web.UI.WebControls.Label lblAuthorName;
         
         /// <summary>
         /// txtAuthorName control.
@@ -298,7 +298,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblAuthorUrl;
+        protected global::System.Web.UI.WebControls.Label lblAuthorUrl;
         
         /// <summary>
         /// txtAuthorUrl control.
@@ -316,7 +316,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblAuthorEmail;
+        protected global::System.Web.UI.WebControls.Label lblAuthorEmail;
         
         /// <summary>
         /// txtAuthorEmail control.
@@ -334,7 +334,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblAuthorNick;
+        protected global::System.Web.UI.WebControls.Label lblAuthorNick;
         
         /// <summary>
         /// txtAuthorNick control.
