@@ -173,31 +173,26 @@ namespace Bitboxx.DNNModules.BBNews
 
 		protected void cboFeedType_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			// <asp:RegularExpressionValidator ID="valFeedUrlValid" CssClass="dnnFormMessage dnnFormError" ControlToValidate="txtFeedUrl" ValidationExpression="(http|https|twitter|none)://[a-zA-Z0-9\.]+/*[a-zA-Z0-9/\\%_.]*\?*[a-zA-Z0-9/\\%_.=&amp;]*" ResourceKey="valFeedUrlValid.Error" Display="Dynamic" runat="Server" Enabled="False"/>
 			switch (cboFeedType.SelectedValue)
 			{
 				case "0": // None
 					pnlFeedUrl.Visible = false;
 					pnlCredentials.Visible = false;
-					//valFeedUrlValid.Enabled = false;
 					break;
 				case "1": // Twitter Search
 					pnlFeedUrl.Visible = true;
 					pnlCredentials.Visible = false;
 					lblFeedUrl.Text = Localization.GetString("lblFeedUrlTwitterSearch.Text", this.LocalResourceFile);
-					//valFeedUrlValid.Enabled = false;
 					break;
 				case "2": // RSS
 					pnlFeedUrl.Visible = true;
 					pnlCredentials.Visible = false;
 					lblFeedUrl.Text = Localization.GetString("lblFeedUrlRss.Text", this.LocalResourceFile);
-					//valFeedUrlValid.Enabled = true;
 					break;
 				case "3": // Twitter Usertimeline
 					pnlFeedUrl.Visible = true;
-					pnlCredentials.Visible = true;
+					pnlCredentials.Visible = false;
 					lblFeedUrl.Text = Localization.GetString("lblFeedUrlTwitterTimeline.Text", this.LocalResourceFile);
-					//valFeedUrlValid.Enabled = false;
 					break;
 			}
 		}

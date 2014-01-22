@@ -4,6 +4,66 @@ namespace DNNtc
 {
 
     #region Attributes
+
+    /// <summary>
+    /// This class is used to set information about the package
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+    public class PackageProperties : Attribute
+    {
+        /// <summary>
+        /// Creates a attribute with the right properties to create a package. Use on View element
+        /// </summary>
+        /// <param name="name">The package name</param>
+        /// <param name="viewOrder">Ordinal number for sorting packages in the manifest</param>
+        /// <param name="friendlyName">The package friendly name</param>
+        /// <param name="description">The package description</param>
+        /// <param name="iconFile">The package iconfile name</param>
+        /// <param name="ownerName">Name of Owner</param>
+        /// <param name="ownerOrganization">Organization of owner</param>
+        /// <param name="ownerUrl">Url of owner</param>
+        /// <param name="ownerEmail">Email of owner</param>
+        /// <param name="azureCompatible">Flag for Azure Compatibility</param>
+        public PackageProperties(string name, int viewOrder, string friendlyName, string description, string iconFile, string ownerName, string ownerOrganization, string ownerUrl, string ownerEmail, bool azureCompatible)
+        {
+            //Intentially left empty
+        }
+        /// <summary>
+        /// Creates a attribute with the right properties to create a package. Use on other elements
+        /// </summary>
+        /// <param name="name">The package name</param>
+        public PackageProperties(string name)
+        {
+            //Intentially left empty
+        }
+    }
+
+    /// <summary>
+    /// This class is used to set information about the module
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+    public class ModuleProperties : Attribute
+    {
+        /// <summary>
+        /// Creates a attribute with the right properties to create a module. Use on View element
+        /// </summary>
+        /// <param name="name">The module name.</param>
+        /// <param name="friendlyname">The module friendlyname.</param>
+        /// <param name="defaultCacheTime">the module default cachetime.</param>
+        public ModuleProperties(string name, string friendlyname, int defaultCacheTime)
+        {
+            //Intentially left empty
+        }
+        /// <summary>
+        /// Creates a attribute with the right properties to create a module. Use on other elements
+        /// </summary>
+        /// <param name="name">The module name.</param>
+        public ModuleProperties(string name)
+        {
+            //Intentially left empty
+        }
+    }
+
     /// <summary>
     /// This class is used to indicate which UserControls should be in the install package
     /// </summary>
@@ -18,7 +78,7 @@ namespace DNNtc
         /// <param name="helpUrl">The help URL.</param>
         /// <param name="supportsPartialRendering">if set to <c>true</c> [supports partial rendering].</param>
         /// <param name="supportsPopUps">if set to <c>true</c> [supports pop ups].</param>
-        public ModuleControlProperties(string key, string title, ControlType userControlType, string helpUrl, bool supportsPartialRendering=false, bool supportsPopUps=false)
+        public ModuleControlProperties(string key, string title, ControlType userControlType, string helpUrl, bool supportsPartialRendering = false, bool supportsPopUps = false)
         {
             //Intentially left empty
         }

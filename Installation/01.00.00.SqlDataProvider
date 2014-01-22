@@ -21,7 +21,7 @@ IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwne
       )
 
       ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_Category] 
-	  ADD CONSTRAINT {objectQualifier}PK_BBNews_Category PRIMARY KEY CLUSTERED  (CategoryID ASC)
+	  ADD CONSTRAINT PK_{objectQualifier}BBNews_Category PRIMARY KEY CLUSTERED  (CategoryID ASC)
    END
 GO
 
@@ -38,7 +38,7 @@ IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwne
       )
 
       ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_Feed] 
-	  ADD CONSTRAINT {objectQualifier}PK_BBNews_Feed PRIMARY KEY CLUSTERED  (FeedID ASC)
+	  ADD CONSTRAINT PK_{objectQualifier}BBNews_Feed PRIMARY KEY CLUSTERED  (FeedID ASC)
    END
 GO
 
@@ -57,20 +57,20 @@ IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwne
       )
 
       ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_News] 
-	  ADD CONSTRAINT {objectQualifier}PK_BBNews_News PRIMARY KEY CLUSTERED  (NewsID ASC)
+	  ADD CONSTRAINT PK_{objectQualifier}BBNews_News PRIMARY KEY CLUSTERED  (NewsID ASC)
    END
 GO
 
 IF NOT EXISTS (SELECT 1 FROM sys.foreign_keys where object_id = object_id(N'{objectQualifier}FK_Category_Feed') and parent_object_id = object_id(N'{databaseOwner}[{objectQualifier}BBNews_Feed]'))
    ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_Feed] WITH NOCHECK 
-   ADD CONSTRAINT {objectQualifier}FK_Category_Feed FOREIGN KEY ( CategoryID ) 
+   ADD CONSTRAINT FK_{objectQualifier}Category_Feed FOREIGN KEY ( CategoryID ) 
    REFERENCES {databaseOwner}[{objectQualifier}BBNews_Category] ( CategoryID ) ON DELETE SET DEFAULT
 GO
 
 /*IF NOT EXISTS (SELECT 1 FROM sys.objects where name='{objectQualifier}FK_Category_News' and type='F')*/
 IF NOT EXISTS (SELECT 1 FROM sys.foreign_keys where object_id = object_id(N'{objectQualifier}FK_Category_News') and parent_object_id = object_id(N'{databaseOwner}[{objectQualifier}BBNews_News]'))
    ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_News] WITH NOCHECK 
-   ADD CONSTRAINT {objectQualifier}FK_Category_News FOREIGN KEY ( CategoryID ) 
+   ADD CONSTRAINT FK_{objectQualifier}Category_News FOREIGN KEY ( CategoryID ) 
    REFERENCES {databaseOwner}[{objectQualifier}BBNews_Category] ( CategoryID ) ON DELETE CASCADE
 GO
 

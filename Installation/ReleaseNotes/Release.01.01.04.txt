@@ -4,10 +4,15 @@
 <ul>
     <li>Fixed some errors in the UI (DNN Form Pattern)</li>
 	<li>Fixed a bug not showing the correct favicon</li>
-	<li>Fixed an error which occured while retrieving some RSS feeds (e.g. blogs-feed on dotnetnuke.com).<li>
-	<li>Fixed an error with ambiguous NewsId when opening "Manage BBNews".<li>
+	<li>Fixed an error which occured while retrieving some RSS feeds (e.g. blogs-feed on dotnetnuke.com).</li>
+	<li>Fixed an error with ambiguous NewsId when opening "Manage BBNews".</li>
+	<li>RSS icon has wrong path if DNN is installed in subdirectory</li>
+	<li>Added some error tolerance to parsing of RSS feeds</li>
+	<li>Added default values for settings "NewsInRow" and "RowsPerPage" to avoid error message if these are not set</li>
 </ul>
 <h3>ENHANCEMENTS</h3>
 <ul>
-    <li>Added a class ("bbNewsCell") to the news area for better styling</li>
+    <li>Upgraded twitter integration to API 1.1 with oAuth (needs creation of app on https://dev.twitter.com/apps).</li>
+	<li>Added a class ("bbNewsCell") to the news area for better styling</li>
+	<li>Upgraded package mechanism to dnntcmsbuild V 2.0</li>
 </ul>

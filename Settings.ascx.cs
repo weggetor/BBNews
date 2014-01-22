@@ -40,7 +40,9 @@ namespace Bitboxx.DNNModules.BBNews
 	/// <history> 
 	/// </history> 
 	/// ----------------------------------------------------------------------------- 
-	[DNNtc.ModuleControlProperties("Settings", "Configure settings", DNNtc.ControlType.Edit, "", true, true)]
+    [DNNtc.PackageProperties("Bitboxx.BBNews")]
+    [DNNtc.ModuleProperties("Bitboxx.BBNews")]
+    [DNNtc.ModuleControlProperties("Settings", "Configure settings", DNNtc.ControlType.Edit, "", true, true)]
 	partial class Settings : ModuleSettingsBase
 	{
 		private BBNewsController _controller;

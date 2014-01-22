@@ -15,11 +15,20 @@ ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_Feed]
 DROP CONSTRAINT [{objectQualifier}FK_Category_Feed]
 go
 
+IF EXISTS (SELECT 1 FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_{objectQualifier}Category_Feed]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}BBNews_Feed]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_Feed] 
+DROP CONSTRAINT [FK_{objectQualifier}Category_Feed]
+go
+
 IF EXISTS (SELECT 1 FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[{objectQualifier}FK_Category_News]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}BBNews_News]'))
 ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_News] 
 DROP CONSTRAINT [{objectQualifier}FK_Category_News]
 go
 
+IF EXISTS (SELECT 1 FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_{objectQualifier}Category_News]') AND parent_object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}BBNews_News]'))
+ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_News] 
+DROP CONSTRAINT [FK_{objectQualifier}Category_News]
+go
 
 IF EXISTS (SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}TEMP_BBNews_Category]') AND type = 'U')
    DROP TABLE {databaseOwner}[{objectQualifier}TEMP_BBNews_Category]
@@ -41,7 +50,7 @@ IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwne
 		CategoryID INT NOT NULL DEFAULT (0),
 		FeedID INT NOT NULL DEFAULT (0)
 	)
-	CREATE CLUSTERED INDEX {objectQualifier}IDX_BBNews_CategoryFeeds_CategoryID ON {databaseOwner}[{objectQualifier}BBNews_CategoryFeeds] (CategoryID ASC, FeedID ASC)
+	CREATE CLUSTERED INDEX IDX_{objectQualifier}BBNews_CategoryFeeds_CategoryID ON {databaseOwner}[{objectQualifier}BBNews_CategoryFeeds] (CategoryID ASC, FeedID ASC)
    END
 GO
 
@@ -54,7 +63,7 @@ CREATE TABLE  {databaseOwner}[{objectQualifier}TEMP_BBNews_Category]
    CategoryDescription NVARCHAR(255) NOT NULL DEFAULT '' 
 )
 ALTER TABLE {databaseOwner}[{objectQualifier}TEMP_BBNews_Category] 
-	  ADD CONSTRAINT {objectQualifier}PK_TEMP_BBNews_Category PRIMARY KEY CLUSTERED  (CategoryID ASC)
+	  ADD CONSTRAINT PK_{objectQualifier}TEMP_BBNews_Category PRIMARY KEY CLUSTERED  (CategoryID ASC)
 go
 
 SET IDENTITY_INSERT {databaseOwner}[{objectQualifier}TEMP_BBNews_Category] ON
@@ -72,7 +81,7 @@ BEGIN
 	SET IDENTITY_INSERT {databaseOwner}[{objectQualifier}TEMP_BBNews_Category] OFF
 
 	EXECUTE sp_rename '{databaseOwner}[{objectQualifier}TEMP_BBNews_Category]', '{objectQualifier}BBNews_Category', 'OBJECT'
-	EXECUTE sp_rename '{objectQualifier}PK_TEMP_BBNews_Category', '{objectQualifier}PK_BBNews_Category', 'OBJECT'
+	EXECUTE sp_rename 'PK_{objectQualifier}TEMP_BBNews_Category', 'PK_{objectQualifier}BBNews_Category', 'OBJECT'
 	
 	--ALTER TABLE  {databaseOwner}[{objectQualifier}BBNews_Category]
 	--ADD CONSTRAINT {objectQualifier}PK_BBNews_Category PRIMARY KEY NONCLUSTERED  (CategoryID ASC)
@@ -105,7 +114,7 @@ CREATE TABLE  {databaseOwner}[{objectQualifier}TEMP_BBNews_Feed]
    Password NVARCHAR(40) NOT NULL DEFAULT '' 
 )
 ALTER TABLE {databaseOwner}[{objectQualifier}TEMP_BBNews_Feed] 
-	  ADD CONSTRAINT {objectQualifier}PK_TEMP_BBNews_Feed PRIMARY KEY CLUSTERED  (FeedID ASC)
+	  ADD CONSTRAINT PK_{objectQualifier}TEMP_BBNews_Feed PRIMARY KEY CLUSTERED  (FeedID ASC)
 
 go
 
@@ -133,7 +142,7 @@ BEGIN
 	SET IDENTITY_INSERT {databaseOwner}[{objectQualifier}TEMP_BBNews_Feed] OFF
 
 	EXECUTE sp_rename '{databaseOwner}[{objectQualifier}TEMP_BBNews_Feed]', '{objectQualifier}BBNews_Feed', 'OBJECT'
-	EXECUTE sp_rename '{objectQualifier}PK_TEMP_BBNews_Feed', '{objectQualifier}PK_BBNews_Feed', 'OBJECT'
+	EXECUTE sp_rename 'PK_{objectQualifier}TEMP_BBNews_Feed', 'PK_{objectQualifier}BBNews_Feed', 'OBJECT'
 
 	--ALTER TABLE  {databaseOwner}[{objectQualifier}BBNews_Feed]
 	--ADD CONSTRAINT {objectQualifier}PK_BBNews_Feed PRIMARY KEY NONCLUSTERED  (FeedID ASC)
@@ -163,7 +172,7 @@ CREATE TABLE  {databaseOwner}[{objectQualifier}TEMP_BBNews_News]
    Internal BIT NOT NULL
 )
 ALTER TABLE {databaseOwner}[{objectQualifier}TEMP_BBNews_News] 
-	  ADD CONSTRAINT {objectQualifier}PK_TEMP_BBNews_News PRIMARY KEY CLUSTERED  (NewsID ASC)
+	  ADD CONSTRAINT PK_{objectQualifier}TEMP_BBNews_News PRIMARY KEY CLUSTERED  (NewsID ASC)
 
 go
 
@@ -184,7 +193,7 @@ BEGIN
 	SET IDENTITY_INSERT {databaseOwner}[{objectQualifier}TEMP_BBNews_News] OFF
 
 	EXECUTE sp_rename '{databaseOwner}[{objectQualifier}TEMP_BBNews_News]', '{objectQualifier}BBNews_News', 'OBJECT'
-	EXECUTE sp_rename '{objectQualifier}PK_TEMP_BBNews_News', '{objectQualifier}PK_BBNews_News', 'OBJECT'
+	EXECUTE sp_rename 'PK_{objectQualifier}TEMP_BBNews_News', 'PK_{objectQualifier}BBNews_News', 'OBJECT'
 
 	--ALTER TABLE  {databaseOwner}[{objectQualifier}BBNews_News]
 	--ADD CONSTRAINT {objectQualifier}PK_BBNews_News PRIMARY KEY NONCLUSTERED  (NewsID ASC)
@@ -198,27 +207,27 @@ BEGIN
 END
 go
 
-IF NOT EXISTS (SELECT 1 FROM sys.objects where name='{objectQualifier}FK_CategoryFeedsOfCategory' and type='F')
+IF NOT EXISTS (SELECT 1 FROM sys.objects where name='FK_{objectQualifier}CategoryFeedsOfCategory' and type='F')
 ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_CategoryFeeds] WITH NOCHECK
-	  ADD CONSTRAINT {objectQualifier}FK_CategoryFeedsOfCategory FOREIGN KEY
+	  ADD CONSTRAINT FK_{objectQualifier}CategoryFeedsOfCategory FOREIGN KEY
 		  ( CategoryID )
 		  REFERENCES {databaseOwner}[{objectQualifier}BBNews_Category]
 		  ( CategoryID )
 	  ON DELETE CASCADE
 go
 
-IF NOT EXISTS (SELECT 1 FROM sys.objects where name='{objectQualifier}FK_NewsOfFeed' and type='F')
+IF NOT EXISTS (SELECT 1 FROM sys.objects where name='FK_{objectQualifier}NewsOfFeed' and type='F')
 ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_News] WITH NOCHECK
-	  ADD CONSTRAINT {objectQualifier}FK_NewsOfFeed FOREIGN KEY
+	  ADD CONSTRAINT FK_{objectQualifier}NewsOfFeed FOREIGN KEY
 		  ( FeedID )
 		  REFERENCES {databaseOwner}[{objectQualifier}BBNews_Feed]
 		  ( FeedID )
 	  ON DELETE CASCADE
 go
 
-IF NOT EXISTS (SELECT 1 FROM sys.objects where name='{objectQualifier}FK_FeedsOfCategoryFeeds' and type='F')
+IF NOT EXISTS (SELECT 1 FROM sys.objects where name='FK_{objectQualifier}FeedsOfCategoryFeeds' and type='F')
 ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_CategoryFeeds] WITH NOCHECK
-	  ADD CONSTRAINT {objectQualifier}FK_FeedsOfCategoryFeeds FOREIGN KEY
+	  ADD CONSTRAINT FK_{objectQualifier}FeedsOfCategoryFeeds FOREIGN KEY
 		  ( FeedID )
 		  REFERENCES {databaseOwner}[{objectQualifier}BBNews_Feed]
 		  ( FeedID )

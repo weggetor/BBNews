@@ -30,7 +30,9 @@ using DotNetNuke.Services.Localization;
 
 namespace Bitboxx.DNNModules.BBNews
 {
-	[DNNtc.ModuleControlProperties("Edit", "Bitboxx.BBNews Admin", DNNtc.ControlType.Edit, "", true, true)]
+    [DNNtc.PackageProperties("Bitboxx.BBNews")]
+    [DNNtc.ModuleProperties("Bitboxx.BBNews")]
+    [DNNtc.ModuleControlProperties("Edit", "Bitboxx.BBNews Admin", DNNtc.ControlType.Edit, "", true, true)]
 	public partial class Edit : PortalModuleBase
 	{
 		public Hashtable SubModules;
@@ -80,6 +82,13 @@ namespace Bitboxx.DNNModules.BBNews
 				ctrlScheduler.MainControl = this;
 				plScheduler.Controls.Add(ctrlScheduler);
 				SubModules.Add("EditScheduler", ctrlScheduler);
+
+                EditCredentials ctrlCredentials = LoadControl("EditCredentials.ascx") as EditCredentials;
+                ctrlCredentials.ModuleConfiguration = this.ModuleConfiguration;
+                ctrlCredentials.LocalResourceFile = Localization.GetResourceFile(ctrlNews, ctrlCredentials.GetType().BaseType.Name + ".ascx");
+                ctrlCredentials.MainControl = this;
+                plCredentials.Controls.Add(ctrlCredentials);
+                SubModules.Add("EditCredentials", ctrlCredentials);
 			}
 			catch (Exception ex)
 			{
