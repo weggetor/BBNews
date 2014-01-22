@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.IO;
+using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Text;
 using System.Web.UI;
@@ -43,7 +44,9 @@ using DotNetNuke.UI.Skins.Controls;
 
 namespace Bitboxx.DNNModules.BBNews
 {
-	[DNNtc.ModuleDependencies(DNNtc.ModuleDependency.CoreVersion, "06.01.00")]
+    [DNNtc.PackageProperties("Bitboxx.BBNews", 1, "Bitboxx BBNews", "A flexible RSS/News reader, provider and aggregator", "bbnews.png", "Torsten Weggen", "bitboxx solutions", "http://www.bitboxx.net", "info@bitboxx.net", true)]
+    [DNNtc.ModuleProperties("Bitboxx.BBNews", "Bitboxx BBNews", -1)]
+    [DNNtc.ModuleDependencies(DNNtc.ModuleDependency.CoreVersion, "06.01.00")]
 	[DNNtc.ModuleControlProperties("", "Bitboxx.BBNews", DNNtc.ControlType.View,"", true, false)]
 	partial class View : PortalModuleBase,IActionable
 	{
@@ -84,7 +87,7 @@ namespace Bitboxx.DNNModules.BBNews
 		{
 			get
 			{
-				int _topN = 1;
+				int _topN = 0;
 				if (Settings["TopN"] != null)
 					Int32.TryParse((string)Settings["TopN"], out _topN);
 				return _topN;
@@ -191,25 +194,26 @@ namespace Bitboxx.DNNModules.BBNews
 			if (user.IsInRole("Administrator") && IsEditable)
 				MultiView1.Visible = true;
 
-			if (Settings["NewsInRow"] != null)
-			{
-				if (ViewIndex == 0)
-				{ 
-					newsInRow = Int32.Parse((string)Settings["NewsInRow"]);
-					rowsPerPage = Int32.Parse((string)Settings["RowsPerPage"]);
-					lstNews.GroupItemCount = newsInRow;
-					Pager.PageSize = newsInRow * rowsPerPage;
-				}
-				MultiView1.ActiveViewIndex = ViewIndex;
-				IsConfigured = true;
-			}
-
-			if (Settings["NewsInRow"] == null) 
-			{
-				string message = Localization.GetString("Configure.Message", this.LocalResourceFile);
-				DotNetNuke.UI.Skins.Skin.AddModuleMessage(this, message, ModuleMessage.ModuleMessageType.YellowWarning);
-			}
-			if (Settings["TemplateName"] == null && Settings["Template"] != null )
+		    if (Settings["NewsInRow"] != null)
+		    {
+		        newsInRow = 1;
+		        rowsPerPage = 5;
+                if (ViewIndex == 0)
+		        {
+		            Int32.TryParse((string) Settings["NewsInRow"], out newsInRow);
+		            Int32.TryParse((string) Settings["RowsPerPage"], out rowsPerPage);
+		            lstNews.GroupItemCount = newsInRow;
+		            Pager.PageSize = newsInRow*rowsPerPage;
+		        }
+		        MultiView1.ActiveViewIndex = ViewIndex;
+		        IsConfigured = true;
+		    }
+		    else
+		    {
+		        string message = Localization.GetString("Configure.Message", this.LocalResourceFile);
+		        DotNetNuke.UI.Skins.Skin.AddModuleMessage(this, message, ModuleMessage.ModuleMessageType.YellowWarning);
+		    }
+		    if (Settings["TemplateName"] == null && Settings["Template"] != null )
 			{
 				var ctrl = LoadControl("controls\\TemplateControl.ascx") as Controls.TemplateControl;
 				ctrl.Key = "News";
@@ -367,7 +371,7 @@ namespace Bitboxx.DNNModules.BBNews
 				{
 					int position = Convert.ToInt32(Settings["ShowRss"]);
 					Control rssIconCtrl = ParseControl("<a href=\"" + Globals.NavigateURL(TabId, "", "feed=rss") +
-					                           "\"><img src=\"/images/action_rss.gif\" style=\"vertical-align:middle; padding-right:5px;\" /></a>");
+					                           "\"><img src=\"" + Page.ResolveUrl("~/images/action_rss.gif") + "\" style=\"vertical-align:middle; padding-right:5px;\" /></a>");
 					switch (position)
 					{
 						case 1:
@@ -455,7 +459,7 @@ namespace Bitboxx.DNNModules.BBNews
 				//feed.Description = new TextSyndicationContent(category.CategoryDescription);
 
 				List<SyndicationItem> items = new List<SyndicationItem>();
-				foreach (NewsInfo news in AllNews)
+				foreach (NewsInfo news in AllNews.Take(10).OrderByDescending(n => n.Pubdate))
 				{
 					if (news.Internal && Settings["NewsPage"] != null)
 					{

@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <!--Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" /-->
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -13,7 +14,7 @@
     <AssemblyName>Bitboxx.DNNModules.BBNews</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
-    <OldToolsVersion>3.5</OldToolsVersion>
+    <OldToolsVersion>4.0</OldToolsVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
@@ -139,7 +140,7 @@
     <Compile Include="Components\BBNewsController.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Components\Twitter.cs" />
+    <Compile Include="Components\TwitterApi11.cs" />
     <Compile Include="Controls\TabSelectControl.ascx.cs">
       <DependentUpon>TabSelectControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -153,6 +154,13 @@
     </Compile>
     <Compile Include="Controls\TemplateControl.ascx.designer.cs">
       <DependentUpon>TemplateControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EditCredentials.ascx.cs">
+      <DependentUpon>EditCredentials.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditCredentials.ascx.designer.cs">
+      <DependentUpon>EditCredentials.ascx</DependentUpon>
     </Compile>
     <Compile Include="EditScheduler.ascx.cs">
       <DependentUpon>EditScheduler.ascx</DependentUpon>
@@ -234,12 +242,14 @@
   <ItemGroup>
     <Content Include="Controls\TabSelectControl.ascx" />
     <Content Include="Controls\TemplateControl.ascx" />
+    <Content Include="EditCredentials.ascx" />
     <Content Include="EditScheduler.ascx" />
     <Content Include="Edit.ascx" />
     <Content Include="EditCategories.ascx" />
     <Content Include="EditCategoryFeeds.ascx" />
     <Content Include="EditFeeds.ascx" />
     <Content Include="EditNews.ascx" />
+    <Content Include="Installation\bbnews.png" />
     <Content Include="Installation\CleanUp\CleanUp.01.00.00.txt" />
     <Content Include="Installation\Config\Config.txt" />
     <Content Include="Installation\License.txt" />
@@ -298,9 +308,18 @@
   <ItemGroup>
     <Content Include="Controls\App_LocalResources\TemplateControl.ascx.resx" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="App_LocalResources\EditCredentials.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Import Project="$(MSBuildProjectDirectory)\Installation\Project.targets" />
   <ProjectExtensions>
     <VisualStudio>

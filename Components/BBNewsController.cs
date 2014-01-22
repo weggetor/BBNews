@@ -162,6 +162,11 @@ namespace Bitboxx.DNNModules.BBNews
 			XmlReader rssReader;
 			SyndicationFeed feed;
 
+            string oAuthToken = DotNetNuke.Entities.Portals.PortalController.GetPortalSetting("BB_TwitterToken", feedInfo.PortalId, "");
+            string oAuthTokenSecret = DotNetNuke.Entities.Portals.PortalController.GetPortalSetting("BB_TwitterTokenSecret", feedInfo.PortalId, "");
+            string oAuthConsumerKey = DotNetNuke.Entities.Portals.PortalController.GetPortalSetting("BB_TwitterConsumerKey", feedInfo.PortalId, "");
+            string oAuthConsumerSecret = DotNetNuke.Entities.Portals.PortalController.GetPortalSetting("BB_TwitterConsumerSecret", feedInfo.PortalId, "");
+            
 			try
 			{
 				switch (feedInfo.FeedType)
@@ -169,72 +174,30 @@ namespace Bitboxx.DNNModules.BBNews
 					case 0: // None
 						return;
 					case 1: // Twitter Search
-						string url = String.Format("http://search.twitter.com/search.atom?q={0}", feedInfo.FeedUrl);
+						
+                        TwitterApi11 twitterApiSearch = new TwitterApi11(oAuthToken, oAuthTokenSecret, oAuthConsumerKey, oAuthConsumerSecret);
+                        List<NewsInfo> newsListSearch = twitterApiSearch.SearchTweets(feedInfo.FeedUrl, 20);
+                        foreach (NewsInfo news in newsListSearch)
+                        {
+                            news.FeedId = FeedId;
+                            this.SaveNewsByGuid(news);
+                        }
+                        feedInfo.LastRetrieve = DateTime.Now;
+                        this.SaveFeed(feedInfo);
+                        break;
 
-						wrq = (HttpWebRequest)WebRequest.Create(url);
-						if (ProxyServer != string.Empty)
-							wrq.Proxy = new WebProxy(ProxyServer + (ProxyPort != "-1" ? ":" + ProxyPort : ""));
+                    case 3: // Twitter Timeline
 
-						if (ProxyUserName != string.Empty)
-							wrq.Proxy.Credentials = new NetworkCredential(ProxyUserName, ProxyPassword);
-
-						// Set UserAgent to avoid prohibited (403) answer
-						wrq.UserAgent = "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:15.0) Gecko/20100101 Firefox/15.0.1";
-
-						wrp = wrq.GetResponse();
-						rssStream = wrp.GetResponseStream();
-
-						settings = new XmlReaderSettings();
-
-						rssReader = XmlReader.Create(rssStream,settings);
-
-						feed = SyndicationFeed.Load(rssReader);
-
-						foreach (var feedItem in feed.Items)
-						{
-							NewsInfo news = new NewsInfo();
-							news.News = "";
-							news.Internal = false;
-							news.Title = (feedItem.Title != null ? feedItem.Title.Text : "");
-							news.Summary = feedItem.Content != null ? ((TextSyndicationContent)feedItem.Content).Text : "";
-							//if (feedInfo.StripHtml)
-							//    news.Summary = StripHTML(news.Summary);
-							news.Link = (feedItem.Links.Count > 0 ? feedItem.Links[0].Uri.OriginalString : "");
-							news.Author = "";
-							if (feedItem.Authors.Count > 0)
-							{
-								string name = feedItem.Authors[0].Name ?? " ";
-								string nick = "";
-								if (name.IndexOf('(') > -1)
-								{
-									nick = name.Substring(0, name.IndexOf('(') - 1);
-									name = name.Substring(name.IndexOf('(') + 1);
-									name = name.Substring(0, name.Length - 1);
-								}
-								string uri = feedItem.Authors[0].Uri ?? " ";
-								string email = feedItem.Authors[0].Email ?? " ";
-							
-								news.Author = name + "|" + uri + "|" + email + "|" + nick;
-							}
-
-							news.Image = (feedItem.Links.Count > 1 ? feedItem.Links[1].Uri.OriginalString : "");
-
-							DateTime pubDate = (feedItem.PublishDate.LocalDateTime != DateTime.MinValue ? feedItem.PublishDate.LocalDateTime : (DateTime)SqlDateTime.MinValue);
-							DateTime lastUpdated = (feedItem.LastUpdatedTime.LocalDateTime != DateTime.MinValue ? feedItem.LastUpdatedTime.LocalDateTime : (DateTime)SqlDateTime.MinValue);
-							news.Pubdate = (pubDate > lastUpdated ? pubDate : lastUpdated);
-							news.Pubdate = (news.Pubdate < (DateTime)SqlDateTime.MinValue ? (DateTime)SqlDateTime.MinValue : news.Pubdate);
-
-							if (feedItem.Id != null)
-								news.GUID = feedItem.Id;
-							else
-								news.GUID = string.Format("{0:yyyyMMddHHmmss}", news.Pubdate) +
-									news.Title.ToUpper().Substring(0, Math.Min(news.Title.Length, 20));
-							news.FeedId = feedInfo.FeedId;
-							this.SaveNewsByGuid(news);
-						}
-						feedInfo.LastRetrieve = DateTime.Now;
-						this.SaveFeed(feedInfo);
-						break;
+                        TwitterApi11 twitterApiUser = new TwitterApi11(oAuthToken, oAuthTokenSecret, oAuthConsumerKey, oAuthConsumerSecret);
+                        List<NewsInfo> newsListUser = twitterApiUser.GetUserTimeLine(feedInfo.FeedUrl, 20);
+                        foreach (NewsInfo news in newsListUser)
+                        {
+                            news.FeedId = FeedId;
+                            this.SaveNewsByGuid(news);
+                        }
+                        feedInfo.LastRetrieve = DateTime.Now;
+                        this.SaveFeed(feedInfo);
+                        break;
 
 					case 2: // RSS
 						Uri baseUrl = new Uri(feedInfo.FeedUrl);
@@ -261,7 +224,7 @@ namespace Bitboxx.DNNModules.BBNews
 							rssReader = XmlReader.Create(rssStream, settings);
 							feed = SyndicationFeed.Load(rssReader);
 						}
-						catch (IOException)
+						catch (Exception ex)
 						{
 							// zweiter Versuch
 							string xml = string.Empty;
@@ -293,9 +256,34 @@ namespace Bitboxx.DNNModules.BBNews
 								s.Close();
 							}
 
-							rssReader = System.Xml.XmlReader.Create(new StringReader(xml));
-							feed = SyndicationFeed.Load(rssReader);
-						}
+				            // if xml is not valid lets try to repair
+                            try
+						    {
+                                try
+                                {
+                                    rssReader = System.Xml.XmlReader.Create(new StringReader(xml));
+                                    feed = SyndicationFeed.Load(rssReader);
+                                }
+                                catch (Exception)
+                                {
+                                    xml = xml.Replace("&nbsp;", "&amp;nbsp;")
+                                        .Replace("&lt;", "&amp;lt;")
+                                        .Replace("&gt;", "&amp;gt;")
+                                        .Replace("&ndash;", "&amp;ndash;")
+                                        .Replace("&ldquo;", "&amp;ldquo;")
+                                        .Replace("&rdquo;", "&amp;rdquo;")
+                                        .Replace("&rsquo;", "&amp;rsquo;");
+                                    rssReader = System.Xml.XmlReader.Create(new StringReader(xml));
+                                    feed = SyndicationFeed.Load(rssReader);
+                                }
+						    }
+						    catch (Exception)
+						    {
+						        xml = AddCDATA(xml);
+                                rssReader = System.Xml.XmlReader.Create(new StringReader(xml));
+                                feed = SyndicationFeed.Load(rssReader);
+						    }
+    					}
 						
 
 						foreach (var feedItem in feed.Items)
@@ -340,8 +328,7 @@ namespace Bitboxx.DNNModules.BBNews
 						this.SaveFeed(feedInfo);
 						break;
 
-					case 3: 
-						break;
+					
 				}
 			}
 			catch (Exception ex)
@@ -352,9 +339,19 @@ namespace Bitboxx.DNNModules.BBNews
 				this.SaveFeed(feedInfo);
 			}
 		}
+
+	    public string AddCDATA(string xml)
+	    {
+	        if (xml.IndexOf("<description>") > -1 && xml.IndexOf("<description><![CDATA[") == -1)
+	        {
+	            xml = xml.Replace("<description>", "<description><![CDATA[").Replace("</description>", "]]></description>");
+	        }
+	        return xml;
+	    }
 		
 		#endregion
-		#region "Optional Interfaces"
+
+        #region "Optional Interfaces"
 
 		/// ----------------------------------------------------------------------------- 
 		/// <summary> 

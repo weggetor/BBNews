@@ -23,6 +23,7 @@
 		<li><a href="#bbManageCategoryFeeds"><%=LocalizeString("bbManageCategoryFeeds")%></a></li>
 		<li><a href="#bbEditNews"><%=LocalizeString("bbEditNews")%></a></li>
 		<li><a href="#bbEditScheduler"><%=LocalizeString("bbEditScheduler")%></a></li>
+        <li><a href="#bbEditCredentials"><%=LocalizeString("bbEditCredentials")%></a></li>
 	</ul>
 	<div id="bbEditCategories" class="bbEditCategories dnnClear">
 		<asp:PlaceHolder runat="server" ID="plCategories"></asp:PlaceHolder>
@@ -36,7 +37,10 @@
 	<div id="bbEditNews" class="bbEditNews dnnClear">
 		<asp:PlaceHolder runat="server" ID="plNews"></asp:PlaceHolder>
 	</div>
-	<div id="bbEditScheduler" class="bbEditNews dnnClear">
+	<div id="bbEditScheduler" class="bbEditScheduler dnnClear">
 		<asp:PlaceHolder runat="server" ID="plScheduler"></asp:PlaceHolder>
+	</div>
+    <div id="bbEditCredentials" class="bbEditCredentials dnnClear">
+		<asp:PlaceHolder runat="server" ID="plCredentials"></asp:PlaceHolder>
 	</div>
 </div>
