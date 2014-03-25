@@ -61,6 +61,7 @@ namespace Bitboxx.DNNModules.BBNews.Components
         {
             public List<Tweet> statuses { get; set; }
         }
+
         public TwitterApi11 (string tokenKey, string tokenSecret, string consumerKey, string consumerSecret)
         {
             TokenKey = tokenKey;
@@ -68,7 +69,6 @@ namespace Bitboxx.DNNModules.BBNews.Components
             ConsumerKey = consumerKey;
             ConsumerSecret = consumerSecret;
         }
-
 
         public List<NewsInfo> GetUserTimeLine(string twitterUsername, int tweetsCount)
         {
@@ -143,11 +143,6 @@ namespace Bitboxx.DNNModules.BBNews.Components
 
         public List<NewsInfo> SearchTweets(string searchTerm, int tweetsCount)
         {
-            string TokenKey = "55684465-gvmJ81DMpzs7QxjY4BlQM2GzRWE9sUZIVTWMrX9nN";
-            string TokenSecret = "nO07e9Vyj4MVJtAYTmYaW2RrEtuJSineAIesWtTTXA";
-            string ConsumerKey = "HEc2tiosBZ0U62SLmsYaOA";
-            string ConsumerSecret = "i3OGf4Rm3bA5MSV55X2froEjo4TCJtA49msBJ1dW9Fc";
-
             // Other OAuth connection/authentication variables
             string oAuthVersion = "1.0";
             string oAuthSignatureMethod = "HMAC-SHA1";
@@ -233,49 +228,44 @@ namespace Bitboxx.DNNModules.BBNews.Components
                 tweet.Internal = false;
                 tweet.Hide = false;
                 tweet.Title = HttpUtility.HtmlDecode(userTweet.text);
+                string title = tweet.Title;
 
-                int pos = tweet.Title.IndexOf("http://t.co");
-                if (pos > -1)
+                List<string> urls = new List<string>();
+
+                int i = 0;
+                while (title.IndexOf("http://t.co") > -1 && i < 100)
                 {
-                    string start = tweet.Title.Substring(0, pos - 1);
-                    string rest = tweet.Title.Substring(pos);
-                    int posEnde = rest.IndexOf(" ");
-
+                    i++;
+                    int pos = title.IndexOf("http://t.co");
+                    string url = title.Substring(pos);
+                    int posEnde = url.IndexOf(" ");
                     if (posEnde > -1)
-                    {
-                        tweet.Link = rest.Substring(0, posEnde - 1);
-                        rest = rest.Substring(posEnde);
-                        tweet.News = start + " <a href=\"" + tweet.Link + "\">" + tweet.Link + "</a> " + rest;
-                        tweet.Title = start + " " + tweet.Link + rest;
-                    }
-                    else
-                    {
-                        tweet.Link = rest;
-                        tweet.News = start + " <a href=\"" + tweet.Link + "\">" + tweet.Link + "</a> ";
-                        tweet.Title = start + " " + tweet.Link;
-                    }
+                        url =  url.Substring(0, posEnde).Trim();
+                    urls.Add(url);
+                    title = title.Replace(url, "");
                 }
-                pos = tweet.Title.IndexOf("https://t.co");
-                if (pos > -1)
+
+                i = 0;
+                while (title.IndexOf("https://t.co") > -1 && i < 100)
                 {
-                    string start = tweet.Title.Substring(0, pos - 1);
-                    string rest = tweet.Title.Substring(pos);
-                    int posEnde = rest.IndexOf(" ");
-
+                    i++;
+                    int pos = title.IndexOf("https://t.co");
+                    string url = title.Substring(pos);
+                    int posEnde = url.IndexOf(" ");
                     if (posEnde > -1)
-                    {
-                        tweet.Link = rest.Substring(0, posEnde - 1);
-                        rest = rest.Substring(posEnde);
-                        tweet.News = start + " <a href=\"" + tweet.Link + "\">" + tweet.Link + "</a> " + rest;
-                        tweet.Title = start + " " + tweet.Link + rest;
-                    }
-                    else
-                    {
-                        tweet.Link = rest;
-                        tweet.News = start + " <a href=\"" + tweet.Link + "\">" + tweet.Link + "</a> ";
-                        tweet.Title = start + " " + tweet.Link;
-                    }
+                        url = url.Substring(0, posEnde).Trim();
+                    urls.Add(url);
+                    title = title.Replace(url, "");
                 }
+                if (urls.Any())
+                    tweet.Link = urls[0];
+
+                foreach (string url in urls)
+                {
+                    if (!url.EndsWith("…"))
+                        tweet.News = tweet.News.Replace(url, "<a href=\"" + url + "\">" + url + "</a>");
+                }
+
                 news.Add(tweet);
             }
             return (from l in news where l.News != String.Empty orderby l.Pubdate descending select l).ToList();
