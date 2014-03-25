@@ -313,7 +313,7 @@ namespace Bitboxx.DNNModules.BBNews
 							DateTime pubDate = (feedItem.PublishDate.LocalDateTime != DateTime.MinValue ? feedItem.PublishDate.LocalDateTime : (DateTime)SqlDateTime.MinValue);
 							DateTime lastUpdated = (feedItem.LastUpdatedTime.LocalDateTime != DateTime.MinValue ? feedItem.LastUpdatedTime.LocalDateTime : (DateTime)SqlDateTime.MinValue);
 							news.Pubdate = (pubDate > lastUpdated ? pubDate : lastUpdated);
-							news.Pubdate = (news.Pubdate < (DateTime)SqlDateTime.MinValue ? (DateTime)SqlDateTime.MinValue : news.Pubdate);
+							news.Pubdate = (news.Pubdate <= (DateTime)SqlDateTime.MinValue ? DateTime.Now : news.Pubdate);
 							news.Internal = false;
 
 							if (feedItem.Id != null)

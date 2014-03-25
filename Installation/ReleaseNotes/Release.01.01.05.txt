@@ -1,0 +1,11 @@
+﻿<h2>Release Notes bitboxx bbnews  01.01.05</h2>
+<p>bbnews  01.01.05 will work for any DNN version <strong>6.1.0</strong> and up.
+<h3>BUG FIXES</h3>
+<ul>
+    <li>Fixed a bug replacing only first url in twitter feed with a link in the news</li>
+	<li>Fixed a bug attaching complete html code after rss code</li>
+	<li>Fixed a bug when fedditem pubdate is empty or not present</li>
+</ul>
+<h3>ENHANCEMENTS</h3>
+<ul>
+</ul>

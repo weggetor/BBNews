@@ -27,6 +27,7 @@ using System.IO;
 using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Text;
+using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -194,7 +195,7 @@ namespace Bitboxx.DNNModules.BBNews
 			if (user.IsInRole("Administrator") && IsEditable)
 				MultiView1.Visible = true;
 
-		    if (Settings["NewsInRow"] != null)
+            if (Settings["NewsInRow"] != null)
 		    {
 		        newsInRow = 1;
 		        rowsPerPage = 5;
@@ -211,7 +212,7 @@ namespace Bitboxx.DNNModules.BBNews
 		    else
 		    {
 		        string message = Localization.GetString("Configure.Message", this.LocalResourceFile);
-		        DotNetNuke.UI.Skins.Skin.AddModuleMessage(this, message, ModuleMessage.ModuleMessageType.YellowWarning);
+		        DotNetNuke.UI.Skins.Skin.AddModuleMessage(this, message + " (NewsInRow)", ModuleMessage.ModuleMessageType.YellowWarning);
 		    }
 		    if (Settings["TemplateName"] == null && Settings["Template"] != null )
 			{
@@ -220,8 +221,15 @@ namespace Bitboxx.DNNModules.BBNews
 				ctrl.SaveTemplateFile("Module_" + ModuleId.ToString(), (string) Settings["Template"]);
 				
 				string message = Localization.GetString("Configure.Message", this.LocalResourceFile);
-				DotNetNuke.UI.Skins.Skin.AddModuleMessage(this, message, ModuleMessage.ModuleMessageType.YellowWarning);
+                DotNetNuke.UI.Skins.Skin.AddModuleMessage(this, message + " (Template)", ModuleMessage.ModuleMessageType.YellowWarning);
 			}
+
+		    if (Settings["CategoryID"] == null)
+		    {
+                string message = Localization.GetString("Configure.Message", this.LocalResourceFile);
+                DotNetNuke.UI.Skins.Skin.AddModuleMessage(this, message + " (Category)", ModuleMessage.ModuleMessageType.YellowWarning);
+                IsConfigured = false;
+		    }
 		}
 		
 		protected void Page_Load(object sender, System.EventArgs e)
@@ -230,34 +238,7 @@ namespace Bitboxx.DNNModules.BBNews
 			{
 				if (IsConfigured)
 				{
-					if (Request["feed"] != null)
-					{
-						string format = Request["feed"].ToLower().Trim();
-						SyndicationFeed feed = CreateFeed();
-						Response.ContentType = "text/xml";
-						Response.Charset = "utf-8";
-						XmlWriterSettings settings = new XmlWriterSettings();
-				        settings.Indent = true;
-						using (XmlWriter writer = XmlWriter.Create(Response.OutputStream, settings))
-						{
-							switch (format)
-							{
-								case "atom":
-									Atom10FeedFormatter atom10Formatter = new Atom10FeedFormatter(feed);
-									atom10Formatter.WriteTo(writer);
-									break;
-								case "rss":
-								default:
-									Rss20FeedFormatter rss20Formatter = new Rss20FeedFormatter(feed);
-									rss20Formatter.WriteTo(writer);
-									break;
-								
-							}
-							
-						}
-						Response.End();
-					}
-					else
+                    if (Request["feed"] != null)
 					{
 						switch (ViewIndex)
 						{
@@ -357,33 +338,66 @@ namespace Bitboxx.DNNModules.BBNews
 		}
 		protected void Page_Prerender(object sender, EventArgs e)
 		{
-			string titleLabelName = DotNetNukeContext.Current.Application.Version.Major < 6 ? "lblTitle" : "titleLabel";
-			Control ctl = Globals.FindControlRecursiveDown(this.ContainerControl, titleLabelName);
+		    if (Request["feed"] != null)
+		    {
+		        string format = Request["feed"].ToLower().Trim();
+		        SyndicationFeed feed = CreateFeed();
+		        Response.Clear();
+		        Response.ContentType = "text/xml";
+		        Response.Charset = "utf-8";
+		        XmlWriterSettings settings = new XmlWriterSettings();
+		        settings.Indent = true;
+		        using (XmlWriter writer = XmlWriter.Create(Response.OutputStream, settings))
+		        {
+		            switch (format)
+		            {
+		                case "atom":
+		                    Atom10FeedFormatter atom10Formatter = new Atom10FeedFormatter(feed);
+		                    atom10Formatter.WriteTo(writer);
+		                    break;
+		                case "rss":
+		                default:
+		                    Rss20FeedFormatter rss20Formatter = new Rss20FeedFormatter(feed);
+		                    rss20Formatter.WriteTo(writer);
+		                    break;
 
-			if ((ctl != null))
-			{
-				if (Settings["ShowTitle"] != null && Convert.ToBoolean((string) Settings["ShowTitle"]) && TheNews != null)
-				{
-					// We can set the title of our module
-					((Label) ctl).Text = TheNews.Title;
-				}
-				if (Settings["ShowRss"]!= null)
-				{
-					int position = Convert.ToInt32(Settings["ShowRss"]);
-					Control rssIconCtrl = ParseControl("<a href=\"" + Globals.NavigateURL(TabId, "", "feed=rss") +
-					                           "\"><img src=\"" + Page.ResolveUrl("~/images/action_rss.gif") + "\" style=\"vertical-align:middle; padding-right:5px;\" /></a>");
-					switch (position)
-					{
-						case 1:
-							ctl.Parent.Controls.AddAt(0, rssIconCtrl);
-							break;
-						case 2:
-							ctl.Parent.Controls.Add(rssIconCtrl);
-							break;
-					}
-					
-				}
-			}
+		            }
+		            writer.Flush();
+		        }
+		        Response.Flush();
+		        Response.End();
+		    }
+		    else
+		    {
+
+		        string titleLabelName = DotNetNukeContext.Current.Application.Version.Major < 6 ? "lblTitle" : "titleLabel";
+		        Control ctl = Globals.FindControlRecursiveDown(this.ContainerControl, titleLabelName);
+
+		        if ((ctl != null))
+		        {
+		            if (Settings["ShowTitle"] != null && Convert.ToBoolean((string) Settings["ShowTitle"]) && TheNews != null)
+		            {
+		                // We can set the title of our module
+		                ((Label) ctl).Text = TheNews.Title;
+		            }
+		            if (Settings["ShowRss"] != null)
+		            {
+		                int position = Convert.ToInt32(Settings["ShowRss"]);
+		                Control rssIconCtrl = ParseControl("<a href=\"" + Globals.NavigateURL(TabId, "", "feed=rss") +
+		                                                   "\"><img src=\"" + Page.ResolveUrl("~/images/action_rss.gif") + "\" style=\"vertical-align:middle; padding-right:5px;\" /></a>");
+		                switch (position)
+		                {
+		                    case 1:
+		                        ctl.Parent.Controls.AddAt(0, rssIconCtrl);
+		                        break;
+		                    case 2:
+		                        ctl.Parent.Controls.Add(rssIconCtrl);
+		                        break;
+		                }
+
+		            }
+		        }
+		    }
 
 		}
 		protected void lstNews_ItemCreated(object sender, ListViewItemEventArgs e)

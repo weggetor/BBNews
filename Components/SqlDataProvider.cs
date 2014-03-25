@@ -335,7 +335,7 @@ namespace Bitboxx.DNNModules.BBNews
 				   " VALUES " +
 				   " (@FeedId,@Title,@Summary,@Author,@News,@Link,@Image,@GUID,@Pubdate,@Hide,@Internal)";
 
-				SqlHelper.ExecuteNonQuery(ConnectionString, CommandType.Text, insCmd, SqlParams);
+				int result = SqlHelper.ExecuteNonQuery(ConnectionString, CommandType.Text, insCmd, SqlParams);
 			}
 
 		}
