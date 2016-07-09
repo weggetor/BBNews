@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.IO;
 using System.Linq;
+using System.Net.Mime;
 using System.ServiceModel.Syndication;
 using System.Text;
 using System.Web;
@@ -32,6 +33,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Xml;
+using System.Xml.Linq;
 using Bitboxx.DNNModules.BBNews.Components;
 using DotNetNuke.Application;
 using DotNetNuke.Common;
@@ -238,7 +240,7 @@ namespace Bitboxx.DNNModules.BBNews
 			{
 				if (IsConfigured)
 				{
-                    if (Request["feed"] != null)
+                    if (Request["feed"] == null)
 					{
 						switch (ViewIndex)
 						{
@@ -468,11 +470,37 @@ namespace Bitboxx.DNNModules.BBNews
 			CategoryInfo category = Controller.GetCategory(CategoryId);
 			if (category != null)
 			{
-				SyndicationFeed feed = new SyndicationFeed(category.CategoryName, category.CategoryDescription, new Uri(Globals.NavigateURL(TabId,"","feed="+ Request["feed"])));
-				//feed.Authors.Add(new SyndicationPerson("someone@microsoft.com"));
-				//feed.Description = new TextSyndicationContent(category.CategoryDescription);
+                string feedUrl = Globals.NavigateURL(TabId, "", "feed=" + Request["feed"]);
+			    string alternateUrl = Globals.NavigateURL(TabId);
 
-				List<SyndicationItem> items = new List<SyndicationItem>();
+                string appUrl = string.Format("{0}://{1}{2}{3}",
+                                    Request.Url.Scheme,
+                                    Request.Url.Host,
+                                    Request.Url.Port == 80
+                                        ? string.Empty
+                                        : ":" + Request.Url.Port,
+                                    Request.ApplicationPath);
+
+                SyndicationFeed feed = new SyndicationFeed(category.CategoryName, category.CategoryDescription, new Uri(alternateUrl));
+                // set the feed ID to the main URL of your Website
+			    feed.Id = feedUrl;
+                feed.BaseUri = new Uri(feedUrl);
+                feed.Title = new TextSyndicationContent(category.CategoryName);
+                feed.Description = new TextSyndicationContent(category.CategoryDescription);
+                feed.LastUpdatedTime = new DateTimeOffset(DateTime.Now);
+			    feed.Generator = "bitboxx bbnews for DNN";
+                if (!string.IsNullOrEmpty(PortalSettings.LogoFile))
+                    feed.ImageUrl = new Uri(appUrl + PortalSettings.HomeDirectory + PortalSettings.LogoFile);
+                
+
+                // Add the URL that will link to your published feed when it's done
+                SyndicationLink link = new SyndicationLink(new Uri(feedUrl));
+                link.RelationshipType = "self";
+                link.MediaType = "text/html";
+                link.Title = category.CategoryName;
+                feed.Links.Add(link);
+
+                List<SyndicationItem> items = new List<SyndicationItem>();
 				foreach (NewsInfo news in AllNews.Take(10).OrderByDescending(n => n.Pubdate))
 				{
 					if (news.Internal && Settings["NewsPage"] != null)
@@ -482,7 +510,30 @@ namespace Bitboxx.DNNModules.BBNews
 					}
 					
 					SyndicationItem item = new SyndicationItem(news.Title,news.Summary,new Uri(news.Link),news.GUID,news.Pubdate);
-					items.Add(item);
+                    item.Id = news.GUID;
+                    
+                    // Add the URL for the item as a link
+                    link = new SyndicationLink(new Uri(news.Link));
+                    item.Links.Add(link);
+
+                    // Fill some properties for the item
+                    item.LastUpdatedTime = news.Pubdate;
+                    item.PublishDate = news.Pubdate;
+
+				    if (!string.IsNullOrEmpty(news.Image))
+				    {
+				        item.Links.Add(SyndicationLink.CreateMediaEnclosureLink(
+				            new Uri(news.Image),
+				            "image/" + news.Image.Substring(news.Image.LastIndexOf('.') + 1),
+				            0));
+				    }
+
+                    // Fill the item content            
+                    TextSyndicationContent content
+                         = new TextSyndicationContent(news.Summary, TextSyndicationContentKind.Plaintext);
+                    item.Content = content;
+
+                    items.Add(item);
 				}
 				feed.Items = items;
 				return feed;
