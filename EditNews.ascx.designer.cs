@@ -37,7 +37,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblSearchText;
+        protected global::System.Web.UI.UserControl lblSearchText;
         
         /// <summary>
         /// txtSearch control.
@@ -55,7 +55,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblSearchCategory;
+        protected global::System.Web.UI.UserControl lblSearchCategory;
         
         /// <summary>
         /// ddlSearchCategory control.
@@ -73,7 +73,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblSearchDateStart;
+        protected global::System.Web.UI.UserControl lblSearchDateStart;
         
         /// <summary>
         /// dpDateStart control.
@@ -91,7 +91,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblSearchDateEnd;
+        protected global::System.Web.UI.UserControl lblSearchDateEnd;
         
         /// <summary>
         /// dpDateEnd control.
@@ -109,7 +109,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblSearch;
+        protected global::System.Web.UI.UserControl lblSearch;
         
         /// <summary>
         /// cmdSearch control.
@@ -145,7 +145,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblHide;
+        protected global::System.Web.UI.UserControl lblHide;
         
         /// <summary>
         /// chkHide control.
@@ -163,7 +163,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblInternal;
+        protected global::System.Web.UI.UserControl lblInternal;
         
         /// <summary>
         /// chkInternal control.
@@ -181,7 +181,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblFeed;
+        protected global::System.Web.UI.UserControl lblFeed;
         
         /// <summary>
         /// ddlFeed control.
@@ -199,7 +199,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblTitle;
+        protected global::System.Web.UI.UserControl lblTitle;
         
         /// <summary>
         /// txtTitle control.
@@ -244,7 +244,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblPubDate;
+        protected global::System.Web.UI.UserControl lblPubDate;
         
         /// <summary>
         /// dpPubDate control.
@@ -271,7 +271,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblAuthor;
+        protected global::System.Web.UI.UserControl lblAuthor;
         
         /// <summary>
         /// lblAuthorName control.
@@ -352,7 +352,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblLink;
+        protected global::System.Web.UI.UserControl lblLink;
         
         /// <summary>
         /// txtLink control.
@@ -370,7 +370,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblImage;
+        protected global::System.Web.UI.UserControl lblImage;
         
         /// <summary>
         /// txtImage control.
@@ -388,16 +388,9 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblSummary;
+        protected global::System.Web.UI.UserControl lblSummary;
         
-        /// <summary>
-        /// txtSummary control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.TextEditor txtSummary;
+
         
         /// <summary>
         /// lblNews control.
@@ -406,16 +399,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblNews;
-        
-        /// <summary>
-        /// txtNews control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.TextEditor txtNews;
+        protected global::System.Web.UI.UserControl lblNews;
         
         /// <summary>
         /// cmdNew control.

@@ -28,7 +28,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblCategories;
+        protected global::System.Web.UI.UserControl lblCategories;
         
         /// <summary>
         /// ddlCategories control.
@@ -46,7 +46,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblFeeds;
+        protected global::System.Web.UI.UserControl lblFeeds;
         
         /// <summary>
         /// ctlFeeds control.

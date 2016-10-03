@@ -1,0 +1,17 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{objectQualifier}BBNews_News]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+   ALTER TABLE {databaseOwner}[{objectQualifier}BBNews_News]  ADD MetaData NVARCHAR(MAX) NULL
+GO
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/

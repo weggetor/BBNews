@@ -1,7 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EditNews.ascx.cs" Inherits="Bitboxx.DNNModules.BBNews.EditNews" %>
 <%@ Register TagPrefix="dnn" TagName="Label" Src="~/controls/LabelControl.ascx" %>
-<%@ Register TagPrefix="dnn" TagName="TextEditor" Src="~/controls/TextEditor.ascx" %>
+<%@ Register TagPrefix="dnnt" TagName="TextEditor" Src="~/controls/TextEditor.ascx" %>
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.UI.WebControls" Assembly="DotNetNuke.Web" %>
+<%@ Register TagPrefix="dnnd" Namespace="DotNetNuke.Web.UI.WebControls" Assembly="DotNetNuke.Web.Deprecated" %>
 
 	<div class="dnnFormMessage dnnFormInfo dnnClear">
 		<asp:Label ID="lblIntro" runat="server" ResourceKey="Intro" />
@@ -19,11 +20,11 @@
 		</div>
 		<div class="dnnFormItem">
 			<dnn:Label runat="server" ID="lblSearchDateStart"/>
-			<dnn:DnnDatePicker runat="server" ID="dpDateStart"/>
+			<dnnd:DnnDatePicker runat="server" ID="dpDateStart"/>
 		</div>
 		<div class="dnnFormItem">
 			<dnn:Label runat="server" ID="lblSearchDateEnd"/>
-			<dnn:DnnDatePicker runat="server" ID="dpDateEnd"/>
+			<dnnd:DnnDatePicker runat="server" ID="dpDateEnd"/>
 		</div>
 		<div class="dnnFormItem">
 			<dnn:Label runat="server" ID="lblSearch"/>
@@ -111,8 +112,8 @@
 			<div class="dnnFormItem">
 				<dnn:Label id="lblPubDate" runat="server"  controlname="dpPubDate" suffix=":" />
 				<div>
-					<dnn:DnnDatePicker runat="server" ID="dpPubDate" CssClass="dnnFormInput" />
-					<dnn:DnnTimePicker runat="server" ID="tpPubDate" CssClass="dnnFormItem"  DateInput="dpPubDate"/>
+					<dnnd:DnnDatePicker runat="server" ID="dpPubDate" CssClass="dnnFormInput" />
+					<dnnd:DnnTimePicker runat="server" ID="tpPubDate" CssClass="dnnFormItem"  DateInput="dpPubDate"/>
 				</div>
 			</div>
 			<div class="dnnFormItem">
@@ -147,13 +148,13 @@
 			<div class="dnnFormItem">
 				<dnn:Label ID="lblSummary" runat="server"  controlname="txtSummary" suffix=":" />
 				<div class="dnnLeft" style="width:200px;">
-					<dnn:texteditor ID="txtSummary" runat="server" TextRenderMode="Raw" HtmlEncode="False" defaultmode="Rich"  choosemode="False" chooserender="False" Width="550" Height="350"/>
+					<dnnt:Texteditor ID="txtSummary" runat="server" TextRenderMode="Raw" HtmlEncode="False" defaultmode="Rich"  choosemode="False" chooserender="False" Width="550" Height="350"/>
 				</div>
 			</div>
 			<div class="dnnFormItem">
 				<dnn:Label ID="lblNews" runat="server"  controlname="txtNews" suffix=":" />
 				<div class="dnnLeft" style="width:200px;">
-					<dnn:texteditor ID="txtNews" runat="server" TextRenderMode="Raw" HtmlEncode="False" defaultmode="Rich"  choosemode="False" chooserender="False" Width="550" Height="350"/>
+					<dnnt:Texteditor ID="txtNews" runat="server" TextRenderMode="Raw" HtmlEncode="False" defaultmode="Rich"  choosemode="False" chooserender="False" Width="550" Height="350"/>
 				</div>
 			</div>
 		</fieldset>

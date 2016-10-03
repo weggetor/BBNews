@@ -1,5 +1,4 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Edit.ascx.cs" Inherits="Bitboxx.DNNModules.BBNews.Edit" %>
-<%@ Register TagPrefix="dnn" Assembly="DotNetNuke" Namespace="DotNetNuke.UI.WebControls"%>
 <script language="javascript" type="text/javascript">
 	/*globals jQuery, window, Sys */
 	(function ($, Sys) {
