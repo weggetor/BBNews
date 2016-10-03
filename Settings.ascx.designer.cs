@@ -19,7 +19,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblView;
+        protected global::System.Web.UI.UserControl lblView;
         
         /// <summary>
         /// rblView control.
@@ -46,7 +46,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblCategory;
+        protected global::System.Web.UI.UserControl lblCategory;
         
         /// <summary>
         /// cboCategory control.
@@ -73,7 +73,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblTopN;
+        protected global::System.Web.UI.UserControl lblTopN;
         
         /// <summary>
         /// txtTopN control.
@@ -100,7 +100,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblStartDate;
+        protected global::System.Web.UI.UserControl lblStartDate;
         
         /// <summary>
         /// dtpStartDate control.
@@ -118,7 +118,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblEndDate;
+        protected global::System.Web.UI.UserControl lblEndDate;
         
         /// <summary>
         /// dtpEndDate control.
@@ -136,7 +136,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblShowRss;
+        protected global::System.Web.UI.UserControl lblShowRss;
         
         /// <summary>
         /// rblRss control.
@@ -163,7 +163,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblShowTitle;
+        protected global::System.Web.UI.UserControl lblShowTitle;
         
         /// <summary>
         /// chkShowTitle control.
@@ -190,7 +190,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblNewsPage;
+        protected global::System.Web.UI.UserControl lblNewsPage;
         
         /// <summary>
         /// urlSelectNewsPage control.
@@ -217,7 +217,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblNewsInRow;
+        protected global::System.Web.UI.UserControl lblNewsInRow;
         
         /// <summary>
         /// txtNewsInRow control.
@@ -244,7 +244,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblRowsPerPage;
+        protected global::System.Web.UI.UserControl lblRowsPerPage;
         
         /// <summary>
         /// txtRowsPerPage control.
@@ -271,7 +271,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblSelectTemplate;
+        protected global::System.Web.UI.UserControl lblSelectTemplate;
         
         /// <summary>
         /// selTemplate control.
@@ -298,7 +298,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblMarqueeDirection;
+        protected global::System.Web.UI.UserControl lblMarqueeDirection;
         
         /// <summary>
         /// cboMarqueeDirection control.
@@ -316,7 +316,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblMarqueeScrollAmount;
+        protected global::System.Web.UI.UserControl lblMarqueeScrollAmount;
         
         /// <summary>
         /// txtMarqueeScrollAmount control.
@@ -343,7 +343,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblMarqueeScrollDelay;
+        protected global::System.Web.UI.UserControl lblMarqueeScrollDelay;
         
         /// <summary>
         /// txtMarqueeScrollDelay control.
@@ -370,7 +370,7 @@ namespace Bitboxx.DNNModules.BBNews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblMarqueeAlternate;
+        protected global::System.Web.UI.UserControl lblMarqueeAlternate;
         
         /// <summary>
         /// chkMarqueeAlternate control.

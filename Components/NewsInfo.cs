@@ -25,6 +25,7 @@ using System;
 using System.Data;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using System.Xml;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
@@ -63,6 +64,7 @@ namespace Bitboxx.DNNModules.BBNews.Components
 		public DateTime Pubdate { get; set; }
 		public Boolean Hide { get; set; }
 		public Boolean Internal { get; set; }
+        public string MetaData { get; set; }
 
 		#region Implementation of IHydratable
 
@@ -80,6 +82,7 @@ namespace Bitboxx.DNNModules.BBNews.Components
 			Pubdate = Null.SetNullDateTime(dr["Pubdate"]);
 			Hide = Null.SetNullBoolean(dr["Hide"]);
 			Internal = Null.SetNullBoolean(dr["Internal"]);
+		    MetaData = Null.SetNullString((dr["MetaData"]));
 		}
 
 		public int KeyID
@@ -186,6 +189,8 @@ namespace Bitboxx.DNNModules.BBNews.Components
 					return PropertyAccess.FormatString(feed.FeedName, format);
 				case "feedurl":
 					return PropertyAccess.FormatString(feed.FeedUrl, format);
+                case "meta":
+			        return GetMetaData(format);
 				default:
 					propertyNotFound = true;
 					return String.Empty;
@@ -212,6 +217,21 @@ namespace Bitboxx.DNNModules.BBNews.Components
 			}
 			return shortenString.Trim() + " ...";
 		}
+
+	    private string GetMetaData(string key)
+	    {
+	        try
+	        {
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(MetaData);
+                XmlNode node = doc.SelectSingleNode("/root/row[translate(key, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')='" + key.ToLower() + "']/val");
+                if (node != null)
+                    return node.InnerText;
+            }
+	        catch (Exception) {}
+            
+            return "";
+        }
 
 		#endregion
 	}

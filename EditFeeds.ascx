@@ -1,6 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EditFeeds.ascx.cs" Inherits="Bitboxx.DNNModules.BBNews.EditFeeds" %>
 <%@ Register TagPrefix="dnn" TagName="Label" Src="~/controls/LabelControl.ascx" %>
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.UI.WebControls" Assembly="DotNetNuke.Web" %>
+<%@ Register TagPrefix="dnnd" Namespace="DotNetNuke.Web.UI.WebControls" Assembly="DotNetNuke.Web.Deprecated" %>
 <div class="dnnForm dnnBBNewsEdit dnnClear">
 	<div class="dnnFormMessage dnnFormInfo dnnClear">
 		<asp:Label ID="lblIntro" runat="server" ResourceKey="Intro" />

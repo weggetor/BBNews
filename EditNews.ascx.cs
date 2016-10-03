@@ -64,11 +64,13 @@ namespace Bitboxx.DNNModules.BBNews
 				cmdCancel.Visible = _inEditMode;
 			}
 		}
-		public Control MainControl { get; set; } 
-		#endregion
+		public Control MainControl { get; set; }
+        #endregion
+        
+        protected DotNetNuke.UI.UserControls.TextEditor txtSummary;
+        protected DotNetNuke.UI.UserControls.TextEditor txtNews;
 
-		
-		protected void Page_Load(object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
 		{
 			Localization.LocalizeDataGrid(ref grdNews, this.LocalResourceFile);
 

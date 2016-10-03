@@ -3,6 +3,7 @@
 <%@ Register TagPrefix="bb" TagName="TabSelectControl" Src="Controls/TabSelectControl.ascx" %> 
 <%@ Register TagPrefix="bb" TagName="TemplateControl" Src="Controls/TemplateControl.ascx" %> 
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.UI.WebControls" Assembly="DotNetNuke.Web" %>
+<%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.UI.WebControls" Assembly="DotNetNuke.Web.Deprecated" %>
  
 <div class="dnnForm dnnBBNewsSettings dnnClear">
     <div class="dnnFormItem">

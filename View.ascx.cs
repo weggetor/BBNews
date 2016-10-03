@@ -508,33 +508,43 @@ namespace Bitboxx.DNNModules.BBNews
 						int newsTabId = Convert.ToInt32((string)Settings["NewsPage"]);
 						news.Link = Globals.NavigateURL(newsTabId, "", "newsid=" + news.NewsId.ToString());
 					}
-					
-					SyndicationItem item = new SyndicationItem(news.Title,news.Summary,new Uri(news.Link),news.GUID,news.Pubdate);
-                    item.Id = news.GUID;
-                    
-                    // Add the URL for the item as a link
-                    link = new SyndicationLink(new Uri(news.Link));
-                    item.Links.Add(link);
 
-                    // Fill some properties for the item
-                    item.LastUpdatedTime = news.Pubdate;
-                    item.PublishDate = news.Pubdate;
-
-				    if (!string.IsNullOrEmpty(news.Image))
+				    try
 				    {
-				        item.Links.Add(SyndicationLink.CreateMediaEnclosureLink(
-				            new Uri(news.Image),
-				            "image/" + news.Image.Substring(news.Image.LastIndexOf('.') + 1),
-				            0));
+				        Uri newsLink = new Uri(news.Link);
+                        SyndicationItem item = new SyndicationItem(news.Title, news.Summary,newsLink, news.GUID, news.Pubdate);
+                        item.Id = news.GUID;
+
+                        // Add the URL for the item as a link
+                        link = new SyndicationLink(new Uri(news.Link));
+                        item.Links.Add(link);
+                        
+                        // Fill some properties for the item
+                        item.LastUpdatedTime = news.Pubdate;
+                        item.PublishDate = news.Pubdate;
+
+                        if (!string.IsNullOrEmpty(news.Image))
+                        {
+                            try
+                            {
+                                Uri imgUrl = new Uri(news.Image);
+                                item.Links.Add(SyndicationLink.CreateMediaEnclosureLink(imgUrl, "image/" + news.Image.Substring(news.Image.LastIndexOf('.') + 1), 0));
+                            }
+                            catch (Exception)
+                            {
+                            }
+                        }
+
+                        // Fill the item content            
+                        TextSyndicationContent content = new TextSyndicationContent(news.Summary, TextSyndicationContentKind.Plaintext);
+                        item.Content = content;
+                        items.Add(item);
+                    }
+                    catch (Exception)
+				    {
 				    }
 
-                    // Fill the item content            
-                    TextSyndicationContent content
-                         = new TextSyndicationContent(news.Summary, TextSyndicationContentKind.Plaintext);
-                    item.Content = content;
-
-                    items.Add(item);
-				}
+ 				}
 				feed.Items = items;
 				return feed;
 			}
