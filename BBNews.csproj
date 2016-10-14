@@ -45,32 +45,20 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <!-- Warum sind die da drin ?
-    <Reference Include="DotNetNuke.Web">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\bin\DotNetNuke.Web.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="WebFormsMvp">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\bin\WebFormsMvp.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    -->
     <Reference Include="DotNetNuke">
-      <HintPath>..\..\..\..\Bitboxx\Dependencies\DNN8.0.0\DotNetNuke.dll</HintPath>
+      <HintPath>..\..\..\..\Dependencies\DNN8.0.0\DotNetNuke.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DotNetNuke.Web">
-      <HintPath>..\..\..\..\Bitboxx\Dependencies\DNN8.0.0\DotNetNuke.Web.dll</HintPath>
+      <HintPath>..\..\..\..\Dependencies\DNN8.0.0\DotNetNuke.Web.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DotNetNuke.Web.Deprecated">
-      <HintPath>..\..\..\..\Bitboxx\Dependencies\DNN8.0.0\DotNetNuke.Web.Deprecated.dll</HintPath>
+      <HintPath>..\..\..\..\Dependencies\DNN8.0.0\DotNetNuke.Web.Deprecated.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.ApplicationBlocks.Data">
-      <HintPath>..\..\..\..\Bitboxx\Dependencies\DNN8.0.0\Microsoft.ApplicationBlocks.Data.dll</HintPath>
+      <HintPath>..\..\..\..\Dependencies\DNN8.0.0\Microsoft.ApplicationBlocks.Data.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -91,7 +79,7 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Telerik.Web.UI">
-      <HintPath>..\..\..\..\Bitboxx\Dependencies\DNN8.0.0\Telerik.Web.UI.dll</HintPath>
+      <HintPath>..\..\..\..\Dependencies\DNN8.0.0\Telerik.Web.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
