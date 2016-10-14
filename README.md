@@ -5,6 +5,11 @@
 * * *
 
 ## Whats new ?
+_Version 01.02.00 (25.03.2014):_
+
+*   Compatibility for DNN 8+
+*   Fixed some issues when retrieving Feeds
+*   Added MetaData field to support XML Data in special News Field
 
 _Version 01.01.05 (25.03.2014):_
 
@@ -327,3 +332,23 @@ The DNN scheduler checks in the defined interval your feed table for feeds that 
 </tr>
 </tbody>
 </table>
+
+## MetaData
+
+New in version 01.02.00 for DNN8+ : The news table has a new MetaData field that is NOT filled by the RSS collector. But it can be used by other developers to fill in some xml:
+```xml
+<root>
+   <row>
+        <key>Article</key>
+        <val>Lorem ipsum dolor..</val>
+    </row>
+    <row>
+        <key>BackLink</key>
+        <val>http://www.auktionsbuddy.de</val>
+    </row>
+    ...
+</root>
+```
+
+These values can then used as placeholder tokens in the template:
+[BBNEWS:Meta|Article] or [BBNEWS:Meta|Backlink]

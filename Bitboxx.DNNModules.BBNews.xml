@@ -1,0 +1,2096 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Bitboxx.DNNModules.BBNews</name>
+    </assembly>
+    <members>
+        <member name="T:Bitboxx.DNNModules.BBNews.DataProvider">
+            ----------------------------------------------------------------------------- 
+            <summary> 
+            An abstract class for the data access layer 
+            </summary> 
+            <remarks> 
+            </remarks> 
+            <history> 
+            </history> 
+            ----------------------------------------------------------------------------- 
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.DataProvider.objProvider">
+            <summary>
+            singleton reference to the instantiated object 
+            </summary>
+        </member>
+        <member name="M:Bitboxx.DNNModules.BBNews.DataProvider.#cctor">
+            <summary>
+            constructor
+            </summary>
+        </member>
+        <member name="M:Bitboxx.DNNModules.BBNews.DataProvider.CreateProvider">
+            <summary>
+            dynamically create provider 
+            </summary>
+        </member>
+        <member name="M:Bitboxx.DNNModules.BBNews.DataProvider.Instance">
+            <summary>
+            return the provider 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Bitboxx.DNNModules.BBNews.SqlDataProvider">
+            ----------------------------------------------------------------------------- 
+            <summary> 
+            SQL Server implementation of the abstract DataProvider class 
+            </summary> 
+            <remarks> 
+            </remarks> 
+            <history> 
+            </history> 
+            ----------------------------------------------------------------------------- 
+        </member>
+        <member name="T:Bitboxx.DNNModules.BBNews.BBNewsController">
+            ----------------------------------------------------------------------------- 
+            <summary> 
+            The Controller class for BBNews 
+            </summary> 
+            <remarks> 
+            </remarks> 
+            <history> 
+            </history> 
+            ----------------------------------------------------------------------------- 
+        </member>
+        <member name="M:Bitboxx.DNNModules.BBNews.BBNewsController.GetSearchItems(DotNetNuke.Entities.Modules.ModuleInfo)">
+            ----------------------------------------------------------------------------- 
+            <summary> 
+            GetSearchItems implements the ISearchable Interface 
+            </summary> 
+            <remarks> 
+            </remarks> 
+            <param name="ModInfo">The ModuleInfo for the module to be Indexed</param> 
+            <history> 
+            </history> 
+            ----------------------------------------------------------------------------- 
+        </member>
+        <member name="M:Bitboxx.DNNModules.BBNews.BBNewsController.ExportModule(System.Int32)">
+            ----------------------------------------------------------------------------- 
+            <summary> 
+            ExportModule implements the IPortable ExportModule Interface 
+            </summary> 
+            <remarks> 
+            </remarks> 
+            <param name="ModuleID">The Id of the module to be exported</param> 
+            <history> 
+            </history> 
+            ----------------------------------------------------------------------------- 
+        </member>
+        <member name="M:Bitboxx.DNNModules.BBNews.BBNewsController.ImportModule(System.Int32,System.String,System.String,System.Int32)">
+            ----------------------------------------------------------------------------- 
+            <summary> 
+            ImportModule implements the IPortable ImportModule Interface 
+            </summary> 
+            <remarks> 
+            </remarks> 
+            <param name="ModuleID">The Id of the module to be imported</param> 
+            <param name="Content">The content to be imported</param> 
+            <param name="Version">The version of the module to be imported</param> 
+            <param name="UserId">The Id of the user performing the import</param> 
+            <history> 
+            </history> 
+            ----------------------------------------------------------------------------- 
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Controls.TemplateControl.pnlView">
+            <summary>
+            pnlView control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Controls.TemplateControl.ddlTemplate">
+            <summary>
+            ddlTemplate control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Controls.TemplateControl.imgThumb">
+            <summary>
+            imgThumb control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Controls.TemplateControl.cmdNew">
+            <summary>
+            cmdNew control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Controls.TemplateControl.cmdEdit">
+            <summary>
+            cmdEdit control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Controls.TemplateControl.pnlEdit">
+            <summary>
+            pnlEdit control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Controls.TemplateControl.pnlMode">
+            <summary>
+            pnlMode control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Controls.TemplateControl.pnlNewTemplate">
+            <summary>
+            pnlNewTemplate control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Controls.TemplateControl.lblName">
+            <summary>
+            lblName control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Controls.TemplateControl.txtName">
+            <summary>
+            txtName control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Controls.TemplateControl.valNameRequired">
+            <summary>
+            valNameRequired control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Controls.TemplateControl.pnlEditTemplate">
+            <summary>
+            pnlEditTemplate control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Controls.TemplateControl.lblMode">
+            <summary>
+            lblMode control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Controls.TemplateControl.rblMode">
+            <summary>
+            rblMode control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Controls.TemplateControl.lblLanguage">
+            <summary>
+            lblLanguage control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Controls.TemplateControl.ddlLanguage">
+            <summary>
+            ddlLanguage control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Controls.TemplateControl.lblFileCap">
+            <summary>
+            lblFileCap control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Controls.TemplateControl.lblFile">
+            <summary>
+            lblFile control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Controls.TemplateControl.lblDummy">
+            <summary>
+            lblDummy control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Controls.TemplateControl.txtTemplate">
+            <summary>
+            txtTemplate control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Controls.TemplateControl.cmdSave">
+            <summary>
+            cmdSave control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Controls.TemplateControl.cmdCancelEdit">
+            <summary>
+            cmdCancelEdit control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Controls.TemplateControl.ltrHelp">
+            <summary>
+            ltrHelp control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCredentials.lblIntro">
+            <summary>
+            lblIntro control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCredentials.lblTwitterConsumerKey">
+            <summary>
+            lblTwitterConsumerKey control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCredentials.txtTwitterConsumerKey">
+            <summary>
+            txtTwitterConsumerKey control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCredentials.lblTwitterConsumerSecret">
+            <summary>
+            lblTwitterConsumerSecret control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCredentials.txtTwitterConsumerSecret">
+            <summary>
+            txtTwitterConsumerSecret control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCredentials.lblTwitterAccessToken">
+            <summary>
+            lblTwitterAccessToken control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCredentials.txtTwitterAccessToken">
+            <summary>
+            txtTwitterAccessToken control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCredentials.lblTwitterAccessTokenSecret">
+            <summary>
+            lblTwitterAccessTokenSecret control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCredentials.txtTwitterAccessTokenSecret">
+            <summary>
+            txtTwitterAccessTokenSecret control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCredentials.cmdUpdate">
+            <summary>
+            cmdUpdate control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="M:Bitboxx.DNNModules.BBNews.EditScheduler.OnUpdateClick(System.Object,System.EventArgs)">
+            <summary>
+            cmdUpdate_Click runs when the Update Button is clicked
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            [cnurse]	9/28/2004	Updated to reflect design changes for Help, 508 support and localisation
+            </history>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditScheduler.lblIntro">
+            <summary>
+            lblIntro control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditScheduler.plFriendlyName">
+            <summary>
+            plFriendlyName control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditScheduler.txtFriendlyName">
+            <summary>
+            txtFriendlyName control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditScheduler.plEnabled">
+            <summary>
+            plEnabled control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditScheduler.chkEnabled">
+            <summary>
+            chkEnabled control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditScheduler.plTimeLapse">
+            <summary>
+            plTimeLapse control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditScheduler.txtTimeLapse">
+            <summary>
+            txtTimeLapse control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditScheduler.ddlTimeLapseMeasurement">
+            <summary>
+            ddlTimeLapseMeasurement control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditScheduler.plRetryTimeLapse">
+            <summary>
+            plRetryTimeLapse control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditScheduler.txtRetryTimeLapse">
+            <summary>
+            txtRetryTimeLapse control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditScheduler.ddlRetryTimeLapseMeasurement">
+            <summary>
+            ddlRetryTimeLapseMeasurement control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditScheduler.plRetainHistoryNum">
+            <summary>
+            plRetainHistoryNum control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditScheduler.ddlRetainHistoryNum">
+            <summary>
+            ddlRetainHistoryNum control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditScheduler.cmdUpdate">
+            <summary>
+            cmdUpdate control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditScheduler.cmdRun">
+            <summary>
+            cmdRun control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditScheduler.cmdCancel">
+            <summary>
+            cmdCancel control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Edit.plCategories">
+            <summary>
+            plCategories control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Edit.plFeeds">
+            <summary>
+            plFeeds control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Edit.plCategoryFeeds">
+            <summary>
+            plCategoryFeeds control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Edit.plNews">
+            <summary>
+            plNews control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Edit.plScheduler">
+            <summary>
+            plScheduler control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Edit.plCredentials">
+            <summary>
+            plCredentials control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCategories.lblIntro">
+            <summary>
+            lblIntro control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCategories.pnlSearch">
+            <summary>
+            pnlSearch control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCategories.grdCategories">
+            <summary>
+            grdCategories control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCategories.pnlEdit">
+            <summary>
+            pnlEdit control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCategories.lblCategoryName">
+            <summary>
+            lblCategoryName control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCategories.txtCategoryName">
+            <summary>
+            txtCategoryName control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCategories.hidCategoryId">
+            <summary>
+            hidCategoryId control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCategories.lblCategoryDescription">
+            <summary>
+            lblCategoryDescription control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCategories.txtCategoryDescription">
+            <summary>
+            txtCategoryDescription control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCategories.HiddenField1">
+            <summary>
+            HiddenField1 control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCategories.cmdNew">
+            <summary>
+            cmdNew control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCategories.cmdSave">
+            <summary>
+            cmdSave control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCategories.cmdCancel">
+            <summary>
+            cmdCancel control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCategoryFeeds.lblIntro">
+            <summary>
+            lblIntro control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCategoryFeeds.lblCategories">
+            <summary>
+            lblCategories control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCategoryFeeds.ddlCategories">
+            <summary>
+            ddlCategories control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCategoryFeeds.lblFeeds">
+            <summary>
+            lblFeeds control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditCategoryFeeds.ctlFeeds">
+            <summary>
+            ctlFeeds control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.lblIntro">
+            <summary>
+            lblIntro control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.pnlSearch">
+            <summary>
+            pnlSearch control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.grdFeeds">
+            <summary>
+            grdFeeds control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.pnlEdit">
+            <summary>
+            pnlEdit control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.lblFeedName">
+            <summary>
+            lblFeedName control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.txtFeedName">
+            <summary>
+            txtFeedName control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.valFeedname">
+            <summary>
+            valFeedname control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.hidFeedId">
+            <summary>
+            hidFeedId control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.lblFeedType">
+            <summary>
+            lblFeedType control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.cboFeedType">
+            <summary>
+            cboFeedType control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.pnlFeedUrl">
+            <summary>
+            pnlFeedUrl control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.txtFeedUrl">
+            <summary>
+            txtFeedUrl control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.valFeedUrl">
+            <summary>
+            valFeedUrl control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.lblRetrieveInterval">
+            <summary>
+            lblRetrieveInterval control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.txtRetrieveInterval">
+            <summary>
+            txtRetrieveInterval control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.valRetrieveIntervalValid">
+            <summary>
+            valRetrieveIntervalValid control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.lblTryInterval">
+            <summary>
+            lblTryInterval control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.txtTryInterval">
+            <summary>
+            txtTryInterval control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.valTryIntervalValid">
+            <summary>
+            valTryIntervalValid control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.lblReorgInterval">
+            <summary>
+            lblReorgInterval control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.txtReorgInterval">
+            <summary>
+            txtReorgInterval control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.valReorgIntervalValid">
+            <summary>
+            valReorgIntervalValid control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.lblEnabled">
+            <summary>
+            lblEnabled control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.chkEnabled">
+            <summary>
+            chkEnabled control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.lblLastRetrieve">
+            <summary>
+            lblLastRetrieve control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.txtLastRetrieve">
+            <summary>
+            txtLastRetrieve control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.lblLastTry">
+            <summary>
+            lblLastTry control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.txtLastTry">
+            <summary>
+            txtLastTry control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.pnlCredentials">
+            <summary>
+            pnlCredentials control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.lblUserName">
+            <summary>
+            lblUserName control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.txtUserName">
+            <summary>
+            txtUserName control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.valUserName">
+            <summary>
+            valUserName control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.lblPassword">
+            <summary>
+            lblPassword control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.txtPassword">
+            <summary>
+            txtPassword control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.valPassword">
+            <summary>
+            valPassword control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.cmdNew">
+            <summary>
+            cmdNew control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.cmdSave">
+            <summary>
+            cmdSave control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditFeeds.cmdCancel">
+            <summary>
+            cmdCancel control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.lblIntro">
+            <summary>
+            lblIntro control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.pnlSearch">
+            <summary>
+            pnlSearch control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.lblSearchText">
+            <summary>
+            lblSearchText control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.txtSearch">
+            <summary>
+            txtSearch control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.lblSearchCategory">
+            <summary>
+            lblSearchCategory control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.ddlSearchCategory">
+            <summary>
+            ddlSearchCategory control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.lblSearchDateStart">
+            <summary>
+            lblSearchDateStart control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.dpDateStart">
+            <summary>
+            dpDateStart control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.lblSearchDateEnd">
+            <summary>
+            lblSearchDateEnd control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.dpDateEnd">
+            <summary>
+            dpDateEnd control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.lblSearch">
+            <summary>
+            lblSearch control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.cmdSearch">
+            <summary>
+            cmdSearch control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.grdNews">
+            <summary>
+            grdNews control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.pnlEdit">
+            <summary>
+            pnlEdit control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.lblHide">
+            <summary>
+            lblHide control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.chkHide">
+            <summary>
+            chkHide control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.lblInternal">
+            <summary>
+            lblInternal control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.chkInternal">
+            <summary>
+            chkInternal control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.lblFeed">
+            <summary>
+            lblFeed control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.ddlFeed">
+            <summary>
+            ddlFeed control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.lblTitle">
+            <summary>
+            lblTitle control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.txtTitle">
+            <summary>
+            txtTitle control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.valTitle">
+            <summary>
+            valTitle control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.hidNewsId">
+            <summary>
+            hidNewsId control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.hidGuid">
+            <summary>
+            hidGuid control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.lblPubDate">
+            <summary>
+            lblPubDate control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.dpPubDate">
+            <summary>
+            dpPubDate control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.tpPubDate">
+            <summary>
+            tpPubDate control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.lblAuthor">
+            <summary>
+            lblAuthor control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.lblAuthorName">
+            <summary>
+            lblAuthorName control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.txtAuthorName">
+            <summary>
+            txtAuthorName control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.lblAuthorUrl">
+            <summary>
+            lblAuthorUrl control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.txtAuthorUrl">
+            <summary>
+            txtAuthorUrl control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.lblAuthorEmail">
+            <summary>
+            lblAuthorEmail control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.txtAuthorEmail">
+            <summary>
+            txtAuthorEmail control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.lblAuthorNick">
+            <summary>
+            lblAuthorNick control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.txtAuthorNick">
+            <summary>
+            txtAuthorNick control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.lblLink">
+            <summary>
+            lblLink control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.txtLink">
+            <summary>
+            txtLink control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.lblImage">
+            <summary>
+            lblImage control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.txtImage">
+            <summary>
+            txtImage control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.lblSummary">
+            <summary>
+            lblSummary control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.lblNews">
+            <summary>
+            lblNews control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.cmdNew">
+            <summary>
+            cmdNew control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.cmdSave">
+            <summary>
+            cmdSave control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.EditNews.cmdCancel">
+            <summary>
+            cmdCancel control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="T:Bitboxx.DNNModules.BBNews.Settings">
+            ----------------------------------------------------------------------------- 
+            <summary> 
+            The Settings class manages Module Settings 
+            </summary> 
+            <remarks> 
+            </remarks> 
+            <history> 
+            </history> 
+            ----------------------------------------------------------------------------- 
+        </member>
+        <member name="M:Bitboxx.DNNModules.BBNews.Settings.UpdateSettings">
+            ----------------------------------------------------------------------------- 
+            <summary> 
+            UpdateSettings saves the modified settings to the Database 
+            </summary> 
+            <remarks> 
+            </remarks> 
+            <history> 
+            </history> 
+            ----------------------------------------------------------------------------- 
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.lblView">
+            <summary>
+            lblView control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.rblView">
+            <summary>
+            rblView control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.pnlCategory">
+            <summary>
+            pnlCategory control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.lblCategory">
+            <summary>
+            lblCategory control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.cboCategory">
+            <summary>
+            cboCategory control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.pnlMulti">
+            <summary>
+            pnlMulti control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.lblTopN">
+            <summary>
+            lblTopN control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.txtTopN">
+            <summary>
+            txtTopN control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.RangeValidatorTopN">
+            <summary>
+            RangeValidatorTopN control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.lblStartDate">
+            <summary>
+            lblStartDate control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.dtpStartDate">
+            <summary>
+            dtpStartDate control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.lblEndDate">
+            <summary>
+            lblEndDate control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.dtpEndDate">
+            <summary>
+            dtpEndDate control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.lblShowRss">
+            <summary>
+            lblShowRss control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.rblRss">
+            <summary>
+            rblRss control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.pnlShowTitle">
+            <summary>
+            pnlShowTitle control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.lblShowTitle">
+            <summary>
+            lblShowTitle control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.chkShowTitle">
+            <summary>
+            chkShowTitle control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.pnlSelectPage">
+            <summary>
+            pnlSelectPage control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.lblNewsPage">
+            <summary>
+            lblNewsPage control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.urlSelectNewsPage">
+            <summary>
+            urlSelectNewsPage control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.pnlNewsRows">
+            <summary>
+            pnlNewsRows control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.lblNewsInRow">
+            <summary>
+            lblNewsInRow control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.txtNewsInRow">
+            <summary>
+            txtNewsInRow control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.RangeValidatorNewsInRow">
+            <summary>
+            RangeValidatorNewsInRow control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.lblRowsPerPage">
+            <summary>
+            lblRowsPerPage control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.txtRowsPerPage">
+            <summary>
+            txtRowsPerPage control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.RangeValidatorRowsPerPage">
+            <summary>
+            RangeValidatorRowsPerPage control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.lblSelectTemplate">
+            <summary>
+            lblSelectTemplate control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.selTemplate">
+            <summary>
+            selTemplate control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.pnlMarquee">
+            <summary>
+            pnlMarquee control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.lblMarqueeDirection">
+            <summary>
+            lblMarqueeDirection control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.cboMarqueeDirection">
+            <summary>
+            cboMarqueeDirection control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.lblMarqueeScrollAmount">
+            <summary>
+            lblMarqueeScrollAmount control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.txtMarqueeScrollAmount">
+            <summary>
+            txtMarqueeScrollAmount control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.RangeValidatorMarqueeScrollAmount">
+            <summary>
+            RangeValidatorMarqueeScrollAmount control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.lblMarqueeScrollDelay">
+            <summary>
+            lblMarqueeScrollDelay control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.txtMarqueeScrollDelay">
+            <summary>
+            txtMarqueeScrollDelay control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.RangeValidatorMarqueeScrollDelay">
+            <summary>
+            RangeValidatorMarqueeScrollDelay control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.lblMarqueeAlternate">
+            <summary>
+            lblMarqueeAlternate control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.chkMarqueeAlternate">
+            <summary>
+            chkMarqueeAlternate control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="M:Bitboxx.DNNModules.BBNews.View.ProcessTokens(Bitboxx.DNNModules.BBNews.Components.NewsInfo,System.String)">
+            <summary>
+            Processes the tokens.
+            </summary>
+            <param name="faqItem">The FAQ item.</param>
+            <param name="template">The template.</param>
+            <returns>Answers in which all tokens are processed</returns>
+        </member>
+        <member name="P:Bitboxx.DNNModules.BBNews.View.ModuleActions">
+            ----------------------------------------------------------------------------- 
+            <summary> 
+            Registers the module actions required for interfacing with the portal framework 
+            </summary> 
+            <value></value> 
+            <returns></returns> 
+            <remarks></remarks> 
+            <history> 
+            </history> 
+            ----------------------------------------------------------------------------- 
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.View.MultiView1">
+            <summary>
+            MultiView1 control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.View.ViewTable">
+            <summary>
+            ViewTable control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.View.lstNews">
+            <summary>
+            lstNews control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.View.Pager">
+            <summary>
+            Pager control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.View.ViewMarquee">
+            <summary>
+            ViewMarquee control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.View.ltrMarquee">
+            <summary>
+            ltrMarquee control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.View.ViewDetail">
+            <summary>
+            ViewDetail control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.View.plhDetail">
+            <summary>
+            plhDetail control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="T:DNNtc.PackageProperties">
+            <summary>
+            This class is used to set information about the package
+            </summary>
+        </member>
+        <member name="M:DNNtc.PackageProperties.#ctor(System.String,System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Creates a attribute with the right properties to create a package. Use on View element
+            </summary>
+            <param name="name">The package name</param>
+            <param name="viewOrder">Ordinal number for sorting packages in the manifest</param>
+            <param name="friendlyName">The package friendly name</param>
+            <param name="description">The package description</param>
+            <param name="iconFile">The package iconfile name</param>
+            <param name="ownerName">Name of Owner</param>
+            <param name="ownerOrganization">Organization of owner</param>
+            <param name="ownerUrl">Url of owner</param>
+            <param name="ownerEmail">Email of owner</param>
+            <param name="azureCompatible">Flag for Azure Compatibility</param>
+        </member>
+        <member name="M:DNNtc.PackageProperties.#ctor(System.String)">
+            <summary>
+            Creates a attribute with the right properties to create a package. Use on other elements
+            </summary>
+            <param name="name">The package name</param>
+        </member>
+        <member name="T:DNNtc.ModuleProperties">
+            <summary>
+            This class is used to set information about the module
+            </summary>
+        </member>
+        <member name="M:DNNtc.ModuleProperties.#ctor(System.String,System.String,System.Int32)">
+            <summary>
+            Creates a attribute with the right properties to create a module. Use on View element
+            </summary>
+            <param name="name">The module name.</param>
+            <param name="friendlyname">The module friendlyname.</param>
+            <param name="defaultCacheTime">the module default cachetime.</param>
+        </member>
+        <member name="M:DNNtc.ModuleProperties.#ctor(System.String)">
+            <summary>
+            Creates a attribute with the right properties to create a module. Use on other elements
+            </summary>
+            <param name="name">The module name.</param>
+        </member>
+        <member name="T:DNNtc.ModuleControlProperties">
+            <summary>
+            This class is used to indicate which UserControls should be in the install package
+            </summary>
+        </member>
+        <member name="M:DNNtc.ModuleControlProperties.#ctor(System.String,System.String,DNNtc.ControlType,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Creates a attribute with the right properties to create a control.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="title">The title.</param>
+            <param name="userControlType">type of the user control.</param>
+            <param name="helpUrl">The help URL.</param>
+            <param name="supportsPartialRendering">if set to <c>true</c> [supports partial rendering].</param>
+            <param name="supportsPopUps">if set to <c>true</c> [supports pop ups].</param>
+        </member>
+        <member name="T:DNNtc.ModulePermission">
+            <summary>
+            Module permission attribute
+            </summary>
+        </member>
+        <member name="M:DNNtc.ModulePermission.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Empty Constructor for Intellisense
+            </summary>
+            <param name="Code"></param>
+            <param name="Key"></param>
+            <param name="Name"></param>
+        </member>
+        <member name="T:DNNtc.ComponentType">
+            <summary>
+            Enum for type of component used.
+            </summary>
+        </member>
+        <member name="T:DNNtc.ControlType">
+            <summary>
+            Enum for the type of controls DotNetNuke is using. 
+            </summary>
+        </member>
+        <member name="T:DNNtc.ModuleDependency">
+            <summary>
+            The type of dependency for the DotNetNuke Module
+            </summary>
+        </member>
+    </members>
+</doc>

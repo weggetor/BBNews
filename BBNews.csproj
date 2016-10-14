@@ -124,6 +124,7 @@
     <Compile Include="Components\FeedInfo.cs" />
     <Compile Include="Components\IEBrowser.cs" />
     <Compile Include="Components\NewsInfo.cs" />
+    <Compile Include="Components\RssXmlReader.cs" />
     <Compile Include="Components\SqlDataProvider.cs" />
     <Compile Include="Components\BBNewsController.cs">
       <SubType>ASPXCodeBehind</SubType>

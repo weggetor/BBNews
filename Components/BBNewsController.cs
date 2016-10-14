@@ -273,7 +273,14 @@ namespace Bitboxx.DNNModules.BBNews
                                         .Replace("&ldquo;", "&amp;ldquo;")
                                         .Replace("&rdquo;", "&amp;rdquo;")
                                         .Replace("&rsquo;", "&amp;rsquo;");
-                                    rssReader = System.Xml.XmlReader.Create(new StringReader(xml));
+
+                                    MemoryStream stream = new MemoryStream();
+                                    StreamWriter writer = new StreamWriter(stream);
+                                    writer.Write(xml);
+                                    writer.Flush();
+                                    stream.Position = 0;
+
+                                    rssReader = new RssXmlReader(stream);
                                     feed = SyndicationFeed.Load(rssReader);
                                 }
 						    }
