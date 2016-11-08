@@ -322,8 +322,10 @@ namespace Bitboxx.DNNModules.BBNews
 							news.Pubdate = (pubDate > lastUpdated ? pubDate : lastUpdated);
 							news.Pubdate = (news.Pubdate <= (DateTime)SqlDateTime.MinValue ? DateTime.Now : news.Pubdate);
 							news.Internal = false;
+						    news.MetaData = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(feedItem);
 
-							if (feedItem.Id != null)
+
+                            if (feedItem.Id != null)
 								news.GUID = feedItem.Id;
 							else
 								news.GUID = string.Format("{0:yyyyMMddHHmmss}", news.Pubdate) +

@@ -1,0 +1,10 @@
+﻿<h2>Release Notes bitboxx bbnews  01.02.01</h2>
+<p>bbnews  01.02.01 will work for any DNN version <strong>8.0.0</strong> and up.
+<h3>BUG FIXES</h3>
+<ul>
+</ul>
+<h3>ENHANCEMENTS</h3>
+<ul>
+	<li>Original news (Twitter + RSS) saved complete as json in MetaData field</li>
+	<li>Token for retrieving content from MetaData as [BBNEWS:META|my.property.chain] notation</li>
+</ul>

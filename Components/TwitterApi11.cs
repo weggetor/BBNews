@@ -136,9 +136,11 @@ namespace Bitboxx.DNNModules.BBNews.Components
             // Retrieve the response data and deserialize the JSON data to a list of Tweet objects
             WebResponse response = request.GetResponse();
             string responseData = new StreamReader(response.GetResponseStream()).ReadToEnd();
+
+            List<dynamic> rawTweets = new JavaScriptSerializer().Deserialize<List<dynamic>>(responseData);
             List<Tweet> userTweets = new JavaScriptSerializer().Deserialize<List<Tweet>>(responseData);
 
-            return TweetsToNews(userTweets);
+            return TweetsToNews(userTweets, rawTweets);
         }
 
         public List<NewsInfo> SearchTweets(string searchTerm, int tweetsCount)
@@ -207,14 +209,17 @@ namespace Bitboxx.DNNModules.BBNews.Components
             // Retrieve the response data and deserialize the JSON data to a list of Tweet objects
             WebResponse response = request.GetResponse();
             string responseData = new StreamReader(response.GetResponseStream()).ReadToEnd();
+
+            List<dynamic> rawTweets = new List<dynamic>(new JavaScriptSerializer().Deserialize<dynamic>(responseData)["statuses"]);
             Tweets userTweets = new JavaScriptSerializer().Deserialize<Tweets>(responseData);
 
-            return TweetsToNews(userTweets.statuses);
+            return TweetsToNews(userTweets.statuses,rawTweets);
         }
 
-        private List<NewsInfo> TweetsToNews(List<Tweet> tweets)
+        private List<NewsInfo> TweetsToNews(List<Tweet> tweets, List<dynamic> rawTweets )
         {
             List<NewsInfo> news = new List<NewsInfo>();
+            int j = 0;
             foreach (Tweet userTweet in tweets)
             {
                 NewsInfo tweet = new NewsInfo();
@@ -228,6 +233,7 @@ namespace Bitboxx.DNNModules.BBNews.Components
                 tweet.Internal = false;
                 tweet.Hide = false;
                 tweet.Title = HttpUtility.HtmlDecode(userTweet.text);
+                tweet.MetaData = new JavaScriptSerializer().Serialize(rawTweets[j]);
                 string title = tweet.Title;
 
                 List<string> urls = new List<string>();
@@ -267,6 +273,7 @@ namespace Bitboxx.DNNModules.BBNews.Components
                 }
 
                 news.Add(tweet);
+                j++;
             }
             return (from l in news where l.News != String.Empty orderby l.Pubdate descending select l).ToList();
         }

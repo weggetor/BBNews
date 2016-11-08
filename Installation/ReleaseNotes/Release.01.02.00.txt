@@ -1,0 +1,11 @@
+﻿<h2>Release Notes bitboxx bbnews  01.02.00</h2>
+<p>bbnews  01.02.00 will work for any DNN version <strong>8.0.0</strong> and up.
+<h3>BUG FIXES</h3>
+<ul>
+    <li>Compatibility for DNN 8+</li>
+	<li>Fixed some issues when retrieving Feeds</li>
+</ul>
+<h3>ENHANCEMENTS</h3>
+<ul>
+	<li>Added MetaData field to support XML Data in special News Field</li>
+</ul>

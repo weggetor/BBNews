@@ -327,13 +327,14 @@ namespace Bitboxx.DNNModules.BBNews
 				            		new SqlParameter("GUID", News.GUID),
 				            		new SqlParameter("Pubdate", News.Pubdate),
 				            		new SqlParameter("Hide", News.Hide),
-				            		new SqlParameter("Internal", News.Internal)
-				            	};
+				            		new SqlParameter("Internal", News.Internal),
+                                    new SqlParameter("MetaData", News.MetaData),
+                                };
 
 				string insCmd = "INSERT INTO " + GetFullyQualifiedName("News") +
-				   " (FeedId,Title,Summary,Author,News,Link,Image,GUID,Pubdate,Hide,Internal)" +
+				   " (FeedId,Title,Summary,Author,News,Link,Image,GUID,Pubdate,Hide,Internal,MetaData)" +
 				   " VALUES " +
-				   " (@FeedId,@Title,@Summary,@Author,@News,@Link,@Image,@GUID,@Pubdate,@Hide,@Internal)";
+				   " (@FeedId,@Title,@Summary,@Author,@News,@Link,@Image,@GUID,@Pubdate,@Hide,@Internal,@MetaData)";
 
 				int result = SqlHelper.ExecuteNonQuery(ConnectionString, CommandType.Text, insCmd, SqlParams);
 			}

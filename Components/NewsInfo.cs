@@ -31,6 +31,7 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Services.Tokens;
+using Newtonsoft.Json.Linq;
 
 namespace Bitboxx.DNNModules.BBNews.Components
 {
@@ -222,14 +223,23 @@ namespace Bitboxx.DNNModules.BBNews.Components
 	    {
 	        try
 	        {
-                XmlDocument doc = new XmlDocument();
-                doc.LoadXml(MetaData);
-                XmlNode node = doc.SelectSingleNode("/root/row[translate(key, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')='" + key.ToLower() + "']/val");
-                if (node != null)
-                    return node.InnerText;
-            }
-	        catch (Exception) {}
-            
+                var jsonData = JObject.Parse(MetaData);
+                return jsonData.SelectToken(key, false).ToString();
+	        }
+	        catch (Exception)
+	        {
+	            try
+	            {
+                    XmlDocument doc = new XmlDocument();
+                    doc.LoadXml(MetaData);
+                    XmlNode node = doc.SelectSingleNode("/root/row[translate(key, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')='" + key.ToLower() + "']/val");
+                    if (node != null)
+                        return node.InnerText;
+                }
+                catch (Exception)
+	            {
+	            }
+	        }
             return "";
         }
 
