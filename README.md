@@ -5,7 +5,7 @@
 * * *
 
 ## Whats new ?
-_Version 01.02.00 (25.03.2014):_
+_Version 01.02.00 (15.10.2016):_
 
 *   Compatibility for DNN 8+
 *   Fixed some issues when retrieving Feeds
