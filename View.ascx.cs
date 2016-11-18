@@ -56,9 +56,9 @@ namespace Bitboxx.DNNModules.BBNews
 		#region Private Members
 		
 		private BBNewsController _controller;
-		private bool IsConfigured = false;
-		private int newsInRow = 0;
-		private int rowsPerPage = 0;
+		private bool _isConfigured = false;
+		private int _newsInRow = 0;
+		private int _rowsPerPage = 0;
 		private NewsInfo News = null;
 		private NewsInfo _theNews = null;
 
@@ -199,17 +199,19 @@ namespace Bitboxx.DNNModules.BBNews
 
             if (Settings["NewsInRow"] != null)
 		    {
-		        newsInRow = 1;
-		        rowsPerPage = 5;
-                if (ViewIndex == 0)
+		        _newsInRow = 1;
+		        _rowsPerPage = 5;
+                if (ViewIndex == 0 || ViewIndex == 3)
 		        {
-		            Int32.TryParse((string) Settings["NewsInRow"], out newsInRow);
-		            Int32.TryParse((string) Settings["RowsPerPage"], out rowsPerPage);
-		            lstNews.GroupItemCount = newsInRow;
-		            Pager.PageSize = newsInRow*rowsPerPage;
-		        }
+		            Int32.TryParse((string) Settings["NewsInRow"], out _newsInRow);
+		            Int32.TryParse((string) Settings["RowsPerPage"], out _rowsPerPage);
+		            lstNews.GroupItemCount = _newsInRow;
+                    lstBsNews.GroupItemCount = _newsInRow;
+                    Pager.PageSize = _newsInRow*_rowsPerPage;
+                    PagerBs.PageSize = _newsInRow * _rowsPerPage;
+                }
 		        MultiView1.ActiveViewIndex = ViewIndex;
-		        IsConfigured = true;
+		        _isConfigured = true;
 		    }
 		    else
 		    {
@@ -230,7 +232,12 @@ namespace Bitboxx.DNNModules.BBNews
 		    {
                 string message = Localization.GetString("Configure.Message", this.LocalResourceFile);
                 DotNetNuke.UI.Skins.Skin.AddModuleMessage(this, message + " (Category)", ModuleMessage.ModuleMessageType.YellowWarning);
-                IsConfigured = false;
+                _isConfigured = false;
+		    }
+		    if (!_isConfigured)
+		    {
+		        Pager.Visible = false;
+		        PagerBs.Visible = false;
 		    }
 		}
 		
@@ -238,7 +245,7 @@ namespace Bitboxx.DNNModules.BBNews
 		{
 			try
 			{
-				if (IsConfigured)
+				if (_isConfigured)
 				{
                     if (Request["feed"] == null)
 					{
@@ -247,11 +254,16 @@ namespace Bitboxx.DNNModules.BBNews
 							case 0: // Table
 								lstNews.DataSource = AllNews;
 								lstNews.DataBind();
-								Pager.Visible = (AllNews.Count > rowsPerPage*newsInRow);
+								Pager.Visible = (AllNews.Count > _rowsPerPage*_newsInRow);
 								break;
-							case 1: // Marquee
+                            case 3: // Bootstrap 3
+                                lstBsNews.DataSource = AllNews;
+                                lstBsNews.DataBind();
+                                PagerBs.Visible = (AllNews.Count > _rowsPerPage * _newsInRow);
+                                break;
+                            case 1: // Marquee
 								StringBuilder sb = new StringBuilder();
-								sb.Append("<marquee");
+								sb.Append("<marquee class=\"bbnews-marquee\"");
 
 								if (Settings["MarqueeDirection"] != null)
 								{
@@ -302,6 +314,7 @@ namespace Bitboxx.DNNModules.BBNews
 								sb.Append("</marquee>");
 								ltrMarquee.Text = sb.ToString();
 								Pager.Visible = false;
+						        PagerBs.Visible = false;
 								break;
 							case 2: // Details
 								if (TheNews != null)
@@ -335,9 +348,12 @@ namespace Bitboxx.DNNModules.BBNews
 		{
 			lstNews.DataSource = AllNews;
 			lstNews.DataBind();
-			Pager.Visible = (AllNews.Count > rowsPerPage * newsInRow);
+		    lstBsNews.DataSource = AllNews;
+            lstBsNews.DataBind();
+			Pager.Visible = (AllNews.Count > _rowsPerPage * _newsInRow);
+            PagerBs.Visible = (AllNews.Count > _rowsPerPage * _newsInRow);
 
-		}
+        }
 		protected void Page_Prerender(object sender, EventArgs e)
 		{
 		    if (Request["feed"] != null)
@@ -404,7 +420,7 @@ namespace Bitboxx.DNNModules.BBNews
 		}
 		protected void lstNews_ItemCreated(object sender, ListViewItemEventArgs e)
 		{
-			if (IsConfigured)
+			if (_isConfigured)
 			{
 				ListView lv = sender as ListView;
 				ListViewDataItem item = e.Item as ListViewDataItem;
@@ -413,7 +429,7 @@ namespace Bitboxx.DNNModules.BBNews
 				{
 					HtmlTableCell td = e.Item.FindControl("newsCell") as HtmlTableCell;
 					if (td != null)
-						td.Width = Convert.ToInt32(100 / newsInRow) + " %";
+						td.Width = Convert.ToInt32(100 / _newsInRow) + " %";
 					
 					PlaceHolder ph = e.Item.FindControl("newsPlaceholder") as PlaceHolder;
 					
@@ -434,7 +450,8 @@ namespace Bitboxx.DNNModules.BBNews
 			else
 			{
 				Pager.Visible = false;
-				lstNews.Visible = false;
+                PagerBs.Visible = false;
+                lstNews.Visible = false;
 			}
 		}
 
@@ -446,12 +463,60 @@ namespace Bitboxx.DNNModules.BBNews
 			Response.Redirect(Globals.NavigateURL(TabId, "", "nid=" + newsId.ToString()));
 		}
 
-		#endregion
+        protected void lstBsNews_SelectedIndexChanging(object sender, ListViewSelectEventArgs e)
+        {
+            LinkButton btn = sender as LinkButton;
+            int newsId = (int)lstBsNews.DataKeys[e.NewSelectedIndex].Value;
 
-		
-		#region Helper Methods
-		
-		private Control FindControlRecursive(Control rootControl, string controlID)
+            Response.Redirect(Globals.NavigateURL(TabId, "", "nid=" + newsId.ToString()));
+        }
+
+        protected void lstBsNews_ItemCreated(object sender, ListViewItemEventArgs e)
+        {
+            if (_isConfigured)
+            {
+                ListView lv = sender as ListView;
+                ListViewDataItem item = e.Item as ListViewDataItem;
+                News = item.DataItem as NewsInfo;
+                if (News != null)
+                {
+                    HtmlGenericControl newsDiv = e.Item.FindControl("newsDiv") as HtmlGenericControl;
+
+                    int cols = 12 / _newsInRow;
+                    if (newsDiv != null)
+                        newsDiv.Attributes["class"] = "col-md-" + cols.ToString();
+                    
+                    PlaceHolder ph = e.Item.FindControl("newsPlaceholder") as PlaceHolder;
+
+                    // if newslink is empty we should generate an internal link
+                    if (News.Internal && Settings["NewsPage"] != null)
+                    {
+                        int newsTabId = Convert.ToInt32((string)Settings["NewsPage"]);
+                        News.Link = Globals.NavigateURL(newsTabId, "", "newsid=" + News.NewsId.ToString());
+                    }
+
+                    PortalSecurity ps = new PortalSecurity();
+                    string newstext = ProcessTokens(News, Template);
+                    string newstextSec = ps.InputFilter(newstext, PortalSecurity.FilterFlag.NoScripting);
+                    Control ctrl = ParseControl(newstextSec);
+                    ph.Controls.Add(ctrl);
+                }
+            }
+            else
+            {
+                Pager.Visible = false;
+                PagerBs.Visible = false;
+                lstNews.Visible = false;
+                lstBsNews.Visible = false;
+            }
+        }
+
+        #endregion
+
+
+        #region Helper Methods
+
+        private Control FindControlRecursive(Control rootControl, string controlID)
 		{
 			if (rootControl.ID == controlID)
 				return rootControl;

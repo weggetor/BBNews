@@ -97,13 +97,18 @@ namespace Bitboxx.DNNModules.BBNews
 					if (TabModuleSettings["TemplateName"] != null)
 						selTemplate.Value = (string)TabModuleSettings["TemplateName"];
 
-					if (TabModuleSettings["RowsPerPage"] != null)
-						txtRowsPerPage.Text = (string)TabModuleSettings["RowsPerPage"];
+				    if (TabModuleSettings["RowsPerPage"] != null)
+				        txtRowsPerPage.Text = (string) TabModuleSettings["RowsPerPage"];
+				    else
+				        txtRowsPerPage.Text = "5";
 
-					if (TabModuleSettings["NewsInRow"] != null)
-						txtNewsInRow.Text = (string)TabModuleSettings["NewsInRow"];
+				    if (TabModuleSettings["NewsInRow"] != null)
+				        txtNewsInRow.Text = (string) TabModuleSettings["NewsInRow"];
+				    else
+				        txtNewsInRow.Text = "1";
 
-					if (TabModuleSettings["CategoryID"] != null)
+
+                    if (TabModuleSettings["CategoryID"] != null)
 						cboCategory.SelectedValue = (string)TabModuleSettings["CategoryID"];
 
 					if (TabModuleSettings["TopN"] != null)
@@ -222,7 +227,7 @@ namespace Bitboxx.DNNModules.BBNews
 		{
 			pnlCategory.Visible = true;
 			pnlMulti.Visible = (rblView.SelectedIndex != 2);
-			pnlNewsRows.Visible = (rblView.SelectedIndex == 0);
+			pnlNewsRows.Visible = (rblView.SelectedIndex == 0 || rblView.SelectedIndex == 3);
 			pnlSelectPage.Visible = (rblView.SelectedIndex != 2);
 			pnlShowTitle.Visible = (rblView.SelectedIndex == 2);
 			pnlMarquee.Visible = (rblView.SelectedIndex == 1);

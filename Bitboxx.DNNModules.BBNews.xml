@@ -2003,6 +2003,33 @@
             To modify move field declaration from designer file to code-behind file.
             </remarks>
         </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.View.ViewBootstrap3">
+            <summary>
+            ViewBootstrap3 control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.View.lstBsNews">
+            <summary>
+            lstBsNews control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.View.PagerBs">
+            <summary>
+            PagerBs control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
         <member name="T:DNNtc.PackageProperties">
             <summary>
             This class is used to set information about the package

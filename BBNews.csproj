@@ -149,6 +149,7 @@
     <Compile Include="Controls\TemplateControl.ascx.designer.cs">
       <DependentUpon>TemplateControl.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Controls\unorderedDataPager.cs" />
     <Compile Include="EditCredentials.ascx.cs">
       <DependentUpon>EditCredentials.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

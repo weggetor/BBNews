@@ -271,7 +271,7 @@ namespace Bitboxx.DNNModules.BBNews.Components
                     if (!url.EndsWith("…"))
                         tweet.News = tweet.News.Replace(url, "<a href=\"" + url + "\">" + url + "</a>");
                 }
-
+                tweet.Summary = tweet.News;
                 news.Add(tweet);
                 j++;
             }

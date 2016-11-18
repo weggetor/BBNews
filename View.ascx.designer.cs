@@ -83,5 +83,32 @@ namespace Bitboxx.DNNModules.BBNews {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder plhDetail;
+        
+        /// <summary>
+        /// ViewBootstrap3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View ViewBootstrap3;
+        
+        /// <summary>
+        /// lstBsNews control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListView lstBsNews;
+        
+        /// <summary>
+        /// PagerBs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Bitboxx.DNNModules.BBNews.Controls.UnorderedListDataPager PagerBs;
     }
 }

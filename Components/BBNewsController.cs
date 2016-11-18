@@ -331,7 +331,11 @@ namespace Bitboxx.DNNModules.BBNews
 								news.GUID = string.Format("{0:yyyyMMddHHmmss}", news.Pubdate) +
 									news.Title.ToUpper().Substring(0, Math.Min(news.Title.Length, 20));
 							news.FeedId = feedInfo.FeedId;
-							this.SaveNewsByGuid(news);
+
+                            if (String.IsNullOrEmpty(news.News))
+						        news.News = news.Summary;
+
+                            this.SaveNewsByGuid(news);
 						}
 						feedInfo.LastRetrieve = DateTime.Now;
 						this.SaveFeed(feedInfo);
@@ -377,14 +381,14 @@ namespace Bitboxx.DNNModules.BBNews
 
 			SearchItemInfoCollection SearchItemCollection = new SearchItemInfoCollection();
 
-			//List<BBNewsInfo> colBBNewss = GetBBNewss(ModInfo.ModuleID);
-			//foreach (BBNewsInfo objBBNews in colBBNewss)
-			//{
-			//    SearchItemInfo SearchItem = new SearchItemInfo(ModInfo.ModuleTitle, objBBNews.Content, objBBNews.CreatedByUser, objBBNews.CreatedDate, ModInfo.ModuleID, objBBNews.ItemId.ToString(), objBBNews.Content, "ItemId=" + objBBNews.ItemId.ToString());
-			//    SearchItemCollection.Add(SearchItem);
-			//}
+            List<NewsInfo> colBBNewss = GetNews();
+            foreach (NewsInfo objBBNews in colBBNewss)
+            {
+                SearchItemInfo SearchItem = new SearchItemInfo(ModInfo.ModuleTitle, objBBNews.Summary, -1, objBBNews.Pubdate, ModInfo.ModuleID, objBBNews.NewsId.ToString(), objBBNews.News, "NewsId=" + objBBNews.NewsId.ToString());
+                SearchItemCollection.Add(SearchItem);
+            }
 
-			return SearchItemCollection;
+            return SearchItemCollection;
 
 		}
 

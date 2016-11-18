@@ -12,6 +12,7 @@
 			<asp:ListItem resourcekey="rblView0" Value="0" />
 			<asp:ListItem resourcekey="rblView1" Value="1" />
 			<asp:ListItem resourcekey="rblView2" Value="2" />
+            <asp:ListItem resourcekey="rblView3" Value="3" />
 		</asp:RadioButtonList>
 	</div>
 	<asp:Panel ID="pnlCategory" runat="server">
