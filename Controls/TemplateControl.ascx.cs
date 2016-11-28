@@ -28,6 +28,7 @@ using System.Text;
 using System.Threading;
 using System.Web.UI.WebControls;
 using Bitboxx.DNNModules.BBNews.Components;
+using Bitboxx.DNNModules.BBNews.Models;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework;
 using DotNetNuke.Services.Localization;
@@ -297,12 +298,12 @@ namespace Bitboxx.DNNModules.BBNews.Controls
 
 		private void CreateThumb(string thumbFile)
 		{
-			NewsInfo demoNews = new NewsInfo();
+			News2Info demoNews = new News2Info();
 			demoNews.Author = "Author";
 			demoNews.GUID = Guid.NewGuid().ToString();
 			BBNewsController controller = new BBNewsController();
 			var feeds = controller.GetFeeds(PortalSettings.PortalId);
-			demoNews.FeedId = feeds[0].FeedId;
+			demoNews.FeedID = feeds[0].FeedId;
 			demoNews.Hide = false;
 			demoNews.Image = "http://placehold.it/140x100";
 			demoNews.Internal = false;

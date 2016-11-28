@@ -53,8 +53,16 @@
       <HintPath>..\..\..\..\Dependencies\DNN8.0.0\DotNetNuke.Web.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="DotNetNuke.Web.Client">
+      <HintPath>..\..\..\..\Dependencies\DNN8.0.0\DotNetNuke.Web.Client.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="DotNetNuke.Web.Deprecated">
       <HintPath>..\..\..\..\Dependencies\DNN8.0.0\DotNetNuke.Web.Deprecated.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DotNetNuke.WebUtility">
+      <HintPath>..\..\..\..\Dependencies\DNN8.0.0\DotNetNuke.WebUtility.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.ApplicationBlocks.Data">
@@ -70,6 +78,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web" />
@@ -78,6 +87,11 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Extensions.Design" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Dependencies\DNN8.0.0\System.Web.Http.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -126,14 +140,13 @@
     <Compile Include="Components\BBNewsTokenReplace.cs" />
     <Compile Include="Components\CategoryInfo.cs" />
     <Compile Include="Components\DataProvider.cs" />
+    <Compile Include="Components\DbController.cs" />
     <Compile Include="Components\FeedInfo.cs" />
     <Compile Include="Components\IEBrowser.cs" />
     <Compile Include="Components\NewsInfo.cs" />
     <Compile Include="Components\RssXmlReader.cs" />
     <Compile Include="Components\SqlDataProvider.cs" />
-    <Compile Include="Components\BBNewsController.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
+    <Compile Include="Components\BBNewsController.cs" />
     <Compile Include="Components\TwitterApi11.cs" />
     <Compile Include="Controls\TabSelectControl.ascx.cs">
       <DependentUpon>TabSelectControl.ascx</DependentUpon>
@@ -199,8 +212,16 @@
     <Compile Include="EditNews.ascx.designer.cs">
       <DependentUpon>EditNews.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Generated\Database.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\News2Info.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Installation\Attributes.cs" />
+    <Compile Include="Services\NewsController.cs" />
+    <Compile Include="Services\RouteMapper.cs" />
     <Compile Include="Settings.ascx.cs">
       <DependentUpon>Settings.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -217,6 +238,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="js\app.js" />
+    <Content Include="js\Controller\viewController.js" />
+    <Content Include="js\Services\viewService.js" />
+    <Content Include="js\Templates\view.html" />
     <None Include="App_LocalResources\Settings.ascx.resx">
       <SubType>Designer</SubType>
     </None>
@@ -225,6 +250,17 @@
     </None>
     <None Include="Installation\01.00.05.SqlDataProvider" />
     <None Include="Installation\01.00.07.SqlDataProvider" />
+    <Content Include="Documentation\BBNews_128_3.png" />
+    <Content Include="Documentation\image_11.png" />
+    <Content Include="Documentation\image_16.png" />
+    <Content Include="Documentation\image_21.png" />
+    <Content Include="Documentation\image_26.png" />
+    <Content Include="Documentation\image_31.png" />
+    <Content Include="Documentation\image_39.png" />
+    <Content Include="Documentation\image_40.png" />
+    <Content Include="Documentation\image_41.png" />
+    <Content Include="Documentation\image_42.png" />
+    <Content Include="Documentation\image_8.png" />
     <Content Include="Installation\01.02.00.SqlDataProvider" />
     <None Include="Installation\01.01.00.SqlDataProvider" />
     <None Include="Installation\Project.targets">
@@ -232,7 +268,10 @@
     </None>
     <None Include="Installation\01.00.00.SqlDataProvider" />
     <None Include="Installation\Uninstall.SqlDataProvider" />
+    <Content Include="Models\Generated\PetaPoco.Core.ttinclude" />
+    <Content Include="Models\Generated\PetaPoco.Generator.ttinclude" />
     <None Include="Module.css" />
+    <Content Include="README.md" />
     <None Include="Templates\News\tokens.htp" />
   </ItemGroup>
   <ItemGroup>
@@ -257,6 +296,10 @@
     <Content Include="Installation\ReleaseNotes\Release.01.01.01.txt" />
     <Content Include="Installation\ReleaseNotes\Release.01.01.00.txt" />
     <Content Include="Installation\ReleaseNotes\Release.01.01.03.txt" />
+    <Content Include="Models\Generated\Database.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Database.cs</LastGenOutput>
+    </Content>
     <Content Include="Settings.ascx" />
     <Content Include="Templates\News\default.htm" />
     <Content Include="Templates\News\default.jpg" />
@@ -312,6 +355,10 @@
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

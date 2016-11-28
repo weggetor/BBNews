@@ -21,6 +21,7 @@
 
 #endregion
 
+using Bitboxx.DNNModules.BBNews.Models;
 using DotNetNuke.Services.Tokens;
 
 namespace Bitboxx.DNNModules.BBNews.Components
@@ -33,7 +34,7 @@ namespace Bitboxx.DNNModules.BBNews.Components
 			PropertySource[ObjectLessToken] = new NewsInfo();
 		}
 
-		public BBNewsTokenReplace(NewsInfo news)
+		public BBNewsTokenReplace(News2Info news)
 			: base(Scope.DefaultSettings)
 		{
 			UseObjectLessExpression = true;

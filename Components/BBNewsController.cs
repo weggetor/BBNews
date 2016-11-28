@@ -23,17 +23,22 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlTypes;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.ServiceModel.Syndication;
 using System.Text;
 using System.Xml;
 
 using Bitboxx.DNNModules.BBNews.Components;
-
+using Bitboxx.DNNModules.BBNews.Models;
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
+using DotNetNuke.Data;
 using DotNetNuke.Entities.Modules;
+using DotNetNuke.Entities.Portals;
 using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Services.Search;
 
@@ -54,12 +59,12 @@ namespace Bitboxx.DNNModules.BBNews
 	// [DNNtc.UpgradeEventMessage("01.01.01,04.00.02,04.01.00")]
 	[DNNtc.BusinessControllerClass()]
 	// public class BBNewsController : ISearchable, IPortable
-	public class BBNewsController : PortalModuleBase //, ISearchable, IPortable
-	{
+	public class BBNewsController //: PortalModuleBase , ISearchable, IPortable
+    {
 
-		#region "Public Data Methods"
+        #region "Public Data Methods"
 
-		public List<NewsInfo> GetNews(int PortalId, int CategoryId, int TopN, DateTime StartDate, DateTime EndDate, int pageNum, int pageSize, bool includeHidden, string search)
+        public List<NewsInfo> GetNews(int PortalId, int CategoryId, int TopN, DateTime StartDate, DateTime EndDate, int pageNum, int pageSize, bool includeHidden, string search)
 		{
 			return CBO.FillCollection<NewsInfo>(DataProvider.Instance().GetNews(PortalId, CategoryId, TopN, StartDate, EndDate, pageNum, pageSize,includeHidden,search));
 		}
@@ -347,13 +352,91 @@ namespace Bitboxx.DNNModules.BBNews
 			catch (Exception ex)
 			{
 				EventLogController objEventLog = new EventLogController();
-				objEventLog.AddLog("Feed Read Error (" + feedInfo.FeedId.ToString() + ":" + feedInfo.FeedUrl + ") ", ex.ToString(), PortalSettings, -1, EventLogController.EventLogType.ADMIN_ALERT);
+				objEventLog.AddLog("Feed Read Error (" + feedInfo.FeedId.ToString() + ":" + feedInfo.FeedUrl + ") ", ex.ToString(), PortalSettings.Current, -1, EventLogController.EventLogType.ADMIN_ALERT);
 				feedInfo.LastTry = DateTime.Now;
 				this.SaveFeed(feedInfo);
 			}
 		}
 
-	    public string AddCDATA(string xml)
+        public SyndicationFeed CreateFeed(int categoryId, string feedUrl, string alternateUrl, string appUrl, string newsPage)
+        {
+            Category2Info category = DbController.Instance.GetCategory2(categoryId);
+            if (category != null)
+            {
+
+                SyndicationFeed feed = new SyndicationFeed(category.CategoryName, category.CategoryDescription, new Uri(alternateUrl));
+                // set the feed ID to the main URL of your Website
+                feed.Id = feedUrl;
+                feed.BaseUri = new Uri(feedUrl);
+                feed.Title = new TextSyndicationContent(category.CategoryName);
+                feed.Description = new TextSyndicationContent(category.CategoryDescription);
+                feed.LastUpdatedTime = new DateTimeOffset(DateTime.Now);
+                feed.Generator = "bitboxx bbnews for DNN";
+                if (!string.IsNullOrEmpty(PortalSettings.Current.LogoFile))
+                    feed.ImageUrl = new Uri(appUrl + PortalSettings.Current.HomeDirectory + PortalSettings.Current.LogoFile);
+
+
+                // Add the URL that will link to your published feed when it's done
+                SyndicationLink link = new SyndicationLink(new Uri(feedUrl));
+                link.RelationshipType = "self";
+                link.MediaType = "text/html";
+                link.Title = category.CategoryName;
+                feed.Links.Add(link);
+
+                List<SyndicationItem> items = new List<SyndicationItem>();
+                List<News2Info> catNews = DbController.Instance.GetNews2(PortalSettings.Current.PortalId, categoryId, 10, new DateTime(1900, 1, 1), new DateTime(9999, 12, 31), 1, 10, false, "").ToList();
+                foreach (News2Info news in catNews.OrderByDescending(n => n.Pubdate))
+                {
+                    if (news.Internal && newsPage != null)
+                    {
+                        int newsTabId = Convert.ToInt32(newsPage);
+                        news.Link = Globals.NavigateURL(newsTabId, "", "newsid=" + news.NewsID.ToString());
+                    }
+
+                    try
+                    {
+                        Uri newsLink = new Uri(news.Link);
+                        SyndicationItem item = new SyndicationItem(news.Title, news.Summary, newsLink, news.GUID, news.Pubdate);
+                        item.Id = news.GUID;
+
+                        // Add the URL for the item as a link
+                        link = new SyndicationLink(new Uri(news.Link));
+                        item.Links.Add(link);
+
+                        // Fill some properties for the item
+                        item.LastUpdatedTime = news.Pubdate;
+                        item.PublishDate = news.Pubdate;
+
+                        if (!string.IsNullOrEmpty(news.Image))
+                        {
+                            try
+                            {
+                                Uri imgUrl = new Uri(news.Image);
+                                item.Links.Add(SyndicationLink.CreateMediaEnclosureLink(imgUrl, "image/" + news.Image.Substring(news.Image.LastIndexOf('.') + 1), 0));
+                            }
+                            catch (Exception)
+                            {
+                            }
+                        }
+
+                        // Fill the item content            
+                        TextSyndicationContent content = new TextSyndicationContent(news.Summary, TextSyndicationContentKind.Plaintext);
+                        item.Content = content;
+                        items.Add(item);
+                    }
+                    catch (Exception)
+                    {
+                    }
+
+                }
+                feed.Items = items;
+                return feed;
+            }
+            return null;
+        }
+
+
+        public string AddCDATA(string xml)
 	    {
 	        if (xml.IndexOf("<description>") > -1 && xml.IndexOf("<description><![CDATA[") == -1)
 	        {
@@ -361,22 +444,47 @@ namespace Bitboxx.DNNModules.BBNews
 	        }
 	        return xml;
 	    }
-		
-		#endregion
+
+        public static string GetTemplate(string name, string key)
+        {
+            string templatePath = Path.Combine(Globals.ApplicationMapPath, "Desktopmodules/BBNews/Templates/" + key);
+            ;
+            string currentLanguage = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
+            string portalLangFile = Path.Combine(templatePath, name + "." + currentLanguage + ".Portal-" + PortalSettings.Current.PortalId.ToString() + ".htm");
+            string langFile = Path.Combine(templatePath, name + "." + currentLanguage + ".htm");
+            string portalFile = Path.Combine(templatePath, name + ".Portal-" + PortalSettings.Current.PortalId.ToString() + ".htm");
+            string neutralFile = Path.Combine(templatePath, name + ".htm");
+            string defaultFile = Path.Combine(templatePath, "default.htm");
+
+            if (File.Exists(portalLangFile))
+                return File.ReadAllText(portalLangFile);
+            else if (File.Exists(langFile))
+                return File.ReadAllText(langFile);
+            else if (File.Exists(portalFile))
+                return File.ReadAllText(portalFile);
+            else if (File.Exists(neutralFile))
+                return File.ReadAllText(neutralFile);
+            else if (File.Exists(defaultFile))
+                return File.ReadAllText(defaultFile);
+            return "";
+        }
+
+
+        #endregion
 
         #region "Optional Interfaces"
 
-		/// ----------------------------------------------------------------------------- 
-		/// <summary> 
-		/// GetSearchItems implements the ISearchable Interface 
-		/// </summary> 
-		/// <remarks> 
-		/// </remarks> 
-		/// <param name="ModInfo">The ModuleInfo for the module to be Indexed</param> 
-		/// <history> 
-		/// </history> 
-		/// ----------------------------------------------------------------------------- 
-		public DotNetNuke.Services.Search.SearchItemInfoCollection GetSearchItems(ModuleInfo ModInfo)
+        /// ----------------------------------------------------------------------------- 
+        /// <summary> 
+        /// GetSearchItems implements the ISearchable Interface 
+        /// </summary> 
+        /// <remarks> 
+        /// </remarks> 
+        /// <param name="ModInfo">The ModuleInfo for the module to be Indexed</param> 
+        /// <history> 
+        /// </history> 
+        /// ----------------------------------------------------------------------------- 
+        public DotNetNuke.Services.Search.SearchItemInfoCollection GetSearchItems(ModuleInfo ModInfo)
 		{
 
 			SearchItemInfoCollection SearchItemCollection = new SearchItemInfoCollection();

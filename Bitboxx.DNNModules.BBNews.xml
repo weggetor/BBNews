@@ -4,6 +4,22 @@
         <name>Bitboxx.DNNModules.BBNews</name>
     </assembly>
     <members>
+        <member name="F:Bitboxx.DNNModules.BBNews.Components.DbController._instance">
+            <summary>
+            The _instance
+            </summary>
+        </member>
+        <member name="P:Bitboxx.DNNModules.BBNews.Components.DbController.Instance">
+            <summary>
+            Gets the instance.
+            </summary>
+            <value>The instance.</value>
+        </member>
+        <member name="M:Bitboxx.DNNModules.BBNews.Components.DbController.ClearCache(System.Int32)">
+            <summary>
+            Clears the cache.
+            </summary>
+        </member>
         <member name="T:Bitboxx.DNNModules.BBNews.DataProvider">
             ----------------------------------------------------------------------------- 
             <summary> 
@@ -1520,6 +1536,17 @@
             To modify move field declaration from designer file to code-behind file.
             </remarks>
         </member>
+        <member name="T:Bitboxx.DNNModules.BBNews.Services.Routemapper">
+            <summary>
+            Class Routemapper.
+            </summary>
+        </member>
+        <member name="M:Bitboxx.DNNModules.BBNews.Services.Routemapper.RegisterRoutes(DotNetNuke.Web.Api.IMapRoute)">
+            <summary>
+            Registers the routes.
+            </summary>
+            <param name="routeManager">The route manager.</param>
+        </member>
         <member name="T:Bitboxx.DNNModules.BBNews.Settings">
             ----------------------------------------------------------------------------- 
             <summary> 
@@ -1911,14 +1938,6 @@
             To modify move field declaration from designer file to code-behind file.
             </remarks>
         </member>
-        <member name="M:Bitboxx.DNNModules.BBNews.View.ProcessTokens(Bitboxx.DNNModules.BBNews.Components.NewsInfo,System.String)">
-            <summary>
-            Processes the tokens.
-            </summary>
-            <param name="faqItem">The FAQ item.</param>
-            <param name="template">The template.</param>
-            <returns>Answers in which all tokens are processed</returns>
-        </member>
         <member name="P:Bitboxx.DNNModules.BBNews.View.ModuleActions">
             ----------------------------------------------------------------------------- 
             <summary> 
@@ -1930,105 +1949,6 @@
             <history> 
             </history> 
             ----------------------------------------------------------------------------- 
-        </member>
-        <member name="F:Bitboxx.DNNModules.BBNews.View.MultiView1">
-            <summary>
-            MultiView1 control.
-            </summary>
-            <remarks>
-            Auto-generated field.
-            To modify move field declaration from designer file to code-behind file.
-            </remarks>
-        </member>
-        <member name="F:Bitboxx.DNNModules.BBNews.View.ViewTable">
-            <summary>
-            ViewTable control.
-            </summary>
-            <remarks>
-            Auto-generated field.
-            To modify move field declaration from designer file to code-behind file.
-            </remarks>
-        </member>
-        <member name="F:Bitboxx.DNNModules.BBNews.View.lstNews">
-            <summary>
-            lstNews control.
-            </summary>
-            <remarks>
-            Auto-generated field.
-            To modify move field declaration from designer file to code-behind file.
-            </remarks>
-        </member>
-        <member name="F:Bitboxx.DNNModules.BBNews.View.Pager">
-            <summary>
-            Pager control.
-            </summary>
-            <remarks>
-            Auto-generated field.
-            To modify move field declaration from designer file to code-behind file.
-            </remarks>
-        </member>
-        <member name="F:Bitboxx.DNNModules.BBNews.View.ViewMarquee">
-            <summary>
-            ViewMarquee control.
-            </summary>
-            <remarks>
-            Auto-generated field.
-            To modify move field declaration from designer file to code-behind file.
-            </remarks>
-        </member>
-        <member name="F:Bitboxx.DNNModules.BBNews.View.ltrMarquee">
-            <summary>
-            ltrMarquee control.
-            </summary>
-            <remarks>
-            Auto-generated field.
-            To modify move field declaration from designer file to code-behind file.
-            </remarks>
-        </member>
-        <member name="F:Bitboxx.DNNModules.BBNews.View.ViewDetail">
-            <summary>
-            ViewDetail control.
-            </summary>
-            <remarks>
-            Auto-generated field.
-            To modify move field declaration from designer file to code-behind file.
-            </remarks>
-        </member>
-        <member name="F:Bitboxx.DNNModules.BBNews.View.plhDetail">
-            <summary>
-            plhDetail control.
-            </summary>
-            <remarks>
-            Auto-generated field.
-            To modify move field declaration from designer file to code-behind file.
-            </remarks>
-        </member>
-        <member name="F:Bitboxx.DNNModules.BBNews.View.ViewBootstrap3">
-            <summary>
-            ViewBootstrap3 control.
-            </summary>
-            <remarks>
-            Auto-generated field.
-            To modify move field declaration from designer file to code-behind file.
-            </remarks>
-        </member>
-        <member name="F:Bitboxx.DNNModules.BBNews.View.lstBsNews">
-            <summary>
-            lstBsNews control.
-            </summary>
-            <remarks>
-            Auto-generated field.
-            To modify move field declaration from designer file to code-behind file.
-            </remarks>
-        </member>
-        <member name="F:Bitboxx.DNNModules.BBNews.View.PagerBs">
-            <summary>
-            PagerBs control.
-            </summary>
-            <remarks>
-            Auto-generated field.
-            To modify move field declaration from designer file to code-behind file.
-            </remarks>
         </member>
         <member name="T:DNNtc.PackageProperties">
             <summary>

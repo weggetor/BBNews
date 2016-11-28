@@ -1,73 +1,55 @@
-<%@ Control Language="C#" Inherits="Bitboxx.DNNModules.BBNews.View"  AutoEventWireup="true" CodeBehind="View.ascx.cs" %>
-<%@ Register TagPrefix="bb" Assembly="Bitboxx.DNNModules.BBNews" Namespace="Bitboxx.DNNModules.BBNews.Controls" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="View.ascx.cs" Inherits="Bitboxx.DNNModules.BBNews.View" %>
+<%@ Register TagPrefix="dnn" TagName="JavaScriptLibraryInclude" Src="~/admin/Skins/JavaScriptLibraryInclude.ascx" %>
+<%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.Client.ClientResourceManagement" Assembly="DotNetNuke.Web.Client" %>
+<dnn:JavaScriptLibraryInclude runat="server" Name="AngularJS" />
+<dnn:JavaScriptLibraryInclude runat="server" Name="angular-route" />
+<dnn:JavaScriptLibraryInclude runat="server" Name="angular-sanitize" />
+<dnn:JavaScriptLibraryInclude runat="server" Name="angular-ng-progress"  />
+<dnn:JavaScriptLibraryInclude runat="server" Name="angular-utils-pagination" />
+<dnn:DnnCssInclude runat="server" FilePath="~/Resources/libraries/angular-ng-progress/01_00_07/ngProgress.min.css" />
+<dnn:JavaScriptLibraryInclude runat="server" Name="angular-ng-toast"/>
+<dnn:DnnCssInclude runat="server" FilePath="~/Resources/libraries/angular-ng-toast/01_05_06/ngToast.min.css"/>
+<dnn:DnnCssInclude runat="server" FilePath="~/Resources/libraries/angular-ng-toast/01_05_06/ngToast-animations.min.css"/>
+<dnn:JavaScriptLibraryInclude runat="server" Name="angular-utils-pagination"/>
+<dnn:DnnJsInclude runat="server" FilePath="~/DesktopModules/BBNews/js/app.js" Priority="40"/>
+<dnn:DnnJsInclude runat="server" FilePath="~/DesktopModules/BBNews/js/Services/viewService.js" Priority="100" />
+<dnn:DnnJsInclude runat="server" FilePath="~/DesktopModules/BBNews/js/Controller/viewController.js" Priority="100" />
 
-<asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
-	<asp:View ID="ViewTable" runat="server">
-		<asp:ListView ID="lstNews" runat="server" GroupItemCount="1" 
-			onitemcreated="lstNews_ItemCreated" 
-			onselectedindexchanging="lstNews_SelectedIndexChanging"
-			DataKeyNames="NewsId">
-			<Layouttemplate>
-				<table id="Table1" runat="server" style="width:100%" border="0" cellpadding="0" cellspacing="0">
-					<tr runat="server" id="groupPlaceholder" />
-				</table>
-			</Layouttemplate>
-			<GroupTemplate>
-				<tr id="Tr1" runat="server"><td id="itemPlaceholder" /></tr>
-			</GroupTemplate>
-			<ItemTemplate>
-				<td id="newsCell" runat="server" class="bbNewsCell">
-					 <asp:PlaceHolder ID="newsPlaceHolder" runat="server" />
-				</td>
-			</ItemTemplate>
-		</asp:ListView>
-		<asp:DataPager ID="Pager" runat="server" PageSize="6" CssClass="Normal" PagedControlID="lstNews" onprerender="Pager_PreRender">                       
-			<Fields>
-				<asp:TemplatePagerField>
-					<PagerTemplate>
-						<asp:Label ID="lblPage" runat="server" ResourceKey="lblPage.Text"></asp:Label>
-						<asp:Label runat="server" ID="CurrentPageLabel" Text="<%# Container.TotalRowCount>0 ? (Container.StartRowIndex / Container.PageSize) + 1 : 0 %>" />
-						<asp:Label ID="lblOfPage" runat="server" ResourceKey="lblOfPage.Text"></asp:Label>
-						<asp:Label runat="server" ID="TotalPagesLabel" Text="<%# Math.Ceiling ((double)Container.TotalRowCount / Container.PageSize) %>" />
-						(<asp:Label runat="server" ID="TotalItemsLabel" Text="<%# Container.TotalRowCount%>" /><asp:Label ID="lblProduct" runat="server" ResourceKey="lblProduct.Text"></asp:Label>):
-					</PagerTemplate>
-				</asp:TemplatePagerField>
-				<asp:NumericPagerField ButtonCount="10" />
-			</Fields>
-		</asp:DataPager>
-	</asp:View>
-	<asp:View ID="ViewMarquee" runat="server">
-		<asp:Literal ID="ltrMarquee" runat="server" Mode="PassThrough"/>
-	</asp:View>
-	<asp:View ID="ViewDetail" runat="server">
-		<asp:Placeholder ID="plhDetail" runat="server" />
-	</asp:View>
-     <asp:View ID="ViewBootstrap3" runat="server">
-		<asp:ListView ID="lstBsNews" runat="server" GroupItemCount="1" 
-			onitemcreated="lstBsNews_ItemCreated" 
-			onselectedindexchanging="lstBsNews_SelectedIndexChanging"
-			DataKeyNames="NewsId">
-			<Layouttemplate>
-                <div class="row" runat="server" ID="groupPlaceHolder"></div>
-			</Layouttemplate>
-			<GroupTemplate>
-			    <div class="row">
-			        <div id="itemPlaceHolder" runat="server"/>
-                </div>
-			</GroupTemplate>
-			<ItemTemplate>
-			    <div id="newsDiv" runat="server">
-			        <asp:PlaceHolder ID="newsPlaceHolder" runat="server" />
-			    </div>
-			</ItemTemplate>
-		</asp:ListView>
-		<bb:UnorderedListDataPager ID="PagerBs" runat="server" PageSize="6" class="pagination" PagedControlID="lstBsNews" onprerender="Pager_PreRender" >                       
-			<Fields>
-			    <asp:NextPreviousPagerField  ShowFirstPageButton="true" ShowLastPageButton="false" ShowNextPageButton="false" />
-				<asp:NumericPagerField ButtonCount="10" />
-                <asp:NextPreviousPagerField  ShowPreviousPageButton="false" ShowLastPageButton="true" ShowNextPageButton="true" />
-			</Fields>
-		</bb:UnorderedListDataPager>
-	</asp:View>
-</asp:MultiView>
+<div id="bbNewsApp<%=ModuleId%>">
+    <div ng-view>Loading...</div>
+    <toast></toast>
+</div>
 
+<script>
+    $( document ).ready(function() {
+        var fileref = document.createElement('script');
+        fileref.setAttribute("src", "/Resources/libraries/AngularJS/01_04_05/i18n/angular-locale_<%=System.Threading.Thread.CurrentThread.CurrentCulture.Name%>.js");
+        document.getElementsByTagName("head")[0].appendChild(fileref);
+    });    
+    angular.element(document).ready(function () {
+        function init(appName, moduleId, apiPath) {
+            var sf = $.ServicesFramework(moduleId);
+            var httpHeaders = { "ModuleId": sf.getModuleId(), "TabId": sf.getTabId(), "RequestVerificationToken": sf.getAntiForgeryValue() };
+            var localAppName = appName + moduleId;
+            var application = angular.module(localAppName, [appName])
+                .constant("serviceRoot", sf.getServiceRoot(apiPath))
+                .constant("moduleProperties", '<%=ModuleProperties%>')
+                .config(function($httpProvider,$routeProvider) {
+                    
+                    // Extend $httpProvider with serviceFramework headers
+                    angular.extend($httpProvider.defaults.headers.common, httpHeaders);
+
+                    jsFileLocation = '<%=ControlPath%>js/';
+
+                    $routeProvider
+                        .when("/", {templateUrl: jsFileLocation + "Templates/View.html", controller: "viewController", controllerAs: "vm"})
+                        .otherwise({redirectTo: '/'});
+                });
+            return application;
+        };
+
+        var app = init("bbNewsApp", <%=ModuleId%>, "BBNews");
+        var moduleContainer = document.getElementById("bbNewsApp<%=ModuleId%>");
+        angular.bootstrap(moduleContainer, [app.name]);
+    });
+</script>
