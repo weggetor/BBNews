@@ -59,7 +59,7 @@ namespace Bitboxx.DNNModules.BBNews.Services
                 template = compatibleTemplate.ToString();
 
                 var allNews = DbController.Instance.GetNews(portalId, categoryId, topN, startDate, endDate, pageNum, pageSize, includeHidden, search);
-                int tabId = Convert.ToInt32(ActiveModule.ModuleSettings["NewsPage"]);
+                int tabId = Convert.ToInt32(ActiveModule.TabModuleSettings["NewsPage"]);
                 if (tabId == 0)
                     tabId = ActiveModule.TabID;
                 foreach (NewsInfo news in allNews)

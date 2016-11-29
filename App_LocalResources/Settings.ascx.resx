@@ -292,4 +292,10 @@
   <data name="lblSelectTemplateSingle.Text" xml:space="preserve">
     <value>Template Detail</value>
   </data>
+  <data name="lblSearchEnabled.Help" xml:space="preserve">
+    <value>Check if you want to enable the search input box</value>
+  </data>
+  <data name="lblSearchEnabled.Text" xml:space="preserve">
+    <value>Enable Search</value>
+  </data>
 </root>

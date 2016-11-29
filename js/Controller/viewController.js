@@ -27,6 +27,7 @@
         vm.allNews = [];
         vm.chunkedNews = [];
         vm.totalCount = 0;
+        vm.searchText = "";
         vm.pageSize = parseInt(vm.settings.RowsPerPage) * parseInt(vm.settings.NewsInRow);
         vm.startDate = vm.settings.StartDate ? new Date(vm.settings.StartDate).toISOString().substring(0, 10) : "1753-01-02";
         vm.endDate = vm.settings.EndDate ? new Date(vm.settings.EndDate).toISOString().substring(0, 10) : "9999-12-31";
@@ -58,8 +59,9 @@
         }
 
         vm.getNews = getNews;
+        vm.search = search;
 
-        getNews(vm.PortalId, vm.settings.CategoryID, vm.topN, vm.startDate, vm.endDate, 1, vm.pageSize, vm.includeHidden, "");
+        getNews(vm.PortalId, vm.settings.CategoryID, vm.topN, vm.startDate, vm.endDate, 1, vm.pageSize, vm.includeHidden, vm.searchText);
 
         function getNews(portalId, categoryId, topN, startDate, endDate, pageNum, pageSize, includeHidden, search) {
             ngProgress.color('red');
@@ -91,6 +93,10 @@
             if (record.PubDate)
                 record.PubDate = new Date(record.PubDate);
             return record;
+        }
+
+        function search() {
+            vm.getNews(vm.PortalId, vm.settings.CategoryID, vm.topN, vm.startDate, vm.endDate, 1, vm.pageSize, vm.includeHidden, vm.searchText);
         }
     }
 })();

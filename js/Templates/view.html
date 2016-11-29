@@ -1,6 +1,10 @@
 ﻿<div ng-show="vm.settings.View == '0'">
+    <div class="bbnews-search" ng-show="vm.settings.SearchEnabled">
+        <input type="text" class="bbnews-searchtext" ng-model="vm.searchText" />
+        <button type="button" class="bbnews-searchbutton" ng-click="vm.search()">{{vm.localize.cmdSearch_Text}}</button>
+    </div>
     <table style="table-layout: fixed; width: 100%;">
-        <tr ng-show="vm.chunkedNews.length <= 0"><td style="text-align:center;">Loading new data!!</td></tr>
+        <tr ng-show="vm.news.length <= 0"><td style="text-align: center;">Loading new data!!</td></tr>
         <tr dir-paginate="row in vm.chunkedNews|itemsPerPage:vm.pageSize" total-items="vm.totalCount">
             <td ng-repeat="news in row" ng-style="{'width': 100 / row.length + '%', 'vertical-align':'top'}">
                 <span ng-bind-html="news.Html | trust"></span>
@@ -10,7 +14,7 @@
     <dir-pagination-controls max-size="8"
                              direction-links="true"
                              boundary-links="true"
-                             on-page-change="vm.getNews(vm.PortalId, vm.settings.CategoryID, vm.topN, vm.startDate, vm.endDate, newPageNumber, vm.pageSize, vm.includeHidden, '')">
+                             on-page-change="vm.getNews(vm.PortalId, vm.settings.CategoryID, vm.topN, vm.startDate, vm.endDate, newPageNumber, vm.pageSize, vm.includeHidden, vm.searchText)">
     </dir-pagination-controls>
 </div>
 <div ng-show="vm.settings.View == '1'">
@@ -20,6 +24,10 @@
 </div>
 <div ng-show="vm.settings.View == '2'">Detail</div>
 <div ng-show="vm.settings.View == '3'">
+    <div class="bbnews-search" ng-show="vm.settings.SearchEnabled">
+        <input type="text" class="bbnews-searchtext" ng-model="vm.searchText" />
+        <button type="button" class="bbnews-searchbutton" ng-click="vm.search()">{{vm.localize.cmdSearch_Text}}</button>
+    </div>
     <div class="row" dir-paginate="row in vm.chunkedNews|itemsPerPage:vm.pageSize" total-items="vm.totalCount">
         <div ng-class="vm.bsClass" ng-repeat="news in row">
             <span ng-bind-html="news.Html | trust"></span>
@@ -28,7 +36,7 @@
     <dir-pagination-controls max-size="8"
                              direction-links="true"
                              boundary-links="true"
-                             on-page-change="vm.getNews(vm.PortalId, vm.settings.CategoryID, vm.topN, vm.startDate, vm.endDate, newPageNumber, vm.pageSize, vm.includeHidden, '')">
+                             on-page-change="vm.getNews(vm.PortalId, vm.settings.CategoryID, vm.topN, vm.startDate, vm.endDate, newPageNumber, vm.pageSize, vm.includeHidden, vm.searchText)">
     </dir-pagination-controls>
 </div>
 

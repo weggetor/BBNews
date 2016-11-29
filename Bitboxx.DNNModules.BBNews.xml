@@ -1778,6 +1778,24 @@
             To modify move field declaration from designer file to code-behind file.
             </remarks>
         </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.lblSearchEnabled">
+            <summary>
+            lblSearchEnabled control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.chkSearchEnabled">
+            <summary>
+            chkSearchEnabled control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
         <member name="F:Bitboxx.DNNModules.BBNews.Settings.lblSelectTemplate">
             <summary>
             lblSelectTemplate control.

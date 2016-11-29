@@ -112,6 +112,8 @@ namespace Bitboxx.DNNModules.BBNews
 				    else
 				        txtNewsInRow.Text = "1";
 
+                    if (TabModuleSettings["SearchEnabled"] != null)
+                        chkSearchEnabled.Checked = Convert.ToBoolean((string)TabModuleSettings["SearchEnabled"]);
 
                     if (TabModuleSettings["CategoryID"] != null)
 						cboCategory.SelectedValue = (string)TabModuleSettings["CategoryID"];
@@ -192,7 +194,8 @@ namespace Bitboxx.DNNModules.BBNews
                 objModules.UpdateTabModuleSetting(TabModuleId, "TemplateNameSingle", selTemplateSingle.Value);
                 objModules.UpdateTabModuleSetting(TabModuleId, "NewsInRow", txtNewsInRow.Text);
 				objModules.UpdateTabModuleSetting(TabModuleId, "RowsPerPage", txtRowsPerPage.Text);
-				objModules.UpdateTabModuleSetting(TabModuleId, "TopN", txtTopN.Text);
+                objModules.UpdateTabModuleSetting(TabModuleId, "SearchEnabled", chkSearchEnabled.Checked.ToString());
+                objModules.UpdateTabModuleSetting(TabModuleId, "TopN", txtTopN.Text);
 				if (dtpStartDate.SelectedDate == null)
 					objModules.DeleteTabModuleSetting(TabModuleId, "StartDate");
 				else

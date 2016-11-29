@@ -47,28 +47,32 @@
 	</asp:Panel>
 	<asp:Panel ID="pnlShowTitle" runat="server">
 		<div class="dnnFormItem">
-			<dnn:label id="lblShowTitle" runat="server" controlname="chkShowTitle" suffix=":" />
+			<dnn:Label id="lblShowTitle" runat="server" controlname="chkShowTitle" suffix=":" />
 			<asp:CheckBox ID="chkShowTitle" CssClass="dnnFormInput" runat="server" />
 		</div>
 	</asp:Panel>
 	<asp:Panel ID="pnlSelectPage" runat="server">
 		<div class="dnnFormItem">
-			<dnn:label id="lblNewsPage" runat="server" controlname="urlSelectNewsPage" suffix=":" />
+			<dnn:Label id="lblNewsPage" runat="server" controlname="urlSelectNewsPage" suffix=":" />
 			<bb:TabSelectControl ID="urlSelectNewsPage" runat="server" Width="200" CssClass="dnnFormInput"/>
 		</div>
 	</asp:Panel>
 	<asp:Panel ID="pnlNewsRows" runat="server">
 		<div class="dnnFormItem">
-			<dnn:label id="lblNewsInRow" runat="server" controlname="txtNewsInRow" suffix=":" />
-			<asp:textbox id="txtNewsInRow" CssClass="dnnFormInput dnnNumberInput" columns="2" runat="server" />
+			<dnn:Label id="lblNewsInRow" runat="server" controlname="txtNewsInRow" suffix=":" />
+			<asp:Textbox id="txtNewsInRow" CssClass="dnnFormInput dnnNumberInput" columns="2" runat="server" />
 			<asp:RangeValidator	ID="RangeValidatorNewsInRow"  CssClass="dnnFormMessage dnnFormError" runat="server"  Type="Integer" 
 				ErrorMessage="1..10" MinimumValue="1" MaximumValue="10" ControlToValidate="txtNewsInRow" />&nbsp;
 		</div>
 		<div class="dnnFormItem">
-			<dnn:label id="lblRowsPerPage" runat="server" controlname="txtRowsPerPage" suffix=":" />
-			<asp:textbox id="txtRowsPerPage" CssClass="dnnFormInput dnnNumberInput" columns="2" runat="server" />
+			<dnn:Label id="lblRowsPerPage" runat="server" controlname="txtRowsPerPage" suffix=":" />
+			<asp:Textbox id="txtRowsPerPage" CssClass="dnnFormInput dnnNumberInput" columns="2" runat="server" />
 			<asp:RangeValidator	ID="RangeValidatorRowsPerPage" CssClass="dnnFormMessage dnnFormError" runat="server" Type="Integer" 
 				ErrorMessage="1..99" MinimumValue="1" MaximumValue="99" ControlToValidate="txtRowsPerPage" />
+		</div>
+        <div class="dnnFormItem">
+			<dnn:Label id="lblSearchEnabled" runat="server" controlname="chkSearchEnabled" suffix=":" />
+			<asp:CheckBox id="chkSearchEnabled" CssClass="dnnFormInput" runat="server" />
 		</div>
 	</asp:Panel>
 	<div class="dnnFormItem">

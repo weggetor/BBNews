@@ -59,7 +59,7 @@ namespace Bitboxx.DNNModules.BBNews
 	// [DNNtc.UpgradeEventMessage("01.01.01,04.00.02,04.01.00")]
 	[DNNtc.BusinessControllerClass()]
 	// public class BBNewsController : ISearchable, IPortable
-	public class BBNewsController //: PortalModuleBase , ISearchable, IPortable
+	public class BBNewsController: ISearchable //: PortalModuleBase , ISearchable, IPortable
     {
 
 		#region "Public Helper Methods"
