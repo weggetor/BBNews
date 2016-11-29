@@ -22,8 +22,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.UI.WebControls;
 using Bitboxx.DNNModules.BBNews.Components;
+using Bitboxx.DNNModules.BBNews.Models;
 using DotNetNuke.Common;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Exceptions;
@@ -64,11 +66,11 @@ namespace Bitboxx.DNNModules.BBNews
 			{
 				if (!IsPostBack)
 				{
-					List<CategoryInfo> cats = Controller.GetCategories(PortalId);
+					List<CategoryInfo> cats = DbController.Instance.GetCategories(PortalId).ToList();
 					cboCategory.Items.Add(new ListItem("(Select Category)", "0"));
 					foreach (CategoryInfo cat in cats)
 					{
-						cboCategory.Items.Add(new ListItem(cat.CategoryName, cat.CategoryId.ToString()));
+						cboCategory.Items.Add(new ListItem(cat.CategoryName, cat.CategoryID.ToString()));
 					}
 
 					//cboPubDateFormat.Items.Add(new ListItem(string.Format("{0:d}",DateTime.Now),"d"));
@@ -97,7 +99,10 @@ namespace Bitboxx.DNNModules.BBNews
 					if (TabModuleSettings["TemplateName"] != null)
 						selTemplate.Value = (string)TabModuleSettings["TemplateName"];
 
-				    if (TabModuleSettings["RowsPerPage"] != null)
+                    if (TabModuleSettings["TemplateNameSingle"] != null)
+                        selTemplateSingle.Value = (string)TabModuleSettings["TemplateNameSingle"];
+
+                    if (TabModuleSettings["RowsPerPage"] != null)
 				        txtRowsPerPage.Text = (string) TabModuleSettings["RowsPerPage"];
 				    else
 				        txtRowsPerPage.Text = "5";
@@ -184,7 +189,8 @@ namespace Bitboxx.DNNModules.BBNews
 				objModules.UpdateTabModuleSetting(TabModuleId, "ShowTitle", chkShowTitle.Checked.ToString());
 				objModules.UpdateTabModuleSetting(TabModuleId, "NewsPage", urlSelectNewsPage.Url);
 				objModules.UpdateTabModuleSetting(TabModuleId, "TemplateName", selTemplate.Value);
-				objModules.UpdateTabModuleSetting(TabModuleId, "NewsInRow", txtNewsInRow.Text);
+                objModules.UpdateTabModuleSetting(TabModuleId, "TemplateNameSingle", selTemplateSingle.Value);
+                objModules.UpdateTabModuleSetting(TabModuleId, "NewsInRow", txtNewsInRow.Text);
 				objModules.UpdateTabModuleSetting(TabModuleId, "RowsPerPage", txtRowsPerPage.Text);
 				objModules.UpdateTabModuleSetting(TabModuleId, "TopN", txtTopN.Text);
 				if (dtpStartDate.SelectedDate == null)

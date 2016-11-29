@@ -17,7 +17,7 @@
 	<div class="dnnFormItem">
 		<dnn:Label id="lblFeeds" runat="server" controlname="ctlFeeds" suffix=":" />
 		<dnn:DualListBox id="ctlFeeds" runat="server" 
-		   DataValueField="FeedId" 
+		   DataValueField="FeedID" 
 		   DataTextField="FeedName" 
 		   AddKey="AddFeed" 
 		   RemoveKey="RemoveFeed" 

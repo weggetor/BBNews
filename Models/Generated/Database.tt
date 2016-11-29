@@ -50,7 +50,7 @@
 				startIndex += newValue.Length;
 			}
 
-			tables[i].ClassName = originalString + "2Info";
+			tables[i].ClassName = originalString + "Info";
 		}
     }
 

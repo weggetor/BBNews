@@ -75,6 +75,11 @@
 		<dnn:label id="lblSelectTemplate" runat="server" controlname="selTemplate" suffix=":" />
 		<bb:TemplateControl runat="server" ID="selTemplate" Key="News" CssClass="dnnFormInput" Width="250"/>
 	</div>
+	<div class="dnnFormItem">
+		<dnn:label id="lblSelectTemplateSingle" runat="server" controlname="selTemplateSingle" suffix=":" />
+		<bb:TemplateControl runat="server" ID="selTemplateSingle" Key="News" CssClass="dnnFormInput" Width="250"/>
+	</div>
+
 	<asp:Panel ID="pnlMarquee" runat="server">
 		<div class="dnnFormItem">
 			<dnn:label id="lblMarqueeDirection" runat="server" controlname="cboMarqueeDirection" suffix=":" />

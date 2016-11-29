@@ -24,6 +24,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Web.UI.WebControls;
@@ -238,8 +239,8 @@ namespace Bitboxx.DNNModules.BBNews.Controls
 		{
 			string imageFile = TemplatePath + Value + ".jpg";
 			if (File.Exists(imageFile))
-				imgThumb.ImageUrl = AppRelativeTemplateSourceDirectory + @"../Templates/" + Key + "/" + Value + ".jpg";
-			else
+				imgThumb.ImageUrl = AppRelativeTemplateSourceDirectory + @"../Templates/" + Key + "/" + Value + ".jpg" + "?id=" + Guid.NewGuid().ToString(); // No caching !
+            else
 				imgThumb.ImageUrl = "";
 		}
 		private void LoadTemplateFile()
@@ -298,12 +299,12 @@ namespace Bitboxx.DNNModules.BBNews.Controls
 
 		private void CreateThumb(string thumbFile)
 		{
-			News2Info demoNews = new News2Info();
+			NewsInfo demoNews = new NewsInfo();
 			demoNews.Author = "Author";
 			demoNews.GUID = Guid.NewGuid().ToString();
 			BBNewsController controller = new BBNewsController();
-			var feeds = controller.GetFeeds(PortalSettings.PortalId);
-			demoNews.FeedID = feeds[0].FeedId;
+			var feed = DbController.Instance.GetFeeds(PortalSettings.PortalId).FirstOrDefault();
+			demoNews.FeedID = feed.FeedID;
 			demoNews.Hide = false;
 			demoNews.Image = "http://placehold.it/140x100";
 			demoNews.Internal = false;

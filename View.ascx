@@ -14,6 +14,7 @@
 <dnn:DnnJsInclude runat="server" FilePath="~/DesktopModules/BBNews/js/app.js" Priority="40"/>
 <dnn:DnnJsInclude runat="server" FilePath="~/DesktopModules/BBNews/js/Services/viewService.js" Priority="100" />
 <dnn:DnnJsInclude runat="server" FilePath="~/DesktopModules/BBNews/js/Controller/viewController.js" Priority="100" />
+<dnn:DnnJsInclude runat="server" FilePath="~/DesktopModules/BBNews/js/Controller/detailController.js" Priority="100" />
 
 <div id="bbNewsApp<%=ModuleId%>">
     <div ng-view>Loading...</div>
@@ -43,6 +44,7 @@
 
                     $routeProvider
                         .when("/", {templateUrl: jsFileLocation + "Templates/View.html", controller: "viewController", controllerAs: "vm"})
+                        .when("/newsid/:id", {templateUrl: jsFileLocation + "Templates/Detail.html", controller: "detailController", controllerAs: "vm"})
                         .otherwise({redirectTo: '/'});
                 });
             return application;

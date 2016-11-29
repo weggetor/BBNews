@@ -283,6 +283,24 @@ namespace Bitboxx.DNNModules.BBNews {
         protected global::Bitboxx.DNNModules.BBNews.Controls.TemplateControl selTemplate;
         
         /// <summary>
+        /// lblSelectTemplateSingle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UserControl lblSelectTemplateSingle;
+        
+        /// <summary>
+        /// selTemplateSingle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Bitboxx.DNNModules.BBNews.Controls.TemplateControl selTemplateSingle;
+        
+        /// <summary>
         /// pnlMarquee control.
         /// </summary>
         /// <remarks>

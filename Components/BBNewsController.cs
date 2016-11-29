@@ -62,100 +62,11 @@ namespace Bitboxx.DNNModules.BBNews
 	public class BBNewsController //: PortalModuleBase , ISearchable, IPortable
     {
 
-        #region "Public Data Methods"
-
-        public List<NewsInfo> GetNews(int PortalId, int CategoryId, int TopN, DateTime StartDate, DateTime EndDate, int pageNum, int pageSize, bool includeHidden, string search)
-		{
-			return CBO.FillCollection<NewsInfo>(DataProvider.Instance().GetNews(PortalId, CategoryId, TopN, StartDate, EndDate, pageNum, pageSize,includeHidden,search));
-		}
-		public int GetNewsCount(int PortalID, int CategoryID, int TopN, DateTime StartDate, DateTime EndDate, bool includeHidden, String search)
-		{
-			return DataProvider.Instance().GetNewsCount(PortalID, CategoryID, TopN, StartDate, EndDate, includeHidden, search);
-		}
-		public NewsInfo GetNews(int NewsId)
-		{
-			return CBO.FillObject<NewsInfo>(DataProvider.Instance().GetNews(NewsId));
-		}
-		public List<NewsInfo> GetNews()
-		{
-			return CBO.FillCollection<NewsInfo>(DataProvider.Instance().GetNews());
-		}
-		public void ReorgNews(int FeedId)
-		{
-			DataProvider.Instance().ReorgNews(FeedId);
-		}
-		public void SaveNewsByGuid(NewsInfo News)
-		{
-			DataProvider.Instance().SaveNewsByGuid(News);
-		}
-		public void SaveNewsById(NewsInfo News)
-		{
-			DataProvider.Instance().SaveNewsById(News);
-		}
-		public void DeleteNews(int NewsId)
-		{
-			DataProvider.Instance().DeleteNews(NewsId);
-		}
-		public CategoryInfo GetCategory(int categoryId)
-		{
-			return CBO.FillObject<CategoryInfo>(DataProvider.Instance().GetCategory(categoryId));
-		}
-		public List<CategoryInfo> GetCategories()
-		{
-			return CBO.FillCollection<CategoryInfo>(DataProvider.Instance().GetCategories());
-		}
-		public List<CategoryInfo> GetCategories(int PortalId)
-		{
-			return CBO.FillCollection<CategoryInfo>(DataProvider.Instance().GetCategories(PortalId));
-		}
-		public void SaveCategory(CategoryInfo Category)
-		{
-			DataProvider.Instance().SaveCategory(Category);
-		}
-		public void DeleteCategory(int CategoryId)
-		{
-			DataProvider.Instance().DeleteCategory(CategoryId);
-		}
-
-		public FeedInfo GetFeed(int FeedId)
-		{
-			return CBO.FillObject<FeedInfo>(DataProvider.Instance().GetFeed(FeedId));
-		}
-		public List<FeedInfo> GetFeeds()
-		{
-			return CBO.FillCollection<FeedInfo>(DataProvider.Instance().GetFeeds());
-		}
-		public List<FeedInfo> GetFeeds(int portalId)
-		{
-			return CBO.FillCollection<FeedInfo>(DataProvider.Instance().GetFeeds(portalId));
-		}
-		public void SaveFeed(FeedInfo Feed)
-		{
-			DataProvider.Instance().SaveFeed(Feed);
-		}
-		public void DeleteFeed(int FeedId)
-		{
-			DataProvider.Instance().DeleteFeed(FeedId);
-		}
-		public List<FeedInfo>  GetCategoryFeeds(int categoryId)
-		{
-			return CBO.FillCollection<FeedInfo>(DataProvider.Instance().GetCategoryFeeds(categoryId));
-		}
-		public void AddCategoryFeed(int categoryId, int feedId)
-		{
-			DataProvider.Instance().AddCategoryFeed(categoryId, feedId);
-		}
-		public void RemoveCategoryFeed(int categoryId, int feedId)
-		{
-			DataProvider.Instance().RemoveCategoryFeed(categoryId, feedId);
-		}
-		#endregion
-
 		#region "Public Helper Methods"
 		
 		public void ReadFeed(int FeedId)
 		{
-			FeedInfo feedInfo = this.GetFeed(FeedId);
+			FeedInfo feedInfo = DbController.Instance.GetFeed(FeedId);
 			string ProxyServer = DotNetNuke.Entities.Host.Host.ProxyServer;
 			string ProxyPort = DotNetNuke.Entities.Host.Host.ProxyPort.ToString();
 			string ProxyUserName = DotNetNuke.Entities.Host.Host.ProxyUsername;
@@ -184,11 +95,11 @@ namespace Bitboxx.DNNModules.BBNews
                         List<NewsInfo> newsListSearch = twitterApiSearch.SearchTweets(feedInfo.FeedUrl, 20);
                         foreach (NewsInfo news in newsListSearch)
                         {
-                            news.FeedId = FeedId;
-                            this.SaveNewsByGuid(news);
+                            news.FeedID = FeedId;
+                            DbController.Instance.SaveNewsByGuid(news);
                         }
                         feedInfo.LastRetrieve = DateTime.Now;
-                        this.SaveFeed(feedInfo);
+                        DbController.Instance.SaveFeed(feedInfo);
                         break;
 
                     case 3: // Twitter Timeline
@@ -197,11 +108,11 @@ namespace Bitboxx.DNNModules.BBNews
                         List<NewsInfo> newsListUser = twitterApiUser.GetUserTimeLine(feedInfo.FeedUrl, 20);
                         foreach (NewsInfo news in newsListUser)
                         {
-                            news.FeedId = FeedId;
-                            this.SaveNewsByGuid(news);
+                            news.FeedID = FeedId;
+                            DbController.Instance.SaveNewsByGuid(news);
                         }
                         feedInfo.LastRetrieve = DateTime.Now;
-                        this.SaveFeed(feedInfo);
+                        DbController.Instance.SaveFeed(feedInfo);
                         break;
 
 					case 2: // RSS
@@ -335,15 +246,15 @@ namespace Bitboxx.DNNModules.BBNews
 							else
 								news.GUID = string.Format("{0:yyyyMMddHHmmss}", news.Pubdate) +
 									news.Title.ToUpper().Substring(0, Math.Min(news.Title.Length, 20));
-							news.FeedId = feedInfo.FeedId;
+							news.FeedID = feedInfo.FeedID;
 
                             if (String.IsNullOrEmpty(news.News))
 						        news.News = news.Summary;
 
-                            this.SaveNewsByGuid(news);
+                            DbController.Instance.SaveNewsByGuid(news);
 						}
 						feedInfo.LastRetrieve = DateTime.Now;
-						this.SaveFeed(feedInfo);
+                        DbController.Instance.SaveFeed(feedInfo);
 						break;
 
 					
@@ -352,15 +263,15 @@ namespace Bitboxx.DNNModules.BBNews
 			catch (Exception ex)
 			{
 				EventLogController objEventLog = new EventLogController();
-				objEventLog.AddLog("Feed Read Error (" + feedInfo.FeedId.ToString() + ":" + feedInfo.FeedUrl + ") ", ex.ToString(), PortalSettings.Current, -1, EventLogController.EventLogType.ADMIN_ALERT);
+				objEventLog.AddLog("Feed Read Error (" + feedInfo.FeedID.ToString() + ":" + feedInfo.FeedUrl + ") ", ex.ToString(), PortalSettings.Current, -1, EventLogController.EventLogType.ADMIN_ALERT);
 				feedInfo.LastTry = DateTime.Now;
-				this.SaveFeed(feedInfo);
+                DbController.Instance.SaveFeed(feedInfo);
 			}
 		}
 
         public SyndicationFeed CreateFeed(int categoryId, string feedUrl, string alternateUrl, string appUrl, string newsPage)
         {
-            Category2Info category = DbController.Instance.GetCategory2(categoryId);
+            CategoryInfo category = DbController.Instance.GetCategory(categoryId);
             if (category != null)
             {
 
@@ -384,8 +295,8 @@ namespace Bitboxx.DNNModules.BBNews
                 feed.Links.Add(link);
 
                 List<SyndicationItem> items = new List<SyndicationItem>();
-                List<News2Info> catNews = DbController.Instance.GetNews2(PortalSettings.Current.PortalId, categoryId, 10, new DateTime(1900, 1, 1), new DateTime(9999, 12, 31), 1, 10, false, "").ToList();
-                foreach (News2Info news in catNews.OrderByDescending(n => n.Pubdate))
+                List<NewsInfo> catNews = DbController.Instance.GetNews(PortalSettings.Current.PortalId, categoryId, 10, new DateTime(1900, 1, 1), new DateTime(9999, 12, 31), 1, 10, false, "").ToList();
+                foreach (NewsInfo news in catNews.OrderByDescending(n => n.Pubdate))
                 {
                     if (news.Internal && newsPage != null)
                     {
@@ -489,10 +400,10 @@ namespace Bitboxx.DNNModules.BBNews
 
 			SearchItemInfoCollection SearchItemCollection = new SearchItemInfoCollection();
 
-            List<NewsInfo> colBBNewss = GetNews();
+            List<NewsInfo> colBBNewss = DbController.Instance.GetNews().ToList();
             foreach (NewsInfo objBBNews in colBBNewss)
             {
-                SearchItemInfo SearchItem = new SearchItemInfo(ModInfo.ModuleTitle, objBBNews.Summary, -1, objBBNews.Pubdate, ModInfo.ModuleID, objBBNews.NewsId.ToString(), objBBNews.News, "NewsId=" + objBBNews.NewsId.ToString());
+                SearchItemInfo SearchItem = new SearchItemInfo(ModInfo.ModuleTitle, objBBNews.Summary, -1, objBBNews.Pubdate, ModInfo.ModuleID, objBBNews.NewsID.ToString(), objBBNews.News, "NewsId=" + objBBNews.NewsID.ToString());
                 SearchItemCollection.Add(SearchItem);
             }
 

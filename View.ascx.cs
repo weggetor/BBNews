@@ -163,7 +163,7 @@ namespace Bitboxx.DNNModules.BBNews
                 if ((ctl != null))
                 {
                     int newsId = Convert.ToInt32(Request["newsid"] ?? "-1");
-                    News2Info news = DbController.Instance.GetNews2(newsId);
+                    NewsInfo news = DbController.Instance.GetNews(newsId);
 
                     if (Settings["ShowTitle"] != null && Convert.ToBoolean((string) Settings["ShowTitle"]) && news != null)
                     {

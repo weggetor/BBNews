@@ -14,7 +14,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Bitboxx.DNNModules.BBNews.Models
 {
-    public partial class News2Info:IPropertyAccess
+    public partial class NewsInfo:IPropertyAccess
     {
         [ReadOnlyColumn]
         public string Html { get; set; }
@@ -24,7 +24,7 @@ namespace Bitboxx.DNNModules.BBNews.Models
         public string GetProperty(string propertyName, string format, CultureInfo formatProvider, UserInfo accessingUser, Scope accessLevel, ref bool propertyNotFound)
         {
             string[] authInfo;
-            Feed2Info feed = DbController.Instance.GetFeed2(FeedID);
+            FeedInfo feed = DbController.Instance.GetFeed(FeedID);
             propertyNotFound = false;
             switch (propertyName.ToLower())
             {
@@ -123,6 +123,7 @@ namespace Bitboxx.DNNModules.BBNews.Models
             }
         }
 
+        [ReadOnlyColumn]
         public CacheLevel Cacheability
         {
             get { return CacheLevel.fullyCacheable; }

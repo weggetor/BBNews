@@ -24,7 +24,7 @@ namespace Bitboxx.DNNModules.BBNews.Models
     [TableName("BBNews_Category")]
     [PrimaryKey("CategoryID")]
 	[Cacheable("BBNews_Category", CacheItemPriority.Normal, 20)]
-    public partial class Category2Info     
+    public partial class CategoryInfo     
 	{
         public int CategoryID { get; set; }
         public int? PortalID { get; set; }
@@ -35,7 +35,7 @@ namespace Bitboxx.DNNModules.BBNews.Models
 
     [TableName("BBNews_CategoryFeeds")]
 	[Cacheable("BBNews_CategoryFeeds", CacheItemPriority.Normal, 20)]
-    public partial class CategoryFeeds2Info     
+    public partial class CategoryFeedsInfo     
 	{
         public int? CategoryID { get; set; }
         public int? FeedID { get; set; }
@@ -45,7 +45,7 @@ namespace Bitboxx.DNNModules.BBNews.Models
     [TableName("BBNews_Feed")]
     [PrimaryKey("FeedID")]
 	[Cacheable("BBNews_Feed", CacheItemPriority.Normal, 20)]
-    public partial class Feed2Info     
+    public partial class FeedInfo     
 	{
         public int FeedID { get; set; }
         public string FeedUrl { get; set; }
@@ -66,7 +66,7 @@ namespace Bitboxx.DNNModules.BBNews.Models
     [TableName("BBNews_News")]
     [PrimaryKey("NewsID")]
 	[Cacheable("BBNews_News", CacheItemPriority.Normal, 20)]
-    public partial class News2Info     
+    public partial class NewsInfo     
 	{
         public int NewsID { get; set; }
         public int FeedID { get; set; }

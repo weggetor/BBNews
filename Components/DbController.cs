@@ -44,7 +44,7 @@ namespace Bitboxx.DNNModules.BBNews.Components
                 try
                 {
                     // Setup fictitious item to delete (just to clear the scope cache)
-                    DeleteNews2(-1);
+                    DeleteNews(-1);
                 }
                 catch { } // ignore
             }
@@ -52,7 +52,7 @@ namespace Bitboxx.DNNModules.BBNews.Components
 
         #region News
 
-        public IEnumerable<News2Info> GetNews2(int portalId, int categoryId, int topN, DateTime startDate, DateTime endDate, int pageNum, int pageSize, bool includeHidden, string search)
+        public IEnumerable<NewsInfo> GetNews(int portalId, int categoryId, int topN, DateTime startDate, DateTime endDate, int pageNum, int pageSize, bool includeHidden, string search)
         {
             // parameters: PortalId = 0, CategoryId = 1, StartDate = 2 , EndDate = 3,
 
@@ -133,11 +133,11 @@ namespace Bitboxx.DNNModules.BBNews.Components
 
                     sqlCmd += " WHERE " + where + " ORDER BY Pubdate DESC, News.NewsId DESC";
                 }
-                return context.ExecuteQuery<News2Info>(CommandType.Text, sqlCmd, portalId, categoryId, startDate, endDate);
+                return context.ExecuteQuery<NewsInfo>(CommandType.Text, sqlCmd, portalId, categoryId, startDate, endDate);
             }
         }
 
-        public int GetNewsCount2(int portalId, int categoryId, int topN, DateTime startDate, DateTime endDate, bool includeHidden, String search)
+        public int GetNewsCount(int portalId, int categoryId, int topN, DateTime startDate, DateTime endDate, bool includeHidden, String search)
         {
             using (IDataContext context = DataContext.Instance())
             {
@@ -176,29 +176,29 @@ namespace Bitboxx.DNNModules.BBNews.Components
             }
         }
 
-        public News2Info GetNews2(int newsId)
+        public NewsInfo GetNews(int newsId)
         {
             using (IDataContext context = DataContext.Instance())
             {
                 string sqlCmd = "SELECT * FROM {databaseOwner}[{objectQualifier}" + Prefix + "News] WHERE NewsId = @0";
-                return context.ExecuteSingleOrDefault<News2Info>(CommandType.Text, sqlCmd, newsId);
+                return context.ExecuteSingleOrDefault<NewsInfo>(CommandType.Text, sqlCmd, newsId);
             }
         }
 
-        public IEnumerable<News2Info> GetNews2()
+        public IEnumerable<NewsInfo> GetNews()
         {
             using (IDataContext context = DataContext.Instance())
             {
                 string sqlCmd = "SELECT * FROM {databaseOwner}[{objectQualifier}" + Prefix + "News]";
-                return context.ExecuteQuery<News2Info>(CommandType.Text, sqlCmd);
+                return context.ExecuteQuery<NewsInfo>(CommandType.Text, sqlCmd);
             }
         }
 
-        public void ReorgNews2(int feedId)
+        public void ReorgNews(int feedId)
         {
             using (IDataContext context = DataContext.Instance())
             {
-                Feed2Info feed = GetFeed2(feedId);
+                FeedInfo feed = GetFeed(feedId);
 
                 int reorgInterval = feed.ReorgInterval;
 
@@ -214,12 +214,12 @@ namespace Bitboxx.DNNModules.BBNews.Components
             }
         }
 
-        public void SaveNewsByGuid2(News2Info news)
+        public void SaveNewsByGuid(NewsInfo news)
         {
             using (IDataContext context = DataContext.Instance())
             {
-                var repository = context.GetRepository<News2Info>();
-                News2Info dbNews = repository.Find("WHERE GUID = @0 AND FeedId = @1", news.GUID, news.FeedID).FirstOrDefault();
+                var repository = context.GetRepository<NewsInfo>();
+                NewsInfo dbNews = repository.Find("WHERE GUID = @0 AND FeedId = @1", news.GUID, news.FeedID).FirstOrDefault();
                 if (dbNews == null)
                 {
                     repository.Insert(news);
@@ -228,12 +228,12 @@ namespace Bitboxx.DNNModules.BBNews.Components
             }
         }
 
-        public void SaveNewsById2(News2Info news)
+        public void SaveNewsById(NewsInfo news)
         {
             using (IDataContext context = DataContext.Instance())
             {
-                var repository = context.GetRepository<News2Info>();
-                News2Info dbNews = repository.Find("NewsId = @0", news.NewsID).FirstOrDefault();
+                var repository = context.GetRepository<NewsInfo>();
+                NewsInfo dbNews = repository.Find("WHERE NewsId = @0", news.NewsID).FirstOrDefault();
                 if (dbNews == null)
                 {
                     repository.Insert(news);
@@ -246,12 +246,12 @@ namespace Bitboxx.DNNModules.BBNews.Components
             }
         }
 
-        public void DeleteNews2(int newsId)
+        public void DeleteNews(int newsId)
         {
             using (IDataContext context = DataContext.Instance())
             {
-                var repository = context.GetRepository<News2Info>();
-                News2Info dbNews = new News2Info() { NewsID = newsId };
+                var repository = context.GetRepository<NewsInfo>();
+                NewsInfo dbNews = new NewsInfo() { NewsID = newsId };
                 repository.Delete(dbNews);
             }
         }
@@ -260,39 +260,39 @@ namespace Bitboxx.DNNModules.BBNews.Components
 
         #region Category
 
-        public Category2Info GetCategory2(int categoryId)
+        public CategoryInfo GetCategory(int categoryId)
         {
             using (IDataContext context = DataContext.Instance())
             {
-                var repository = context.GetRepository<Category2Info>();
+                var repository = context.GetRepository<CategoryInfo>();
                 return repository.GetById(categoryId);
             }
         }
 
-        public IEnumerable<Category2Info> GetCategories2()
+        public IEnumerable<CategoryInfo> GetCategories()
         {
             using (IDataContext context = DataContext.Instance())
             {
-                var repository = context.GetRepository<Category2Info>();
+                var repository = context.GetRepository<CategoryInfo>();
                 return repository.Get();
             }
         }
 
-        public IEnumerable<Category2Info> GetCategories2(int portalId)
+        public IEnumerable<CategoryInfo> GetCategories(int portalId)
         {
             using (IDataContext context = DataContext.Instance())
             {
-                var repository = context.GetRepository<Category2Info>();
+                var repository = context.GetRepository<CategoryInfo>();
                 return repository.Find("WHERE PortalId = @0", portalId);
             }
         }
 
-        public void SaveCategory2(Category2Info category)
+        public void SaveCategory(CategoryInfo category)
         {
             using (IDataContext context = DataContext.Instance())
             {
-                var repository = context.GetRepository<Category2Info>();
-                Category2Info dbCat = GetCategory2(category.CategoryID);
+                var repository = context.GetRepository<CategoryInfo>();
+                CategoryInfo dbCat = GetCategory(category.CategoryID);
                 if (dbCat == null)
                 {
                     repository.Insert(category);
@@ -304,12 +304,12 @@ namespace Bitboxx.DNNModules.BBNews.Components
             }
         }
 
-        public void DeleteCategory2(int categoryId)
+        public void DeleteCategory(int categoryId)
         {
             using (IDataContext context = DataContext.Instance())
             {
-                var repository = context.GetRepository<Category2Info>();
-                Category2Info dbCat = new Category2Info() { CategoryID = categoryId };
+                var repository = context.GetRepository<CategoryInfo>();
+                CategoryInfo dbCat = new CategoryInfo() { CategoryID = categoryId };
                 repository.Delete(dbCat);
             }
         }
@@ -318,51 +318,51 @@ namespace Bitboxx.DNNModules.BBNews.Components
 
         #region Feed
 
-        public Feed2Info GetFeed2(int feedId)
+        public FeedInfo GetFeed(int feedId)
         {
             using (IDataContext context = DataContext.Instance())
             {
-                var repository = context.GetRepository<Feed2Info>();
+                var repository = context.GetRepository<FeedInfo>();
                 return repository.GetById(feedId);
             }
         }
 
-        public IEnumerable<Feed2Info> GetFeeds2()
+        public IEnumerable<FeedInfo> GetFeeds()
         {
             using (IDataContext context = DataContext.Instance())
             {
-                var repository = context.GetRepository<Feed2Info>();
+                var repository = context.GetRepository<FeedInfo>();
                 return repository.Get();
             }
         }
 
-        public IEnumerable<Feed2Info> GetFeeds2(int portalId)
+        public IEnumerable<FeedInfo> GetFeeds(int portalId)
         {
             using (IDataContext context = DataContext.Instance())
             {
-                var repository = context.GetRepository<Feed2Info>();
+                var repository = context.GetRepository<FeedInfo>();
                 return repository.Find("WHERE PortalId = @0", portalId);
             }
         }
 
-        public IEnumerable<Feed2Info> GetCategoryFeeds2(int categoryId)
+        public IEnumerable<FeedInfo> GetCategoryFeeds(int categoryId)
         {
             using (IDataContext context = DataContext.Instance())
             {
-                string sqlCmd = "SELECT feeds.* " +
-                                " FROM {databaseOwner}[{objectQualifier}" + Prefix + "Feed] feeds " +
+                string sqlCmd = "SELECT f.* " +
+                                " FROM {databaseOwner}[{objectQualifier}" + Prefix + "Feed] f " +
                                 " INNER JOIN {databaseOwner}[{objectQualifier}" + Prefix + "CategoryFeeds] cf on f.FeedId = cf.FeedId" +
                                 " WHERE cf.CategoryId = @0";
-                return context.ExecuteQuery<Feed2Info>(CommandType.Text, sqlCmd, categoryId);
+                return context.ExecuteQuery<FeedInfo>(CommandType.Text, sqlCmd, categoryId);
             }
         }
 
-        public void SaveFeed2(Feed2Info feed)
+        public void SaveFeed(FeedInfo feed)
         {
             using (IDataContext context = DataContext.Instance())
             {
-                var repository = context.GetRepository<Feed2Info>();
-                Feed2Info dbFeed = GetFeed2(feed.FeedID);
+                var repository = context.GetRepository<FeedInfo>();
+                FeedInfo dbFeed = GetFeed(feed.FeedID);
                 if (dbFeed == null)
                 {
                     repository.Insert(feed);
@@ -374,12 +374,12 @@ namespace Bitboxx.DNNModules.BBNews.Components
             }
         }
 
-        public void DeleteFeed2(int feedId)
+        public void DeleteFeed(int feedId)
         {
             using (IDataContext context = DataContext.Instance())
             {
-                var repository = context.GetRepository<Feed2Info>();
-                Feed2Info dbFeed = new Feed2Info() { FeedID = feedId };
+                var repository = context.GetRepository<FeedInfo>();
+                FeedInfo dbFeed = new FeedInfo() { FeedID = feedId };
                 repository.Delete(dbFeed);
             }
         }
@@ -388,19 +388,19 @@ namespace Bitboxx.DNNModules.BBNews.Components
 
         #region CategoryFeeds
 
-        public void AddCategoryFeed2(int categoryId, int feedId)
+        public void AddCategoryFeed(int categoryId, int feedId)
         {
-            RemoveCategoryFeed2(categoryId, feedId);
+            RemoveCategoryFeed(categoryId, feedId);
 
             using (IDataContext context = DataContext.Instance())
             {
-                var repository = context.GetRepository<CategoryFeeds2Info>();
-                CategoryFeeds2Info catFeed = new CategoryFeeds2Info() { CategoryID = categoryId, FeedID = feedId };
-                repository.Insert(catFeed);
+                string sqlCmd = "INSERT INTO {databaseOwner}[{objectQualifier}" + Prefix + "CategoryFeeds]" +
+                                " (CategoryID,FeedID) VALUES (@0,@1)";
+                context.Execute(CommandType.Text, sqlCmd,categoryId,feedId);
             }
         }
 
-        public void RemoveCategoryFeed2(int categoryId, int feedId)
+        public void RemoveCategoryFeed(int categoryId, int feedId)
         {
             using (IDataContext context = DataContext.Instance())
             {

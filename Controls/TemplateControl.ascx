@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="TemplateControl.ascx.cs" Inherits="Bitboxx.DNNModules.BBNews.Controls.TemplateControl" %>
-<%@ Register TagPrefix="dnn" TagName="Label" Src="~/controls/LabelControl.ascx" %>
-<asp:Panel runat="server" ID="pnlView">
+<%@ Register TagPrefix="dnn" TagName="Label" Src="/controls/LabelControl.ascx" %>
+<asp:Panel runat="server" ID="pnlView" style="display:inline-block;">
    <div>
    		<asp:DropDownList runat="server" ID="ddlTemplate" onselectedindexchanged="ddlTemplate_SelectedIndexChanged"  AutoPostBack="True" />
    </div>

@@ -138,14 +138,9 @@
   <ItemGroup>
     <Compile Include="Components\BBNewsScheduler.cs" />
     <Compile Include="Components\BBNewsTokenReplace.cs" />
-    <Compile Include="Components\CategoryInfo.cs" />
-    <Compile Include="Components\DataProvider.cs" />
     <Compile Include="Components\DbController.cs" />
-    <Compile Include="Components\FeedInfo.cs" />
     <Compile Include="Components\IEBrowser.cs" />
-    <Compile Include="Components\NewsInfo.cs" />
     <Compile Include="Components\RssXmlReader.cs" />
-    <Compile Include="Components\SqlDataProvider.cs" />
     <Compile Include="Components\BBNewsController.cs" />
     <Compile Include="Components\TwitterApi11.cs" />
     <Compile Include="Controls\TabSelectControl.ascx.cs">
@@ -217,7 +212,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\News2Info.cs" />
+    <Compile Include="Models\NewsInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Installation\Attributes.cs" />
     <Compile Include="Services\NewsController.cs" />
@@ -239,8 +234,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="js\app.js" />
+    <Content Include="js\Controller\detailController.js" />
     <Content Include="js\Controller\viewController.js" />
     <Content Include="js\Services\viewService.js" />
+    <Content Include="js\Templates\detail.html" />
     <Content Include="js\Templates\view.html" />
     <None Include="App_LocalResources\Settings.ascx.resx">
       <SubType>Designer</SubType>

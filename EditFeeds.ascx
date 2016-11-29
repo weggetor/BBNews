@@ -33,6 +33,7 @@
 							<asp:ImageButton ID="ImageButton1" runat="server" CommandName="Delete" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"FeedId") %>' IconKey="Delete"/>
 						</itemtemplate>
 					</asp:templatecolumn>
+                    <asp:BoundColumn  DataField="FeedID" HeaderText="FeedID" />
 					<asp:BoundColumn  DataField="FeedName" HeaderText="FeedName" />
 					<asp:TemplateColumn  HeaderText="FeedType">
 						<itemtemplate>

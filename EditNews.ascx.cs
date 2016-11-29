@@ -23,9 +23,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Bitboxx.DNNModules.BBNews.Components;
+using Bitboxx.DNNModules.BBNews.Models;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Localization;
 
@@ -74,7 +76,7 @@ namespace Bitboxx.DNNModules.BBNews
 		{
 			Localization.LocalizeDataGrid(ref grdNews, this.LocalResourceFile);
 
-			List<FeedInfo> allFeeds = Controller.GetFeeds(PortalId);
+			List<FeedInfo> allFeeds = DbController.Instance.GetFeeds(PortalId).ToList();
 			ddlFeed.Items.Clear();
 			ddlFeed.Items.Add(new ListItem(Localization.GetString("SelectFeed.Text", this.LocalResourceFile), "-1"));
 			ddlFeed.AppendDataBoundItems = true;
@@ -86,7 +88,7 @@ namespace Bitboxx.DNNModules.BBNews
 
 			if (!IsPostBack)
 			{
-				List<CategoryInfo> allCats = Controller.GetCategories(PortalId);
+				List<CategoryInfo> allCats = DbController.Instance.GetCategories(PortalId).ToList();
 				ddlSearchCategory.Items.Clear();
 				ddlSearchCategory.Items.Add(new ListItem(Localization.GetString("SelectCategory.Text", this.LocalResourceFile), "-1"));
 				ddlSearchCategory.AppendDataBoundItems = true;
@@ -107,9 +109,9 @@ namespace Bitboxx.DNNModules.BBNews
 			{
 				case "Edit":
 				    newsId = Convert.ToInt32(e.CommandArgument);
-					NewsInfo news = Controller.GetNews(newsId);
+					NewsInfo news = DbController.Instance.GetNews(newsId);
 					txtTitle.Text = news.Title;
-					ddlFeed.SelectedValue = news.FeedId.ToString();
+					ddlFeed.SelectedValue = news.FeedID.ToString();
 					txtSummary.Text = news.Summary;
 					txtNews.Text = news.News;
 					chkHide.Checked = news.Hide;
@@ -143,14 +145,14 @@ namespace Bitboxx.DNNModules.BBNews
 					
 					txtImage.Text = news.Image;
 					txtLink.Text = news.Link;
-					hidNewsId.Value = news.NewsId.ToString();
+					hidNewsId.Value = news.NewsID.ToString();
 					hidGuid.Value = news.GUID;
 				    InEditMode = true;
 				    break;
 
 				case "Delete":
 				    newsId = Convert.ToInt32(e.CommandArgument);
-				    Controller.DeleteNews(newsId);
+                    DbController.Instance.DeleteNews(newsId);
 				    InEditMode = false;
 					BindData();
 				    break;
@@ -200,10 +202,10 @@ namespace Bitboxx.DNNModules.BBNews
 		protected void cmdSave_Click(object sender, EventArgs e)
 		{
 			NewsInfo news = new NewsInfo();
-			news.NewsId = Convert.ToInt32(hidNewsId.Value);
+			news.NewsID = Convert.ToInt32(hidNewsId.Value);
 			news.GUID = hidGuid.Value;
 			news.Title = txtTitle.Text;
-			news.FeedId = Convert.ToInt32(ddlFeed.SelectedValue);
+			news.FeedID = Convert.ToInt32(ddlFeed.SelectedValue);
 			news.Summary = txtSummary.Text;
 			news.News = txtNews.Text;
 			news.Hide = chkHide.Checked;
@@ -223,7 +225,7 @@ namespace Bitboxx.DNNModules.BBNews
 			news.Internal = chkInternal.Checked;
 			news.Author = txtAuthorName.Text + "|" + txtAuthorUrl.Text + "|" + txtAuthorEmail.Text + "|" + txtAuthorNick.Text;
 
-			Controller.SaveNewsById(news);
+            DbController.Instance.SaveNewsById(news);
 			InEditMode = false;
 			BindData();
 		}
@@ -251,17 +253,17 @@ namespace Bitboxx.DNNModules.BBNews
 			int pageNum = grdNews.CurrentPageIndex +1;
 			int pageSize = 15;
 
-			List<NewsInfo> allNews = Controller.GetNews(PortalId, categoryId, topN, startDate, endDate, pageNum, pageSize,true,search);
+			List<NewsInfo> allNews = DbController.Instance.GetNews(PortalId, categoryId, topN, startDate, endDate, pageNum, pageSize,true,search).ToList();
 			grdNews.DataSource = allNews;
 			grdNews.PageSize = pageSize;
-			grdNews.VirtualItemCount = Controller.GetNewsCount(PortalId, categoryId, topN, startDate, endDate,true,search);
+			grdNews.VirtualItemCount = DbController.Instance.GetNewsCount(PortalId, categoryId, topN, startDate, endDate,true,search);
 			grdNews.DataBind();
 		}
 
 
 		public string GetFeedName(object feedId)
 		{
-			FeedInfo feed = Controller.GetFeed((int) feedId);
+			FeedInfo feed = DbController.Instance.GetFeed((int) feedId);
 			return feed.FeedName;
 		}
 

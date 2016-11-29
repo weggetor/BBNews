@@ -286,4 +286,10 @@
   <data name="rblView3.Text" xml:space="preserve">
     <value>Bootstrap 3</value>
   </data>
+  <data name="lblSelectTemplateSingle.Help" xml:space="preserve">
+    <value>Select a display template from the news details or create a new one (only for internal news needed)</value>
+  </data>
+  <data name="lblSelectTemplateSingle.Text" xml:space="preserve">
+    <value>Template Detail</value>
+  </data>
 </root>

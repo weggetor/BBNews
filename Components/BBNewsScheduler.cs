@@ -23,7 +23,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Bitboxx.DNNModules.BBNews.Components;
+using Bitboxx.DNNModules.BBNews.Models;
 using DotNetNuke.Services.Scheduling;
 
 namespace Bitboxx.DNNModules.BBNews
@@ -47,15 +49,15 @@ namespace Bitboxx.DNNModules.BBNews
 
 				// Check feeds
 				this.ScheduleHistoryItem.AddLogNote("Start Task: <br/ >");
-				List<FeedInfo> AllFeeds = controller.GetFeeds();
+				List<FeedInfo> AllFeeds = DbController.Instance.GetFeeds().ToList();
 				foreach (FeedInfo feed in AllFeeds)
 				{
-					if (feed.Enabled && (feed.LastRetrieve == DateTime.MinValue ||
+					if (feed.Enabled && (feed.LastRetrieve == null ||
 						(DateTime.Now > feed.LastRetrieve + new TimeSpan(0, 0, feed.RetrieveInterval) &&
 						 DateTime.Now > feed.LastTry + new TimeSpan(0, 0, feed.TryInterval))))
-						controller.ReadFeed(feed.FeedId);
-					
-					controller.ReorgNews(feed.FeedId);
+						controller.ReadFeed(feed.FeedID);
+
+                    DbController.Instance.ReorgNews(feed.FeedID);
 				}
 
 				//Note

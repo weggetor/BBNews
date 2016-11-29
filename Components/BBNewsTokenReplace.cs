@@ -34,7 +34,7 @@ namespace Bitboxx.DNNModules.BBNews.Components
 			PropertySource[ObjectLessToken] = new NewsInfo();
 		}
 
-		public BBNewsTokenReplace(News2Info news)
+		public BBNewsTokenReplace(NewsInfo news)
 			: base(Scope.DefaultSettings)
 		{
 			UseObjectLessExpression = true;

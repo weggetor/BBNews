@@ -23,9 +23,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Bitboxx.DNNModules.BBNews.Components;
+using Bitboxx.DNNModules.BBNews.Models;
 using DotNetNuke.Entities.Icons;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Localization;
@@ -71,9 +73,9 @@ namespace Bitboxx.DNNModules.BBNews
 		void ctlFeeds_RemoveAllButtonClick(object sender, EventArgs e)
 		{
 			int categoryId = Convert.ToInt32(ddlCategories.SelectedValue);
-			foreach (FeedInfo feed in Controller.GetCategoryFeeds(categoryId))
+			foreach (FeedInfo feed in DbController.Instance.GetCategoryFeeds(categoryId))
 			{
-				Controller.RemoveCategoryFeed(categoryId, feed.FeedId);
+                DbController.Instance.RemoveCategoryFeed(categoryId, feed.FeedID);
 			}
 			BindData();
 		}
@@ -86,7 +88,7 @@ namespace Bitboxx.DNNModules.BBNews
 				foreach (string feed in e.Items)
 				{
 					int feedId = Convert.ToInt32(feed);
-					Controller.RemoveCategoryFeed(categoryId, feedId);
+                    DbController.Instance.RemoveCategoryFeed(categoryId, feedId);
 				}
 			}
 			BindData();
@@ -95,9 +97,9 @@ namespace Bitboxx.DNNModules.BBNews
 		void ctlFeeds_AddAllButtonClick(object sender, EventArgs e)
 		{
 			int categoryId = Convert.ToInt32(ddlCategories.SelectedValue);
-			foreach (FeedInfo feed in Controller.GetFeeds(PortalId))
+			foreach (FeedInfo feed in DbController.Instance.GetFeeds(PortalId))
 			{
-				Controller.AddCategoryFeed(categoryId, feed.FeedId);
+                DbController.Instance.AddCategoryFeed(categoryId, feed.FeedID);
 			}
 			BindData();
 		}
@@ -110,7 +112,7 @@ namespace Bitboxx.DNNModules.BBNews
 				foreach (string feed in e.Items)
 				{
 					int feedId = Convert.ToInt32(feed);
-					Controller.AddCategoryFeed(categoryId, feedId);
+                    DbController.Instance.AddCategoryFeed(categoryId, feedId);
 				}
 			}
 			BindData();
@@ -123,7 +125,7 @@ namespace Bitboxx.DNNModules.BBNews
 
 		public void FillDdlCategories()
 		{
-			List<CategoryInfo> allCats = Controller.GetCategories(PortalId);
+			List<CategoryInfo> allCats = DbController.Instance.GetCategories(PortalId).ToList();
 			ddlCategories.Items.Clear();
 			ddlCategories.Items.Add(new ListItem(Localization.GetString("Select.Text", this.LocalResourceFile), "0"));
 			ddlCategories.AppendDataBoundItems = true;
@@ -142,14 +144,14 @@ namespace Bitboxx.DNNModules.BBNews
 				int categoryId = Convert.ToInt32(ddlCategories.SelectedValue);
 				if (categoryId > 0)
 				{
-					List<FeedInfo> allFeeds = Controller.GetFeeds(PortalId);
-					List<FeedInfo> selFeeds = Controller.GetCategoryFeeds(categoryId);
+					List<FeedInfo> allFeeds = DbController.Instance.GetFeeds(PortalId).ToList();
+					List<FeedInfo> selFeeds = DbController.Instance.GetCategoryFeeds(categoryId).ToList();
 
 					foreach (FeedInfo feed in selFeeds)
 					{
 						foreach (FeedInfo allFeed in allFeeds)
 						{
-							if (allFeed.FeedId == feed.FeedId)
+							if (allFeed.FeedID == feed.FeedID)
 							{
 								allFeeds.Remove(allFeed);
 								break;

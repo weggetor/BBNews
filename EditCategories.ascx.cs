@@ -23,9 +23,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Bitboxx.DNNModules.BBNews.Components;
+using Bitboxx.DNNModules.BBNews.Models;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Localization;
 
@@ -82,15 +84,15 @@ namespace Bitboxx.DNNModules.BBNews
 			switch (e.CommandName)
 			{
 				case "Edit":
-					CategoryInfo cat = Controller.GetCategory(categoryId);
+					CategoryInfo cat = DbController.Instance.GetCategory(categoryId);
 					txtCategoryName.Text = cat.CategoryName;
 					txtCategoryDescription.Text = cat.CategoryDescription;
-					hidCategoryId.Value = cat.CategoryId.ToString();
+					hidCategoryId.Value = cat.CategoryID.ToString();
 					InEditMode = true;
 					BindData();
 					break;
 				case "Delete":
-					Controller.DeleteCategory(categoryId);
+                    DbController.Instance.DeleteCategory(categoryId);
 					InEditMode = false;
 					BindData();
 					break;
@@ -109,11 +111,11 @@ namespace Bitboxx.DNNModules.BBNews
 		protected void cmdSave_Click(object sender, EventArgs e)
 		{
 			CategoryInfo cat = new CategoryInfo();
-			cat.CategoryId = Convert.ToInt32(hidCategoryId.Value);
+			cat.CategoryID = Convert.ToInt32(hidCategoryId.Value);
 			cat.CategoryName = txtCategoryName.Text;
 			cat.CategoryDescription = txtCategoryDescription.Text;
-			cat.PortalId = PortalId;
-			Controller.SaveCategory(cat);
+			cat.PortalID = PortalId;
+            DbController.Instance.SaveCategory(cat);
 			BindData();
 			InEditMode = false;
 			EditCategoryFeeds ctrl = (EditCategoryFeeds)((Edit) MainControl).SubModules["EditCategoryFeeds"];
@@ -128,7 +130,7 @@ namespace Bitboxx.DNNModules.BBNews
 
 		private void BindData()
 		{
-			List<CategoryInfo> allcats = Controller.GetCategories(PortalId);
+			List<CategoryInfo> allcats = DbController.Instance.GetCategories(PortalId).ToList();
 			grdCategories.DataSource = allcats;
 			grdCategories.DataBind();
 		}

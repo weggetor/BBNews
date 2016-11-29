@@ -31,6 +31,7 @@ using System.Web.Script.Serialization;
 using System.Xml.Linq;
 using System.Net;
 using System.IO;
+using Bitboxx.DNNModules.BBNews.Models;
 
 namespace Bitboxx.DNNModules.BBNews.Components
 {

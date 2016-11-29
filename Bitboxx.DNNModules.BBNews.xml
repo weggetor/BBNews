@@ -20,49 +20,6 @@
             Clears the cache.
             </summary>
         </member>
-        <member name="T:Bitboxx.DNNModules.BBNews.DataProvider">
-            ----------------------------------------------------------------------------- 
-            <summary> 
-            An abstract class for the data access layer 
-            </summary> 
-            <remarks> 
-            </remarks> 
-            <history> 
-            </history> 
-            ----------------------------------------------------------------------------- 
-        </member>
-        <member name="F:Bitboxx.DNNModules.BBNews.DataProvider.objProvider">
-            <summary>
-            singleton reference to the instantiated object 
-            </summary>
-        </member>
-        <member name="M:Bitboxx.DNNModules.BBNews.DataProvider.#cctor">
-            <summary>
-            constructor
-            </summary>
-        </member>
-        <member name="M:Bitboxx.DNNModules.BBNews.DataProvider.CreateProvider">
-            <summary>
-            dynamically create provider 
-            </summary>
-        </member>
-        <member name="M:Bitboxx.DNNModules.BBNews.DataProvider.Instance">
-            <summary>
-            return the provider 
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:Bitboxx.DNNModules.BBNews.SqlDataProvider">
-            ----------------------------------------------------------------------------- 
-            <summary> 
-            SQL Server implementation of the abstract DataProvider class 
-            </summary> 
-            <remarks> 
-            </remarks> 
-            <history> 
-            </history> 
-            ----------------------------------------------------------------------------- 
-        </member>
         <member name="T:Bitboxx.DNNModules.BBNews.BBNewsController">
             ----------------------------------------------------------------------------- 
             <summary> 
@@ -1833,6 +1790,24 @@
         <member name="F:Bitboxx.DNNModules.BBNews.Settings.selTemplate">
             <summary>
             selTemplate control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.lblSelectTemplateSingle">
+            <summary>
+            lblSelectTemplateSingle control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:Bitboxx.DNNModules.BBNews.Settings.selTemplateSingle">
+            <summary>
+            selTemplateSingle control.
             </summary>
             <remarks>
             Auto-generated field.

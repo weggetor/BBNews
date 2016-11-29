@@ -22,9 +22,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Bitboxx.DNNModules.BBNews.Components;
+using Bitboxx.DNNModules.BBNews.Models;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.UI.Skins.Controls;
@@ -84,7 +87,7 @@ namespace Bitboxx.DNNModules.BBNews
 			switch (e.CommandName)
 			{
 				case "Edit":
-					FeedInfo feed = Controller.GetFeed(feedId);
+					FeedInfo feed = DbController.Instance.GetFeed(feedId);
 					txtFeedName.Text = feed.FeedName;
 					txtFeedUrl.Text = feed.FeedUrl;
 					cboFeedType.SelectedValue = feed.FeedType.ToString();
@@ -94,9 +97,9 @@ namespace Bitboxx.DNNModules.BBNews
 					txtTryInterval.Text = feed.TryInterval.ToString();
 					txtReorgInterval.Text = feed.ReorgInterval.ToString();
 					chkEnabled.Checked = feed.Enabled;
-					txtUserName.Text = feed.UserName;
+					txtUserName.Text = feed.Username;
 					txtPassword.Text = feed.Password;
-					hidFeedId.Value = feed.FeedId.ToString();
+					hidFeedId.Value = feed.FeedID.ToString();
 					InEditMode = true;
 					BindData();
 					cboFeedType_SelectedIndexChanged(this, new EventArgs());
@@ -104,7 +107,7 @@ namespace Bitboxx.DNNModules.BBNews
 				case "Delete":
 					try
 					{
-						Controller.DeleteFeed(feedId);
+                        DbController.Instance.DeleteFeed(feedId);
 					}
 					catch (Exception)
 					{
@@ -139,18 +142,22 @@ namespace Bitboxx.DNNModules.BBNews
 		protected void cmdSave_Click(object sender, EventArgs e)
 		{
 			FeedInfo feed = new FeedInfo();
-			feed.FeedId = Convert.ToInt32(hidFeedId.Value);
+			feed.FeedID = Convert.ToInt32(hidFeedId.Value);
 			feed.FeedName = txtFeedName.Text;
 			feed.FeedUrl = txtFeedUrl.Text;
 			feed.FeedType = Convert.ToInt32(cboFeedType.SelectedValue);
-			
-			DateTime time = new DateTime();
-			DateTime.TryParse(txtLastRetrieve.Text, out time);
-			feed.LastRetrieve = time;
-			
-			time = new DateTime();
-			DateTime.TryParse(txtLastTry.Text, out time);
-			feed.LastTry = time;
+
+		    DateTime time;
+		    if (DateTime.TryParse(txtLastRetrieve.Text, out time))
+		    {
+		        feed.LastRetrieve = time;
+		        feed.LastTry = time;
+		    }
+		    else
+		    {
+                feed.LastRetrieve = null;
+                feed.LastTry = null;
+            }
 			
 			feed.RetrieveInterval = Convert.ToInt32(txtRetrieveInterval.Text);
 			feed.TryInterval = Convert.ToInt32(txtTryInterval.Text);
@@ -158,10 +165,12 @@ namespace Bitboxx.DNNModules.BBNews
 			
 			feed.Enabled = chkEnabled.Checked;
 			feed.PortalId = PortalId;
-			feed.UserName = txtUserName.Text;
+			feed.Username = txtUserName.Text;
 			feed.Password = txtPassword.Text;
-			
-			Controller.SaveFeed(feed);
+
+            
+
+            DbController.Instance.SaveFeed(feed);
 			BindData();
 			InEditMode = false;
 		}
@@ -200,7 +209,7 @@ namespace Bitboxx.DNNModules.BBNews
 
 		private void BindData()
 		{
-			List<FeedInfo> allFeeds = Controller.GetFeeds(PortalId);
+			List<FeedInfo> allFeeds = DbController.Instance.GetFeeds(PortalId).ToList();
 			grdFeeds.DataSource = allFeeds;
 			grdFeeds.DataBind();
 		}
