@@ -58,6 +58,5 @@
     <ul class="dnnActions dnnClear">
     	<li><asp:LinkButton id="cmdUpdate" runat="server" CssClass="dnnPrimaryAction" resourcekey="cmdUpdate" OnClick="OnUpdateClick"/></li>
         <li><asp:LinkButton id="cmdRun" runat="server" CssClass="dnnSecondaryAction" resourcekey="cmdRun" Causesvalidation="False" OnClick="OnRunClick" /></li>
-        <li><asp:HyperLink id="cmdCancel" runat="server" CssClass="dnnSecondaryAction" resourcekey="cmdCancel" /></li>
     </ul>
 </div>

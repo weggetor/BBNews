@@ -93,42 +93,36 @@ namespace Bitboxx.DNNModules.BBNews
 			    _scheduleItem.ScheduleID = SchedulingProvider.Instance().AddSchedule(_scheduleItem);
 			}
 
-			txtFriendlyName.Text = _scheduleItem.FriendlyName;
-			chkEnabled.Checked = _scheduleItem.Enabled;
-			if (_scheduleItem.TimeLapse == Null.NullInteger)
-			{
-				txtTimeLapse.Text = "";
-			}
-			else
-			{
-				txtTimeLapse.Text = Convert.ToString(_scheduleItem.TimeLapse);
-			}
-			if (ddlTimeLapseMeasurement.Items.FindByValue(_scheduleItem.TimeLapseMeasurement) != null)
-			{
-				ddlTimeLapseMeasurement.Items.FindByValue(_scheduleItem.TimeLapseMeasurement).Selected = true;
-			}
-			if (_scheduleItem.RetryTimeLapse == Null.NullInteger)
-			{
-				txtRetryTimeLapse.Text = "";
-			}
-			else
-			{
-				txtRetryTimeLapse.Text = Convert.ToString(_scheduleItem.RetryTimeLapse);
-			}
-			if (ddlRetryTimeLapseMeasurement.Items.FindByValue(_scheduleItem.RetryTimeLapseMeasurement) != null)
-			{
-				ddlRetryTimeLapseMeasurement.Items.FindByValue(_scheduleItem.RetryTimeLapseMeasurement).Selected = true;
-			}
-			if (ddlRetainHistoryNum.Items.FindByValue(Convert.ToString(_scheduleItem.RetainHistoryNum)) != null)
-			{
-				ddlRetainHistoryNum.Items.FindByValue(Convert.ToString(_scheduleItem.RetainHistoryNum)).Selected = true;
-			}
-			else
-			{
-				ddlRetainHistoryNum.Items.Add(_scheduleItem.RetainHistoryNum.ToString());
-				ddlRetainHistoryNum.Items.FindByValue(Convert.ToString(_scheduleItem.RetainHistoryNum)).Selected = true;
-			}
+		    bool isAdmin = UserInfo.IsInRole(this.PortalSettings.AdministratorRoleName);
+		    txtFriendlyName.Enabled = isAdmin;
+            chkEnabled.Enabled = isAdmin;
+		    txtTimeLapse.Enabled = isAdmin;
+            txtRetryTimeLapse.Enabled = isAdmin;
+		    ddlRetainHistoryNum.Enabled = isAdmin;
+		    ddlTimeLapseMeasurement.Enabled = isAdmin;
+		    ddlRetryTimeLapseMeasurement.Enabled = isAdmin;
+		    cmdUpdate.Enabled = isAdmin;
 
+
+            txtFriendlyName.Text = _scheduleItem.FriendlyName;
+			chkEnabled.Checked = _scheduleItem.Enabled;
+			txtTimeLapse.Text = _scheduleItem.TimeLapse == Null.NullInteger ? "" : Convert.ToString(_scheduleItem.TimeLapse);
+            txtRetryTimeLapse.Text = _scheduleItem.RetryTimeLapse == Null.NullInteger ? "" : Convert.ToString(_scheduleItem.RetryTimeLapse);
+
+		    if (ddlTimeLapseMeasurement.Items.FindByValue(_scheduleItem.TimeLapseMeasurement) != null)
+		        ddlTimeLapseMeasurement.Items.FindByValue(_scheduleItem.TimeLapseMeasurement).Selected = true;
+
+
+		    if (ddlRetryTimeLapseMeasurement.Items.FindByValue(_scheduleItem.RetryTimeLapseMeasurement) != null)
+		        ddlRetryTimeLapseMeasurement.Items.FindByValue(_scheduleItem.RetryTimeLapseMeasurement).Selected = true;
+		    
+            if (ddlRetainHistoryNum.Items.FindByValue(Convert.ToString(_scheduleItem.RetainHistoryNum)) != null)
+		        ddlRetainHistoryNum.Items.FindByValue(Convert.ToString(_scheduleItem.RetainHistoryNum)).Selected = true;
+		    else
+		    {
+		        ddlRetainHistoryNum.Items.Add(_scheduleItem.RetainHistoryNum.ToString());
+		        ddlRetainHistoryNum.Items.FindByValue(Convert.ToString(_scheduleItem.RetainHistoryNum)).Selected = true;
+		    }
 		}
 		protected void OnRunClick(object sender, EventArgs e)
 		{
